@@ -9,7 +9,7 @@ export default function HeroSection() {
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-amber-50 dark:from-cyan-950/20 dark:via-background dark:to-amber-950/20"></div>
       <div className="absolute inset-0 bg-[url('/abstract-geometric-pattern-subtle-lines.jpg')] opacity-5"></div>
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-24 sm:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
@@ -30,13 +30,18 @@ export default function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white shadow-lg"
+                className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white shadow-lg transition-transform duration-200 ease-in-out hover:scale-105"
               >
                 <Link href="/contact">
                   Get Started Today <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button variant="outline" size="lg" className="border-2 hover:bg-cyan-50 bg-transparent" asChild>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-50 bg-transparent hover:border-cyan-700 hover:text-cyan-800 transition-transform duration-200 ease-in-out hover:scale-105"
+                asChild
+              >
                 <Link href="/services">Explore Our Services</Link>
               </Button>
             </div>

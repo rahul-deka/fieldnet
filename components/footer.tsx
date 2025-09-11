@@ -39,14 +39,14 @@ export function Footer() {
               December 2005 with over 150 years of collective experience.
             </p>
             <div className="flex space-x-6">
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              <Link href="https://www.linkedin.com/company/fieldnetglobal/" className="text-muted-foreground hover:text-primary">
                 <span className="sr-only">LinkedIn</span>
                 <Linkedin className="h-6 w-6" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary">
+              {/* <Link href="#" className="text-muted-foreground hover:text-primary">
                 <span className="sr-only">Twitter</span>
                 <Twitter className="h-6 w-6" />
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
