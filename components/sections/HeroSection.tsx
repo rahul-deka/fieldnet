@@ -30,7 +30,7 @@ export default function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white shadow-lg transition-transform duration-200 ease-in-out hover:scale-105"
+                className="w-full sm:w-auto bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800 text-white shadow-lg transition-transform duration-200 ease-in-out hover:scale-105"
               >
                 <Link href="/contact">
                   Get Started Today <ArrowRight className="ml-2 h-5 w-5" />
@@ -39,7 +39,7 @@ export default function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-50 bg-transparent hover:border-cyan-700 hover:text-cyan-800 transition-transform duration-200 ease-in-out hover:scale-105"
+                className="w-full sm:w-auto border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-50 bg-transparent hover:border-cyan-700 hover:text-cyan-800 transition-transform duration-200 ease-in-out hover:scale-105"
                 asChild
               >
                 <Link href="/services">Explore Our Services</Link>
