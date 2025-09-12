@@ -6,7 +6,7 @@ import { Clock, Users, Target, Globe } from "lucide-react";
 const ANIMATION_DURATION = 2500; // ms
 const stats = [
   { label: "Years of Experience", value: 19, suffix: "+", icon: Clock, color: "text-cyan-600" },
-  { label: "Interviews Conducted", value: 400000, suffix: "+", icon: Users, color: "text-green-600" },
+  { label: "Interviews Conducted", value: 400, suffix: "K+", icon: Users, color: "text-green-600" },
   { label: "Focus Groups", value: 2200, suffix: "+", icon: Target, color: "text-amber-600" },
   { label: "Languages Supported", value: 11, suffix: "", icon: Globe, color: "text-purple-600" },
 ];
@@ -60,7 +60,7 @@ export default function TrustedSection() {
   }, [isVisible]);
 
   return (
-    <section ref={sectionRef} className="py-24 sm:py-32 bg-gradient-to-b from-cyan-50/50 to-white dark:from-cyan-950/10 dark:to-background">
+    <section ref={sectionRef} className="py-20 sm:py-24 bg-gradient-to-b from-cyan-50/50 to-white dark:from-cyan-950/10 dark:to-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
@@ -70,21 +70,38 @@ export default function TrustedSection() {
             Our track record speaks for itself across industries and continents
           </p>
         </div>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <Card
-              key={index}
-              className="text-center p-8 hover:shadow-lg transition-all duration-300 border-0 bg-white/80 backdrop-blur"
-            >
-              <CardContent className="p-0">
-                <stat.icon className={`h-12 w-12 mx-auto mb-4 ${stat.color}`} />
-                <div className="text-4xl font-bold tracking-tight text-foreground mb-2">
-                  {isVisible ? `${animatedNumbers[index].toLocaleString()}${stat.suffix}` : `0${stat.suffix}`}
-                </div>
-                <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
-              </CardContent>
-            </Card>
-          ))}
+  <div className="relative grid grid-cols-2 lg:grid-cols-4 border border-slate-200 bg-white">
+          {stats.map((stat, index) => {
+            // For 2x2 grid on small screens: add right border except for last in row, and bottom border except for last row
+            const isLastCol = (index + 1) % 2 === 0;
+            const isLastRow = index >= 2;
+            return (
+              <div
+                key={index}
+                className={`relative h-full
+                  ${!isLastCol ? 'border-r border-slate-200' : ''}
+                  ${!isLastRow ? 'border-b border-slate-200' : ''}
+                  lg:border-0'
+                }`}
+              >
+                {/* Vertical divider for large screens */}
+                {index !== stats.length - 1 && (
+                  <div className={`hidden lg:block absolute top-0 bottom-0 right-0 w-px bg-slate-200 z-10`} />
+                )}
+                <Card
+                  className="text-center flex flex-col items-center justify-center p-4 sm:p-8 min-h-[120px] sm:min-h-[170px] bg-transparent shadow-none rounded-none border-0 h-full"
+                >
+                  <CardContent className="p-0 flex flex-col items-center justify-center">
+                    {/* Icon removed for cleaner look */}
+                    <div className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground mb-1">
+                      {isVisible ? `${animatedNumbers[index].toLocaleString()}${stat.suffix}` : `0${stat.suffix}`}
+                    </div>
+                    <div className="text-sm font-medium text-muted-foreground leading-tight">{stat.label}</div>
+                  </CardContent>
+                </Card>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
