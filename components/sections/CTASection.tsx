@@ -5,7 +5,7 @@ import { ArrowRight, Building2, Globe, Clock } from "lucide-react"
 export default function CTASection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-r from-cyan-600 via-cyan-700 to-cyan-800 py-24 sm:py-32">
-      <div className="absolute inset-0 bg-[url('/abstract-network-connections-dots-lines.jpg')] opacity-10"></div>
+  <div className="absolute inset-0 bg-[url('/abstract-network-connections-dots-lines.jpg')] bg-no-repeat bg-cover opacity-10"></div>
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl mb-6">
@@ -19,23 +19,23 @@ export default function CTASection() {
             <Button
               variant="secondary"
               size="lg"
-              className="bg-white text-cyan-700 hover:bg-cyan-50 shadow-lg"
+              className="bg-white text-cyan-700 hover:bg-cyan-50 shadow-lg transition-colors duration-200 group min-w-[200px]"
               asChild
             >
               <Link href="/contact">
-                Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+                Start Your Project <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
               </Link>
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="border-white/30 text-white hover:bg-white/10 bg-transparent backdrop-blur"
+              className="border-white/30 text-white hover:text-white hover:bg-white/10 bg-transparent backdrop-blur min-w-[200px]"
               asChild
             >
               <Link href="/case-studies">View Success Stories</Link>
             </Button>
           </div>
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-8 text-cyan-100">
+          <div className="mt-12 hidden sm:flex flex-row items-center justify-center gap-8 text-cyan-100">
             <div className="flex items-center gap-2">
               <Building2 className="w-5 h-5" />
               <span>Mumbai, India HQ</span>
