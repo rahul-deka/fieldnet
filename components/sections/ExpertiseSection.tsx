@@ -6,7 +6,7 @@ import Link from "next/link"
 
 export default function ExpertiseSection() {
   return (
-    <section className="py-24 sm:py-32">
+    <section className="py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -21,10 +21,9 @@ export default function ExpertiseSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <div className="relative grid grid-cols-1 lg:grid-cols-3 border border-slate-200 bg-white lg:divide-x lg:divide-y-0 divide-y divide-slate-200 gap-0">
           <Card
-            className="lg:col-span-2 lg:row-span-2 p-8 border-0 relative overflow-hidden hover:shadow-xl transition-all duration-300"
-            style={{ backgroundColor: "#0891b2" }}
+            className="lg:col-span-2 lg:row-span-2 p-8 border-0 relative overflow-hidden bg-[#0891b2] shadow-none rounded-none from-amber-50 to-amber-100"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
             <div className="relative z-10">
@@ -51,7 +50,7 @@ export default function ExpertiseSection() {
             </div>
           </Card>
 
-          <Card className="p-6 hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-amber-50 to-amber-100">
+          <Card className="p-6 border-0 bg-gradient-to-br from-amber-50 to-amber-100 shadow-none rounded-none">
             <CardContent className="p-0">
               <Target className="h-10 w-10 text-amber-600 mb-4" />
               <h3 className="text-xl font-bold mb-3 text-foreground">Audits & Polls</h3>
@@ -62,7 +61,7 @@ export default function ExpertiseSection() {
             </CardContent>
           </Card>
 
-          <Card className="p-6 hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-green-50 to-green-100">
+          <Card className="p-6 border-0 bg-gradient-to-br from-green-50 to-green-100 shadow-none rounded-none">
             <CardContent className="p-0">
               <TrendingUp className="h-10 w-10 text-green-600 mb-4" />
               <h3 className="text-xl font-bold mb-3 text-foreground">Data Analysis</h3>
@@ -73,7 +72,7 @@ export default function ExpertiseSection() {
             </CardContent>
           </Card>
 
-          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-purple-50 to-pink-50 border-0 hover:shadow-xl transition-all duration-300">
+          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-purple-50 to-pink-50 border-0 shadow-none rounded-none">
             <CardContent className="p-0">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-0">
                 <div className="flex items-center gap-4 mb-4 sm:mb-0 sm:order-2 order-1 sm:justify-end justify-start w-full sm:w-auto">
