@@ -1,6 +1,8 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { BarChart3, Target, TrendingUp, CheckCircle, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function ExpertiseSection() {
   return (
@@ -21,7 +23,7 @@ export default function ExpertiseSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <Card
-            className="lg:col-span-2 lg:row-span-2 p-8 border-0 relative overflow-hidden"
+            className="lg:col-span-2 lg:row-span-2 p-8 border-0 relative overflow-hidden hover:shadow-xl transition-all duration-300"
             style={{ backgroundColor: "#0891b2" }}
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
@@ -71,26 +73,37 @@ export default function ExpertiseSection() {
             </CardContent>
           </Card>
 
-          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-purple-50 to-pink-50 border-0">
+          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-purple-50 to-pink-50 border-0 hover:shadow-xl transition-all duration-300">
             <CardContent className="p-0">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Global Research Network</h3>
-                  <p className="text-muted-foreground text-lg">
-                    Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin
-                    America
-                  </p>
-                </div>
-                <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-0">
+                <div className="flex items-center gap-4 mb-4 sm:mb-0 sm:order-2 order-1 sm:justify-end justify-start w-full sm:w-auto">
                   <MapPin className="h-8 w-8 text-purple-600" />
                   <div className="text-right">
                     <div className="text-3xl font-bold text-purple-600">50+</div>
                     <div className="text-sm text-muted-foreground">Countries</div>
                   </div>
                 </div>
+                <div className="flex-1 sm:order-1 order-2">
+                  <h3 className="text-2xl font-bold mb-2 text-foreground">Global Research Network</h3>
+                  <p className="text-muted-foreground text-lg">
+                    Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin America
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
+        </div>
+        <div className="flex justify-center mt-12">
+          <Link href="/what-we-do" passHref legacyBehavior>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="cursor-pointer border-cyan-600 text-cyan-700 hover:bg-cyan-600 hover:text-white hover:border-cyan-700"
+            >
+              <span>Learn More</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
