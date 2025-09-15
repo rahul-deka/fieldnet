@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Globe, Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react"
+import LogoBlackSVG from "@/components/ui/LogoBlackSVG"
 
 const navigation = {
   company: [
@@ -31,7 +32,7 @@ export function Footer() {
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8">
             <div className="flex items-center space-x-2">
-              <Globe className="h-8 w-8 text-primary" />
+              <LogoBlackSVG className="h-6 w-6" />
               <span className="text-xl font-bold text-card-foreground">Fieldnet Global Research</span>
             </div>
             <p className="text-sm leading-6 text-muted-foreground">

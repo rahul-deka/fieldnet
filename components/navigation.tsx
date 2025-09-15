@@ -3,7 +3,8 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Globe } from "lucide-react"
+import { Menu, X } from "lucide-react"
+import LogoSVG from "@/components/ui/LogoSVG"
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -23,8 +24,7 @@ export function Navigation() {
       <span className="sr-only">Fieldnet Global Research</span>
       <div className="flex items-center space-x-3">
         <div className="relative">
-          <Globe className="h-10 w-10 text-cyan-600 group-hover:text-cyan-700 transition-colors" />
-          <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full animate-pulse"></div>
+          <LogoSVG className="h-10 w-10 text-cyan-600 group-hover:text-cyan-700 transition-colors" />
         </div>
         <div>
           <span className="text-xl font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">
