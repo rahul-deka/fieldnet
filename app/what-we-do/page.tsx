@@ -1,13 +1,704 @@
+"use client";
+import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import {
+  CheckCircle,
+  Users,
+  Globe,
+  BarChart3,
+  Target,
+  Lightbulb,
+  TrendingUp,
+  Shield,
+  Phone,
+  Monitor,
+  MessageSquare,
+  FileText,
+  Search,
+  Award,
+  Eye,
+  ClipboardCheck,
+  Mic,
+  Languages,
+  Database,
+  Code,
+  Building2,
+} from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 export default function WhatWeDoPage() {
+  // Counter animation for Global Execution Capability
+  const globalStats = [
+    { value: 400000, label: 'Surveys Conducted', color: 'text-cyan-400', suffix: '+' },
+    { value: 2200, label: 'Focus Groups', color: 'text-amber-400', suffix: '+' },
+    { value: 11, label: 'Languages', color: 'text-cyan-400', suffix: '' },
+    { value: 50, label: 'Countries', color: 'text-amber-400', suffix: '+' },
+  ];
+  const [animatedGlobalStats, setAnimatedGlobalStats] = React.useState(globalStats.map(() => 0));
+  const [globalStatsVisible, setGlobalStatsVisible] = React.useState(false);
+  const globalStatsRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !globalStatsVisible) {
+          setGlobalStatsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (globalStatsRef.current) observer.observe(globalStatsRef.current);
+    return () => {
+      if (globalStatsRef.current) observer.unobserve(globalStatsRef.current);
+    };
+  }, [globalStatsVisible]);
+
+  React.useEffect(() => {
+    if (!globalStatsVisible) return;
+    globalStats.forEach((stat, idx) => {
+      const start = 0;
+      const end = stat.value;
+      const duration = 2500;
+      const startTime = Date.now();
+      function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 4);
+        const current = Math.floor(start + (end - start) * ease);
+        setAnimatedGlobalStats(prev => {
+          const arr = [...prev];
+          arr[idx] = current;
+          return arr;
+        });
+        if (progress < 1) requestAnimationFrame(animate);
+        else setAnimatedGlobalStats(prev => {
+          const arr = [...prev];
+          arr[idx] = end;
+          return arr;
+        });
+      }
+      setTimeout(animate, idx * 150);
+    });
+  }, [globalStatsVisible]);
+  const coreServices = [
+    {
+      icon: BarChart3,
+      title: "Market Research",
+      description:
+        "Modular services provide clients the flexibility to either commission a full-service project or select only those components that they require.",
+      features: [
+        "Sample Design",
+        "Questionnaire Development",
+        "Data Collection",
+        "Data Aggregation",
+        "Data Processing",
+        "Analysis and Reporting",
+      ],
+    },
+    {
+      icon: Shield,
+      title: "Audits & Polls",
+      description:
+        "We approach audits and polls with a research mindset enabling us to deliver more than just counts and numbers to our clients.",
+      features: ["Location Audits", "Shop/Retail Census", "Mystery Shopping", "Quality Audits", "Opinion Polls"],
+    },
+    {
+      icon: FileText,
+      title: "Support Services",
+      description:
+        "Full range of Market Research support services to provide a seamless service experience and minimize transaction costs.",
+      features: ["Transcription", "Translation", "Digitization", "Verbatim Coding", "Voiceover", "Facilities"],
+    },
+  ]
+
+  const marketResearchServices = [
+    {
+      icon: Phone,
+      title: "Telephone Interviews",
+      features: [
+        "CATI",
+        "In-depth telephonic interviews",
+        "B2C and B2B interviews",
+        "Channel (distributor, retailer) interviews",
+        "Multilingual capability – all major Indian and Asian languages supported",
+        "Access to various consumer databases in India and business directories across Asia",
+      ],
+    },
+    {
+      icon: Monitor,
+      title: "Web Surveys",
+      features: [
+        "Advanced survey programming capabilities using Confirm IT and other prominent tools",
+        "Multilingual support in all major global languages",
+        "Access to leading consumer panel providers across the globe",
+        "Integrated translation, verbatim coding, data tabulation and reporting",
+      ],
+    },
+    {
+      icon: Users,
+      title: "Quantitative Research",
+      features: [
+        "Multilingual F2F surveys across India. Over 4,00,000 surveys were conducted",
+        "Large scale concept testing (CLT)",
+        "Car-Clinics",
+        "Intercept surveys",
+        "Integrated Sales, Promotion and Research capability",
+        "Comprehensive urban, semi-urban and rural coverage across India",
+      ],
+    },
+    {
+      icon: MessageSquare,
+      title: "Qualitative Research",
+      features: [
+        "Focus Group Discussions (FGDs) – Extended groups, full groups, mini groups, triads and dyads",
+        "In-depth Interviews (IDIs) – Single, paired and supervised",
+        "Observation Research – Ethnography, activity clinics, home or business observation",
+        "Tracking Studies – Diary and Journal based activities",
+        "Sensory Evaluation – Appearance, odors, texture and taste",
+        "Comprehensive urban, semi-urban and rural coverage across India",
+        "Content Analysis",
+      ],
+    },
+    {
+      icon: BarChart3,
+      title: "Data Analysis and Reporting",
+      features: [
+        "Content Analysis – From IDI and FGD transcripts",
+        "Data Tabulation – Quantum tables including proportions, mean tables, summary tables, top-box",
+        "Quantitative Data Analysis – T-tests, correlation, regression, Van Westendorp (Price Sensitivity) analysis",
+        "Qualitative Analysis – Affinity and interrelationship analysis",
+        "Reporting – Recurring reports, basic reports and executive reports",
+      ],
+    },
+  ]
+
+  const researchSolutions = [
+    {
+      icon: Award,
+      name: "Brand Health Research/Brand Tracks",
+      description:
+        "Evaluates congruence between actual and desired perceptions of brand promise, identity and image. Provides benchmarks with competitors.",
+      metrics: ["Awareness", "Familiarity", "Consideration", "Preference and loyalty"],
+    },
+    {
+      icon: Target,
+      name: "Customer Satisfaction and Loyalty",
+      description:
+        "Includes classification of customers on the Loyalty Grid, evaluations of emotional, attitudinal and behavioral loyalty. Measures advocacy through NPS.",
+      metrics: [],
+    },
+    {
+      icon: TrendingUp,
+      name: "Advertising Effectiveness (Pre and Post)",
+      description:
+        "Includes testing effectiveness of multiple campaigns by using 'Lift Analysis'. In addition to content evaluation, also measures change in perception.",
+      metrics: ["Awareness", "Familiarity", "Consideration", "Preference", "Purchase intention", "Advocacy"],
+    },
+    {
+      icon: Lightbulb,
+      name: "Product and Concept Testing",
+      description:
+        "Includes CLTs, Car Clinics, In-home/In-market testing for existing as well as new products and concepts.",
+      metrics: [
+        "Multiple choice sets (features and attributes)",
+        "Price trade-off",
+        "Purchase and re-purchase intentions",
+      ],
+    },
+    {
+      icon: Building2,
+      name: "Packaging Tests",
+      description:
+        "Includes in-store package tests for standard SKUs as well as special packs (such as Diwali gift packs).",
+      metrics: ["Attractiveness", "Durability", "Hygiene", "Ease of use"],
+    },
+    {
+      icon: Search,
+      name: "Usage and Attitude Research",
+      description:
+        "Creates a product/service usage landscape that includes nature (frequency, type and depth) of interactions with your brand and key competitive brands.",
+      metrics: [],
+    },
+    {
+      icon: Users,
+      name: "Customer Segmentation and Profiling",
+      description:
+        "Often combined with Usage and Attitude Research, this creates customer segments based on demographic, geographic, behavior or lifestyle attributes.",
+      metrics: [],
+    },
+    {
+      icon: BarChart3,
+      name: "Price Sensitivity Measurement",
+      description:
+        "Uses the Van Westendorp technique to determine the acceptable price range for a product or service. Measure consumer price preferences and sensitivity using a graphical plot.",
+      metrics: [],
+    },
+    {
+      icon: Eye,
+      name: "Sensory Evaluation",
+      description:
+        "Used specifically for the Food and Beverage sector. Measures consumer sensory responses to product attributes.",
+      metrics: ["Appearance", "Touch", "Odour", "Texture", "Temperature", "Taste"],
+    },
+    {
+      icon: MessageSquare,
+      name: "Ethnography/Day in the life Studies",
+      description:
+        "Observational and non-intrusive research technique typically used for consumer immersion where a deep understanding of consumer behavior and lifestyle is essential.",
+      metrics: [],
+    },
+  ]
+
+  const auditServices = [
+    { icon: Building2, name: "Location Audits", description: "Identifying most attractive locations for branding" },
+    {
+      icon: ClipboardCheck,
+      name: "Shop/Retail Census and Audits",
+      description: "Off-take and footfall analysis, product display and merchandising review",
+    },
+    {
+      icon: Eye,
+      name: "Mystery Shopping",
+      description: "Salesperson and shopper experience evaluation, promotion implementation",
+    },
+    {
+      icon: Shield,
+      name: "Quality Audits",
+      description: "Spot checks and back checks for Market Research data validation",
+    },
+    {
+      icon: Users,
+      name: "Polls",
+      description: "Entrance and exit polls (electoral), opinion tracking polls and public relations polls",
+    },
+  ]
+
+  const supportServices = [
+    {
+      icon: Mic,
+      name: "Transcription",
+      description:
+        "Content from video recorded interviews and FGD's and audio files from qualitative in-depth interviews",
+    },
+    { icon: Languages, name: "Voiceover", description: "English voiceover for multi-lingual interviews and FGDs" },
+    { icon: Globe, name: "Translation", description: "English translation from all major Indian languages" },
+    {
+      icon: Database,
+      name: "Digitization",
+      description: "Data entry for pen-paper surveys, conversion of other content into digital format (ebooks)",
+    },
+    {
+      icon: Code,
+      name: "Verbatim Coding",
+      description: "Intuitive and contextual coding of qualitative survey responses",
+    },
+    {
+      icon: Building2,
+      name: "Facilities",
+      description:
+        "Venue for FGDs, IDIs, CLTs etc. with all necessary infrastructure in place – AV recording, video streaming, one way mirrors, qualified interpreters etc.",
+    },
+  ]
+
   return (
     <>
       <Navigation />
-      <main className="min-h-screen py-20 px-4">
-        <h1 className="text-4xl font-bold mb-6 text-cyan-800">What We Do</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl">Discover our services, expertise, and differentiators. This page is a placeholder—add your content here.</p>
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50">
+        {/* Hero Section */}
+        <section className="relative py-20 px-6 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 to-amber-400/10"></div>
+          <div className="relative max-w-7xl mx-auto text-center">
+            <Badge className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200 px-4 py-2">
+              Comprehensive Research Solutions
+            </Badge>
+            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 text-balance">
+              What We <span className="text-cyan-600">Do</span>
+            </h1>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto text-pretty leading-relaxed">
+              FieldNet Global Research LLP extensive experience in multiple Market Research methodologies allows us to
+              create customized and integrated research approaches that best meet our clients' specific needs.
+            </p>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto mt-4 text-pretty">
+              In addition to core research services, we offer validation services (Audits and Polls) as well as other
+              support services such as data analysis and reporting, data tabulation, transcription etc.
+            </p>
+          </div>
+        </section>
+
+        {/* Core Services Overview */}
+        <section className="py-20 sm:py-24 bg-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+                Comprehensive Solutions
+              </Badge>
+              <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">Our Services</h2>
+              <p className="text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">
+                Project management capabilities coupled with a strong network of partners allows us to optimize project
+                execution in all major geographies, handling multilingual and multi-country assignments with ease.
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 border border-slate-200 bg-white">
+              {coreServices.map((service, index) => {
+                // For 3-column grid: add right border except for last in row, and bottom border for mobile
+                const isLastCol = (index + 1) % 3 === 0;
+                const isMiddleCol = (index + 1) % 3 === 2;
+                
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch
+                      ${!isLastCol ? 'md:border-r border-slate-200' : ''}
+                      ${index < coreServices.length - 1 ? 'border-b border-slate-200 md:border-b-0' : ''}
+                      ${isMiddleCol ? 'md:border-r border-slate-200' : ''}
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-cyan-100 rounded-xl group-hover:bg-cyan-600 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-cyan-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
+                      </div>
+                      <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
+                      <ul className="space-y-3 flex-grow">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start text-sm text-slate-700">
+                            <CheckCircle className="h-4 w-4 text-cyan-600 mr-3 mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Market Research Services - Detailed */}
+        <section className="py-20  bg-white">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+                Modular Services
+              </Badge>
+              <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">Market Research Services</h2>
+              <p className="text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">
+                Modular services provide clients the flexibility to either commission a full-service project or select only those components that they require. Our team contributes in all areas from sample design to analysis and reporting.
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 border border-slate-200 bg-white">
+              {/* First row: 3 columns */}
+              {marketResearchServices.slice(0, 3).map((service, index) => {
+                const isLastCol = (index + 1) % 3 === 0;
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch
+                      ${!isLastCol ? 'md:border-r border-slate-200' : ''}
+                      border-b border-slate-200
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-cyan-100 rounded-xl group-hover:bg-cyan-600 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-cyan-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
+                      </div>
+                      <ul className="space-y-3 flex-grow">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start text-sm text-slate-700">
+                            <CheckCircle className="h-4 w-4 text-cyan-600 mr-3 mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* Second row: 2 columns, each 50% width */}
+              {/* Divider between first and second row */}
+              <div className="w-full border-t border-slate-200" />
+              <div className="md:col-span-3 w-full flex flex-col md:flex-row">
+                {marketResearchServices.slice(3, 5).map((service, index) => (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch w-full md:w-1/2
+                      ${index === 0 ? 'md:border-r border-slate-200 border-b border-slate-200 md:border-b-0' : ''}
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-cyan-100 rounded-xl group-hover:bg-cyan-600 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-cyan-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
+                      </div>
+                      <ul className="space-y-3 flex-grow">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start text-sm text-slate-700">
+                            <CheckCircle className="h-4 w-4 text-cyan-600 mr-3 mt-0.5 flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Market Research Solutions */}
+        <section className="py-20 bg-gradient-to-br from-slate-900 to-cyan-900">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 text-cyan-200 border-cyan-400 bg-white/10">
+                Specialized Solutions
+              </Badge>
+              <h2 className="text-4xl font-bold text-white mb-4">Market Research Solutions</h2>
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+                Specialized research approaches tailored to specific business challenges and objectives
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-2 border border-white/20 bg-white/5">
+              {researchSolutions.map((solution, index) => {
+                // 2xN grid: right border except last col, bottom border except last row
+                const isLastCol = (index + 1) % 2 === 0;
+                const isLastRow = index >= researchSolutions.length - 2;
+                // Add mobile divider between Sensory Evaluation (index 8) and Ethnography (index 9)
+                const isSensoryEvaluation = index === 8;
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch
+                      ${!isLastCol ? 'md:border-r border-white/20' : ''}
+                      ${!isLastRow ? 'border-b border-white/20' : ''}
+                      ${isSensoryEvaluation ? 'border-b border-white/20 md:border-b-0' : ''}
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-4">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-amber-100/20 rounded-xl group-hover:bg-amber-400 transition-colors duration-300">
+                            <solution.icon className="h-6 w-6 text-amber-400 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-lg font-bold text-white">{solution.name}</h3>
+                      </div>
+                      <p className="text-sm text-slate-300 leading-relaxed mb-3">{solution.description}</p>
+                      {solution.metrics.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {solution.metrics.map((metric, idx) => (
+                            <Badge
+                              key={idx}
+                              variant="outline"
+                              className="bg-cyan-400/10 text-cyan-300 border-cyan-400/30"
+                            >
+                              {metric}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Audits and Polls */}
+        <section className="py-20 bg-gradient-to-br from-cyan-50 to-amber-50">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+                Validation Services
+              </Badge>
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Audits and Polls</h2>
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+                FieldNet Global Research LLP approaches audits and polls with a research mindset enabling us to deliver
+                more than just counts and numbers to our clients. All our projects mandate that the execution team should
+                answer the question <span className="font-semibold text-cyan-700">WHY?</span> – To help our clients get a
+                richer perspective on the audit or poll outcomes.
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 border border-slate-200 bg-white">
+              {/* First row: 3 columns */}
+              {auditServices.slice(0, 3).map((service, index) => {
+                const isLastCol = (index + 1) % 3 === 0;
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch
+                      ${!isLastCol ? 'md:border-r border-slate-200' : ''}
+                      border-b border-slate-200
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-cyan-100 rounded-xl group-hover:bg-cyan-600 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-cyan-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.name}</h3>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-2">{service.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* Divider between first and second row */}
+              <div className="w-full border-t border-slate-200" />
+              {/* Second row: 2 columns, each 50% width */}
+              <div className="md:col-span-3 w-full flex flex-col md:flex-row">
+                {auditServices.slice(3, 5).map((service, index) => (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch w-full md:w-1/2
+                      ${index === 0 ? 'md:border-r border-slate-200 border-b border-slate-200 md:border-b-0' : ''}
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-cyan-100 rounded-xl group-hover:bg-cyan-600 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-cyan-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.name}</h3>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-2">{service.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Support Services */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-16">
+              <Badge variant="outline" className="mb-4 text-amber-700 border-amber-200">
+                Support Services
+              </Badge>
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Market Research Support Services</h2>
+              <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+                While we encourage our clients to use only those services that they need, we actively recommend that they
+                take advantage of our expertise in providing the full range of Market Research support services. Our aim
+                is to provide a seamless service experience to all our clients and minimize the transaction costs of
+                engaging with agencies for their Market Research needs.
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 border border-amber-200 bg-white">
+              {supportServices.map((service, index) => {
+                const isLastCol = (index + 1) % 3 === 0;
+                const isLastCard = index === supportServices.length - 1;
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex items-stretch
+                      ${!isLastCol ? 'md:border-r border-amber-200' : ''}
+                      ${!isLastCard ? 'border-b border-amber-200 md:border-b-0' : ''}
+                    `}
+                  >
+                    <div className="flex flex-col p-8 w-full group">
+                      <div className="flex items-center mb-6">
+                        <div className="flex h-12 w-12 items-center justify-center mr-4 shrink-0">
+                          <div className="p-3 bg-amber-100 rounded-xl group-hover:bg-amber-400 transition-colors duration-300">
+                            <service.icon className="h-6 w-6 text-amber-600 group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-slate-900">{service.name}</h3>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-2">{service.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+              {/* Add empty cells for alignment if needed */}
+              {supportServices.length % 3 !== 0 && Array.from({ length: 3 - (supportServices.length % 3) }).map((_, idx) => (
+                <div key={`empty-${idx}`} className="hidden md:block" />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Global Reach Stats */}
+        <section className="py-20 px-6 bg-slate-900">
+          <div className="max-w-7xl mx-auto px-6" ref={globalStatsRef}>
+            <div className="flex items-center justify-center mb-8">
+              <Globe className="h-12 w-12 text-cyan-400 mr-4" />
+              <h2 className="text-4xl font-bold text-white">Global Execution Capability</h2>
+            </div>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12 text-pretty text-center">
+              Our project management capabilities coupled with a strong network of partners allows us to optimize project
+              execution in all major geographies, handling multilingual and multi-country assignments with ease.
+            </p>
+            <div className="relative grid grid-cols-1 md:grid-cols-4 border border-cyan-400 bg-white/5">
+              {globalStats.map((stat, index) => {
+                const isLastCol = (index + 1) % 4 === 0;
+                return (
+                  <div
+                    key={index}
+                    className={`relative h-full flex flex-col items-center justify-center p-8 bg-white/10 backdrop-blur-sm
+                      ${!isLastCol ? 'md:border-r border-cyan-400' : ''}
+                    `}
+                  >
+                    <div className={`text-3xl font-bold mb-2 ${stat.color}`}>
+                      {globalStatsVisible
+                        ? `${animatedGlobalStats[index].toLocaleString()}${stat.suffix}`
+                        : `0${stat.suffix}`}
+                    </div>
+                    <div className="text-slate-300 text-center">{stat.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className=" border-slate-200 bg-white py-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="border border-cyan-700 bg-cyan-600 h-full flex flex-col md:flex-row p-8 items-start md:items-center md:justify-between gap-4">
+              <div>
+                <div className="uppercase text-sm font-medium text-white mb-2">Ready to Collaborate?</div>
+                <h3 className="text-xl font-semibold text-white mb-1">Work with a seasoned global research team</h3>
+                <p className="text-white/90 mb-4">
+                  Let’s apply the right methodologies and quality controls to answer your toughest questions.
+                </p>
+              </div>
+              <a
+                href="/contact"
+                className="inline-flex items-center bg-white px-5 py-2.5 text-base font-bold text-cyan-600 shadow-lg transition-colors hover:bg-indigo-50 md:ml-auto"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>
