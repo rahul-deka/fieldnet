@@ -24,9 +24,12 @@ import {
   Database,
   Code,
   Building2,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export default function WhatWeDoPage() {
   // Counter animation for Global Execution Capability
@@ -307,28 +310,58 @@ export default function WhatWeDoPage() {
       <Navigation />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50">
         {/* Hero Section */}
-        <section className="relative py-20 px-6 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/10 to-amber-400/10"></div>
-          <div className="relative max-w-7xl mx-auto text-center">
-            <Badge className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200 px-4 py-2">
-              Comprehensive Research Solutions
-            </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6 text-balance">
-              What We <span className="text-cyan-600">Do</span>
+        <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fillRule='evenodd'%3E%3Cg fill='%23ffffff' fillOpacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }}
+            ></div>
+          </div>
+
+          <div className="relative max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 bg-cyan-400/20 backdrop-blur-sm border border-cyan-400/30 rounded-full px-4 py-2 mb-6">
+              <Sparkles className="h-4 w-4 text-cyan-400" />
+              <span className="text-sm font-medium text-cyan-100">Comprehensive Research Solutions</span>
+            </div>
+
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-balance">
+              What We <span className="text-cyan-400">Do</span>
             </h1>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto text-pretty leading-relaxed">
+
+            <p className="text-xl text-slate-300 mb-6 leading-relaxed text-pretty">
               FieldNet Global Research LLP extensive experience in multiple Market Research methodologies allows us to
               create customized and integrated research approaches that best meet our clients' specific needs.
             </p>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto mt-4 text-pretty">
+
+            <p className="text-lg text-slate-400 mb-8 text-pretty">
               In addition to core research services, we offer validation services (Audits and Polls) as well as other
               support services such as data analysis and reporting, data tabulation, transcription etc.
             </p>
+
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-cyan-600 hover:bg-cyan-700 text-white cursor-pointer"
+                onClick={() => {
+                  const servicesSection = document.querySelector('#our-services');
+                  servicesSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                Explore Services
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 bg-transparent cursor-pointer hover:text-white">
+                Contact Us
+              </Button>
+            </div>
           </div>
         </section>
 
         {/* Core Services Overview */}
-        <section className="py-20 sm:py-24 bg-white">
+        <section id="our-services" className="py-24 sm:py-24 bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
