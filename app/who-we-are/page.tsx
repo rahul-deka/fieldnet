@@ -119,7 +119,7 @@ export default function WhoWeArePage() {
         </section>
 
         {/* Philosophy */}
-        <section className="border-y border-slate-200 bg-slate-50/60 py-14">
+        <section id="philosophy" className="border-y border-slate-200 bg-slate-50/60 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
             <p className="mt-3 text-slate-600">The principles that shape our culture and the way we deliver research.</p>
