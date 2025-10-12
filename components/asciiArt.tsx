@@ -9,7 +9,7 @@ const asciiArt = `
     \\\\|//   \\\\|///  \\\\\\|//\\\\\\|/// \\|///  \\\\\\|//  \\\\|//  \\\\\\|// 
 %c^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 %cPoking around the console? Huh! Like what you see?
-%cBuilt with ❤️ by Rahul Deka || 🌐 rahul-deka.is-a.dev`;
+%cBuilt with ❤️ by Rahul Deka || 🌐 rahul-deka.dev`;
 
 const styles = [
     'color: #dc3545; font-family: monospace; font-size: 12px;',
