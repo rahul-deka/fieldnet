@@ -122,7 +122,7 @@ export default function WhoWeArePage() {
         <section id="philosophy" className="border-y border-slate-200 bg-slate-50/60 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
-            <p className="mt-3 text-slate-600">The principles that shape our culture and the way we deliver research.</p>
+            <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery</p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
               {[
                 {
@@ -273,6 +273,57 @@ export default function WhoWeArePage() {
                 Contact Us
               </a>
             </div>
+          </div>
+        </section>
+        {/* Previous Clients */}
+        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">
+              Trusted by Leading Brands
+            </h2>
+            <p className="text-lg text-slate-600">
+              We've partnered with industry leaders across various sectors to deliver actionable insights
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+            {[
+              { name: 'Forrester', logo: 'forrester.png' },
+              { name: 'Bisleri', logo: 'bisleri.png' },
+              { name: 'Coca-Cola', logo: 'coca-cola.png' },
+              { name: 'Emami', logo: 'emami.png' },
+              { name: 'Epigamia', logo: 'epigamia.png' },
+              { name: 'Visa', logo: 'visa.png' },
+              { name: 'Frost & Sullivan', logo: 'frostandsullivan.png' },
+              { name: 'Genpact', logo: 'genpact.png' },
+              { name: 'Godrej', logo: 'godrej.png' },
+              { name: 'Haier', logo: 'haier.png' },
+              { name: 'LG', logo: 'lg.png' },
+              { name: 'Hersheys', logo: 'hersheys.png' },
+              { name: 'ITC', logo: 'itc.png' },
+              { name: 'HDFC', logo: 'hdfc.png' },
+              { name: 'McDonalds', logo: 'mcd.png' },
+              { name: 'Mother Dairy', logo: 'motherdairy.png' },
+              { name: 'Nielsen', logo: 'nielsen.png' },
+              { name: 'NPCI', logo: 'npci.png' },
+              { name: 'P&G', logo: 'p&g.png' },
+              { name: 'Pepsi', logo: 'pepsi.png' },
+              { name: 'Saffola', logo: 'saffola.png' },
+              { name: 'Unilever', logo: 'unilever.png' },
+              { name: 'Ayush', logo: 'ayush.png' },
+              { name: 'ZMedia', logo: 'zmedia.png' },
+            ].map((client) => (
+              <div
+                key={client.name}
+                className="flex items-center justify-center w-full h-24"
+              >
+                <img
+                  src={`/clients/${client.logo}`}
+                  alt={client.name}
+                  className="max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                />
+              </div>
+            ))}
           </div>
         </section>
       </main>
