@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Target, TrendingUp, CheckCircle, MapPin } from "lucide-react"
+import { BarChart3, Target, TrendingUp, CheckCircle, MapPin, Lightbulb } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -72,26 +72,43 @@ export default function ExpertiseSection() {
             </CardContent>
           </Card>
 
-          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-purple-50 to-pink-50 border-0 shadow-none rounded-none">
+          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-orange-50 to-rose-50 border-0 shadow-none rounded-none">
             <CardContent className="p-0">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-0">
-                <div className="flex items-center gap-4 mb-4 sm:mb-0 sm:order-2 order-1 sm:justify-end justify-start w-full sm:w-auto">
-                  <MapPin className="h-8 w-8 text-purple-600" />
-                  <div className="text-right">
-                    <div className="text-3xl font-bold text-purple-600">50+</div>
-                    <div className="text-sm text-muted-foreground">Countries</div>
-                  </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-4 mb-4 sm:mb-0 order-1">
+                  <Lightbulb className="h-8 w-8 text-orange-600 flex-shrink-0" />
                 </div>
-                <div className="flex-1 sm:order-1 order-2">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Global Research Network</h3>
+                <div className="flex-1 order-2">
+                  <h3 className="text-2xl font-bold mb-2 text-foreground">Kaizen Synergy</h3>
                   <p className="text-muted-foreground text-lg">
-                    Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin America
+                    Brand strategy development, creative testing, product innovation, packaging design research, and customer experience optimization
                   </p>
                 </div>
               </div>
             </CardContent>
           </Card>
+
         </div>
+
+        {/* Global Research Network - Outside Grid */}
+        <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 p-8 border border-purple-600">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="flex items-center gap-4 sm:order-2 order-1">
+              <MapPin className="h-10 w-10 text-purple-600" />
+              <div className="text-right">
+                <div className="text-4xl font-bold text-purple-600">50+</div>
+                <div className="text-sm text-muted-foreground">Countries</div>
+              </div>
+            </div>
+            <div className="flex-1 sm:order-1 order-2">
+              <h3 className="text-3xl font-bold mb-3 text-foreground">Global Research Network</h3>
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin America
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-center mt-12">
           <Link href="/what-we-do" passHref legacyBehavior>
             <Button
