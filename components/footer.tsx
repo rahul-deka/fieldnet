@@ -93,18 +93,29 @@ export function Footer() {
               <div className="mt-10 md:mt-0">
                 <h3 className="text-sm font-semibold leading-6 text-card-foreground">Contact Info</h3>
                 <div className="mt-6 space-y-4">
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <a 
+                    href="https://maps.app.goo.gl/i3xHQcrsZym2aq267" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     <MapPin className="h-4 w-4" />
                     <span>Mumbai, India</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  </a>
+                  <a 
+                    href="tel:+917738814467"
+                    className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     <Phone className="h-4 w-4" />
-                    <span>+91 (0) 22 XXXX XXXX</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <span>+91 7738814467</span>
+                  </a>
+                  <a 
+                    href="mailto:info@fieldnetglobal.com"
+                    className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
                     <Mail className="h-4 w-4" />
                     <span>info@fieldnetglobal.com</span>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
