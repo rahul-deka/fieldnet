@@ -1,10 +1,14 @@
+"use client";
+
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Building2, Trophy } from "lucide-react";
+import Autoplay from "embla-carousel-autoplay";
 
 export default function WhoWeArePage() {
   return (
@@ -119,7 +123,7 @@ export default function WhoWeArePage() {
         </section>
 
         {/* Philosophy */}
-        <section id="philosophy" className="border-y border-slate-200 bg-slate-50/60 py-24">
+        <section id="philosophy" className="border-y border-slate-200 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
             <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery</p>
@@ -172,6 +176,84 @@ export default function WhoWeArePage() {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* Global Partnership */}
+        <section className="py-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">
+                Global Partnership
+              </h2>
+              <p className="text-lg text-slate-600">
+                Operating across 12 countries, delivering insights worldwide
+              </p>
+            </div>
+
+            <div className="relative">
+              {/* Left fade overlay */}
+              <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+              
+              {/* Right fade overlay */}
+              <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+              <Carousel
+                plugins={[
+                  Autoplay({
+                    delay: 1000,
+                    stopOnInteraction: false,
+                    stopOnMouseEnter: true,
+                  }),
+                ]}
+                opts={{
+                  align: "start",
+                  loop: true,
+                  dragFree: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent className="-ml-4">
+                {[
+                  { name: "India", code: "in" },
+                  { name: "Pakistan", code: "pk" },
+                  { name: "Sri Lanka", code: "lk" },
+                  { name: "Nepal", code: "np" },
+                  { name: "Bhutan", code: "bt" },
+                  { name: "Bangladesh", code: "bd" },
+                  { name: "Indonesia", code: "id" },
+                  { name: "Thailand", code: "th" },
+                  { name: "UAE", code: "ae" },
+                  { name: "South Africa", code: "za" },
+                  { name: "Singapore", code: "sg" },
+                  { name: "USA", code: "us" },
+                  // Duplicate for seamless loop
+                  { name: "India", code: "in" },
+                  { name: "Pakistan", code: "pk" },
+                  { name: "Sri Lanka", code: "lk" },
+                  { name: "Nepal", code: "np" },
+                  { name: "Bhutan", code: "bt" },
+                  { name: "Bangladesh", code: "bd" },
+                  { name: "Indonesia", code: "id" },
+                  { name: "Thailand", code: "th" },
+                  { name: "UAE", code: "ae" },
+                  { name: "South Africa", code: "za" },
+                  { name: "Singapore", code: "sg" },
+                  { name: "USA", code: "us" },
+                ].map((country, index) => (
+                  <CarouselItem key={`${country.code}-${index}`} className="pl-4 basis-auto">
+                    <div className="flex flex-col items-center justify-center px-1">
+                      <span 
+                        className={`fi fi-${country.code} mb-3 ${country.code === 'np' ? '' : 'shadow-md'}`} 
+                        style={{ fontSize: '4rem', display: 'inline-block' }}
+                      ></span>
+                      {/* <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p> */}
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
             </div>
           </div>
         </section>
