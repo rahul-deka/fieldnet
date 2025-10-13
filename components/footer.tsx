@@ -24,7 +24,10 @@ const navigation = {
 
 export function Footer() {
   return (
-    <footer className="bg-card" aria-labelledby="footer-heading">
+    <footer className="bg-gradient-to-b from-cyan-100 to-cyan-200 relative" aria-labelledby="footer-heading">
+      {/* Top fade effect */}
+      <div className="absolute top-0 left-0 right-0 h-16 md:h-32 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
+      
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -39,15 +42,11 @@ export function Footer() {
               Full service Market Research agency providing services to clients from across the globe. Established in
               December 2005 with over 150 years of collective experience.
             </p>
-            <div className="flex space-x-6">
-              <Link href="https://www.linkedin.com/company/fieldnetglobal/" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">LinkedIn</span>
-                <Linkedin className="h-6 w-6" />
-              </Link>
-              {/* <Link href="#" className="text-muted-foreground hover:text-primary">
-                <span className="sr-only">Twitter</span>
-                <Twitter className="h-6 w-6" />
-              </Link> */}
+            <div className="grid grid-cols-2 gap-4 max-w-xs">
+              <img src="/programs/dell.png" alt="Dell" className="h-12 w-auto object-contain" />
+              <img src="/programs/iimb.png" alt="IIM Bangalore" className="h-12 w-auto object-contain" />
+              <img src="/programs/goldman.png" alt="Goldman Sachs" className="h-12 w-auto object-contain" />
+              <img src="/programs/nsrcel.png" alt="NSRCEL" className="h-12 w-auto object-contain" />
             </div>
           </div>
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
@@ -116,12 +115,21 @@ export function Footer() {
                     <Mail className="h-4 w-4" />
                     <span>info@fieldnetglobal.com</span>
                   </a>
+                  <a 
+                    href="https://www.linkedin.com/company/fieldnetglobal/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Linkedin className="h-4 w-4" />
+                    <span>LinkedIn</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-16 border-t border-border pt-8 sm:mt-20 lg:mt-24">
+        <div className="mt-16 border-t border-cyan-300/50 pt-8 sm:mt-20 lg:mt-24 text-center">
           <p className="text-xs leading-5 text-muted-foreground">
             &copy; 2025 Fieldnet Global Research LLP. All rights reserved.
           </p>
