@@ -7,8 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Phone, MessageCircle, Mail } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function ContactPage() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -16,11 +19,55 @@ export default function ContactPage() {
     phone: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/submit-contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Success!",
+          description: "Your message has been sent successfully. We'll get back to you shortly.",
+          duration: 5000,
+        });
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: data.error || "Failed to send message. Please try again.",
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Network error. Please check your connection and try again.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -184,9 +231,10 @@ export default function ContactPage() {
 
                 <Button
                   type="submit"
-                  className="w-full bg-cyan-600 hover:bg-cyan-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 text-white !cursor-pointer"
+                  disabled={isSubmitting}
+                  className="w-full bg-cyan-600 hover:bg-cyan-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 text-white !cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
                 >
-                  Submit Message
+                  {isSubmitting ? "Submitting..." : "Submit Message"}
                 </Button>
               </form>
 
@@ -245,6 +293,7 @@ export default function ContactPage() {
         </div>
       </main>
       <Footer />
+      <Toaster />
     </>
   );
 }
