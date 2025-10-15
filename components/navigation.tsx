@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, LogIn, CircleUser } from "lucide-react"
 import LogoSVG from "@/components/ui/LogoSVG"
 
 const navigation = [
@@ -58,6 +58,13 @@ export function Navigation() {
               </Link>
             ))}
           </div>
+          <Link
+            href="/register"
+            className="flex items-center justify-center p-2 rounded-lg hover:bg-cyan-50 transition-colors group"
+            title="Login / Register"
+          >
+            <CircleUser className="h-5 w-5 text-slate-700 group-hover:text-cyan-600 transition-colors" />
+          </Link>
           <Button
             asChild
             className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg border-0"
@@ -121,6 +128,16 @@ export function Navigation() {
                 style={{ backgroundColor: "#0891b2" }}
               >
                 <Link href="/contact">Get Started</Link>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                className="w-full border-slate-300 text-slate-700 hover:bg-slate-50"
+              >
+                <Link href="/register" className="flex items-center justify-center gap-2">
+                  <LogIn className="h-4 w-4" />
+                  Login / Register
+                </Link>
               </Button>
             </div>
           </div>
