@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { AnnouncementBanner } from "@/components/announcement-banner"
+import { AnnouncementBannerSkeleton } from "@/components/announcement-banner-skeleton"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -23,6 +25,9 @@ export default function RootLayout({
         <link rel="icon" href="/logo-cyan.svg" type="image/svg+xml" />
       </head>
       <body>
+        <Suspense fallback={<AnnouncementBannerSkeleton />}>
+          <AnnouncementBanner />
+        </Suspense>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>

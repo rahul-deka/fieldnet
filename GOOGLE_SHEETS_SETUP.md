@@ -19,6 +19,7 @@
 2. Delete any code in the editor and paste the following code:
 
 ```javascript
+// Handle POST requests (Contact Form Submissions)
 function doPost(e) {
   try {
     // Get the active spreadsheet
@@ -56,8 +57,28 @@ function doPost(e) {
   }
 }
 
+// Handle GET requests (Fetch Announcement)
+function doGet(e) {
+  try {
+    // Check if this is an announcement request
+    if (e.parameter.action === 'getAnnouncement') {
+      return getActiveAnnouncement();
+    }
+    
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'Web app is running' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Send email notifications for contact form submissions
 function sendEmailNotifications(data) {
-  var adminEmail = "adminemail@company.com"; // admin email
+  var adminEmail = "rahuldeka072@gmail.com"; // admin email
   var customerEmail = data.email;
   var customerName = data.firstName + " " + data.lastName;
   
@@ -129,11 +150,49 @@ function sendEmailNotifications(data) {
   }
 }
 
-// Test function (optional)
-function doGet(e) {
-  return ContentService
-    .createTextOutput(JSON.stringify({ status: 'Web app is running' }))
-    .setMimeType(ContentService.MimeType.JSON);
+// Get active announcement from the Announcement sheet
+function getActiveAnnouncement() {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var announcementSheet = spreadsheet.getSheetByName('Announcement');
+    
+    if (!announcementSheet) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ error: 'Announcement sheet not found' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Get all data from the announcement sheet
+    var data = announcementSheet.getDataRange().getValues();
+    
+    // Skip header row and find active announcement
+    for (var i = 1; i < data.length; i++) {
+      var title = data[i][0];
+      var link = data[i][1];
+      var status = data[i][2];
+      
+      // Return the first active announcement
+      if (status && status.toString().toLowerCase() === 'active') {
+        return ContentService
+          .createTextOutput(JSON.stringify({
+            title: title,
+            link: link,
+            status: status
+          }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    
+    // No active announcement found
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'expired' }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
 }
 ```
 
@@ -235,4 +294,43 @@ The script automatically sends two emails on each submission:
 ## Future Enhancements
 
 - [x] **Add email notifications**: Implemented - Emails sent to both admin and customer
+- [x] **Announcement banner integration**: Fetch announcements from Google Sheet
 - [ ] Beautification of the email template
+
+## Announcement Banner Setup
+
+### Step 1: Create Announcement Sheet
+
+1. In your Google Sheet, create a new sheet (tab) named **"Announcement"**
+2. Add these headers in the first row:
+   - Column A: Title
+   - Column B: Link
+   - Column C: Status
+
+3. Add your announcement data:
+   - **Title**: The announcement message (e.g., "Join our worldwide research community and earn rewards!")
+   - **Link**: URL to link to (e.g., "/register" or full URL)
+   - **Status**: Either "active" or "expired"
+
+### Step 2: The Script is Already Set Up!
+
+The Google Apps Script code above already includes the `doGet` and `getActiveAnnouncement` functions needed for the announcement banner. No additional code is needed!
+
+### Step 3: Redeploy (if needed)
+
+If you had already deployed the script before adding the announcement functionality:
+
+1. Click **Deploy** > **Manage deployments**
+2. Click the **Edit** icon (pencil) next to your deployment
+3. Under "Execute as", make sure it's set to **"Me"**
+4. Under "Who has access", keep it as **"Anyone"**
+5. Click **Deploy**
+
+### Usage
+
+The announcement banner will:
+- Automatically fetch the announcement from your Google Sheet
+- Only display if status is "active"
+- Hide if status is "expired" or if there's no active announcement
+- Show a loading state while fetching
+- Users can dismiss it with the X button
