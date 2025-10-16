@@ -46,6 +46,20 @@ Create another sheet named "Announcement" with these headers:
 - Column B: Link
 - Column C: Status
 
+### Sheet 4: FAQs
+Create another sheet named "FAQs" with:
+1. **Row 1** (Headers):
+   - Column A: Question
+   - Column B: Answer
+
+2. **Row 2+**: Add your FAQ entries
+   - Example:
+   
+| Question | Answer |
+|----------|--------|
+| What services does FieldNet offer? | FieldNet provides comprehensive market research solutions including data collection, analysis, and reporting for a wide range of industries. |
+| How can I start a project with FieldNet? | Simply contact us through our website or email, and our team will guide you through the process from consultation to project delivery. |
+
 ## Step 2: Create Google Apps Script
 
 1. In your Google Sheet, click on **Extensions** > **Apps Script**
@@ -132,7 +146,7 @@ function handleBookingSubmission(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
-// Handle GET requests (Fetch Announcement & Time Slots)
+// Handle GET requests (Fetch Announcement, Time Slots & FAQs)
 function doGet(e) {
   try {
     // Check if this is an announcement request
@@ -143,6 +157,11 @@ function doGet(e) {
     // Check if this is a time slots request
     if (e.parameter.action === 'getTimeSlots') {
       return getTimeSlots();
+    }
+    
+    // Check if this is a FAQs request
+    if (e.parameter.action === 'getFAQs') {
+      return getFAQs();
     }
     
     return ContentService
@@ -338,6 +357,50 @@ function getTimeSlots() {
     return ContentService
       .createTextOutput(JSON.stringify({ 
         timeSlots: timeSlots 
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Get FAQs from the FAQs sheet
+function getFAQs() {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var faqSheet = spreadsheet.getSheetByName('FAQs');
+    
+    if (!faqSheet) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ error: 'FAQs sheet not found' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Get all data from the FAQ sheet (skip header row)
+    var data = faqSheet.getDataRange().getValues();
+    var faqs = [];
+    
+    // Start from row 2 (index 1) to skip headers
+    for (var i = 1; i < data.length; i++) {
+      var question = data[i][0]; // Column A
+      var answer = data[i][1];   // Column B
+      
+      // Only add if both question and answer exist
+      if (question && question.toString().trim() !== '' && 
+          answer && answer.toString().trim() !== '') {
+        faqs.push({
+          question: question.toString(),
+          answer: answer.toString()
+        });
+      }
+    }
+    
+    return ContentService
+      .createTextOutput(JSON.stringify({ 
+        faqs: faqs 
       }))
       .setMimeType(ContentService.MimeType.JSON);
       
