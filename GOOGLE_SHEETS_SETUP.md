@@ -66,15 +66,17 @@ Create another sheet named "FAQs" with:
 2. Delete any code in the editor and paste the following code:
 
 ```javascript
-// Handle POST requests (Contact Form & Booking Submissions)
+// Handle POST requests (Contact Form, Booking Submissions & Newsletter)
 function doPost(e) {
   try {
     // Parse the incoming data
     var data = JSON.parse(e.postData.contents);
     
-    // Check if this is a booking or contact form submission
+    // Check the action type
     if (data.action === 'booking') {
       return handleBookingSubmission(data);
+    } else if (data.action === 'newsletter') {
+      return handleNewsletterSubscription(data);
     } else {
       return handleContactSubmission(data);
     }
@@ -678,4 +680,186 @@ Update the `adminEmail` variable in both `sendEmailNotifications` and `sendBooki
 4. Submit and check:
    - Google Sheet "Call Bookings" tab for the new entry
    - Admin email (rahuldeka072@gmail.com) for booking notification
+   - Customer email for booking confirmation
+
+---
+
+## Newsletter Subscription System
+
+### Overview
+
+The newsletter subscription feature allows visitors to subscribe to your newsletter directly from the footer of your website. This provides an easy way to build an email list for marketing campaigns and updates.
+
+### Sheet 5: Newsletter Subscribers
+
+1. Create a new sheet and name it "Newsletter Subscribers"
+2. In **Row 1**, add these headers:
+   - Column A: Timestamp
+   - Column B: Email
+   - Column C: Status (optional, for managing subscriptions)
+
+3. Subscriber entries will start from **Row 2** onwards
+
+### Google Apps Script Function
+
+Add this function to your Google Apps Script (after the other functions):
+
+```javascript
+// Handle Newsletter Subscriptions
+function handleNewsletterSubscription(data) {
+  // Get the "Newsletter Subscribers" sheet
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var newsletterSheet = spreadsheet.getSheetByName('Newsletter Subscribers');
+  
+  if (!newsletterSheet) {
+    throw new Error('Newsletter Subscribers sheet not found');
+  }
+  
+  // Check if email already exists (starting from row 2)
+  var lastRow = newsletterSheet.getLastRow();
+  
+  // Only check if there's data beyond the header row
+  if (lastRow > 1) {
+    var emailColumn = newsletterSheet.getRange(2, 2, lastRow - 1, 1).getValues(); // Column B, starting from row 2
+    
+    for (var i = 0; i < emailColumn.length; i++) {
+      if (emailColumn[i][0] === data.email) {
+        return ContentService
+          .createTextOutput(JSON.stringify({ 
+            status: 'already_subscribed',
+            message: 'This email is already subscribed' 
+          }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+  }
+  
+  // Append the new subscriber starting from row 2, column A
+  newsletterSheet.appendRow([
+    data.timestamp,
+    data.email,
+    'Active' // Status
+  ]);
+  
+  // Send welcome email
+  sendNewsletterWelcomeEmail(data.email);
+  
+  // Return success response
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Send welcome email to new newsletter subscriber
+function sendNewsletterWelcomeEmail(email) {
+  var adminEmail = "rahuldeka072@gmail.com";
+  
+  // Email to Admin
+  var adminSubject = "📬 New Newsletter Subscriber";
+  var adminBody = 
+    "A new subscriber has joined your newsletter!\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "📧 Email: " + email + "\n" +
+    "🕐 Time: " + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "MMM dd, yyyy 'at' hh:mm a") + "\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "View all subscribers in your Google Sheet:\n" +
+    SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  
+  // Email to Subscriber (Welcome)
+  var subscriberSubject = "Welcome to FieldNet Research Newsletter! 📬";
+  var subscriberBody = 
+    "Hi there! 👋\n\n" +
+    "Thank you for subscribing to the FieldNet Research newsletter!\n\n" +
+    "You'll now receive:\n" +
+    "• Latest market research insights and trends\n" +
+    "• Industry news and updates\n" +
+    "• Exclusive tips and resources\n" +
+    "• Company announcements\n\n" +
+    "We're excited to have you as part of our community!\n\n" +
+    "Best regards,\n" +
+    "The FieldNet Research Team\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "📧 Email: info@fieldnetglobal.com\n" +
+    "📱 Phone: +91 7738814467\n" +
+    "🌐 Website: https://fieldnetglobal.com\n\n" +
+    "---\n" +
+    "To unsubscribe from this newsletter, please reply to this email with 'Unsubscribe' in the subject line.";
+  
+  try {
+    // Send email to admin
+    MailApp.sendEmail({
+      to: adminEmail,
+      subject: adminSubject,
+      body: adminBody
+    });
+    
+    // Send welcome email to subscriber
+    MailApp.sendEmail({
+      to: email,
+      subject: subscriberSubject,
+      body: subscriberBody
+    });
+    
+    Logger.log("Newsletter welcome emails sent to " + adminEmail + " and " + email);
+  } catch (emailError) {
+    Logger.log("Error sending newsletter emails: " + emailError.toString());
+  }
+}
+```
+
+### How It Works
+
+1. **User Interaction**:
+   - Users enter their email in the newsletter field in the footer
+   - Click "Subscribe" button
+   - Receive instant success message
+   - Get welcome email with subscription confirmation
+
+2. **Duplicate Prevention**:
+   - Script checks if email already exists before adding
+   - Returns "already subscribed" message if duplicate found
+   - Prevents multiple entries for the same email
+
+3. **Email Notifications**:
+   - **Admin** receives notification of new subscriber with email and timestamp
+   - **Subscriber** receives welcome email with information about what to expect
+
+### Features
+
+- ✅ Clean, minimal design in footer
+- ✅ Email validation
+- ✅ Loading state during submission
+- ✅ Success/error messages
+- ✅ Duplicate email prevention
+- ✅ Automatic welcome email
+- ✅ Admin notifications
+- ✅ Responsive design (works on mobile and desktop)
+- ✅ Cyan theme matching contact page
+
+### Testing
+
+1. Go to any page on your website
+2. Scroll to the footer
+3. Find "Subscribe to Newsletter" section
+4. Enter a test email address
+5. Click "Subscribe"
+6. Verify:
+   - Success message appears
+   - Email added to "Newsletter Subscribers" sheet
+   - Admin receives notification email
+   - Subscriber receives welcome email
+
+---
+
+## Summary of All Sheets
+
+Your Google Sheets setup now includes **5 sheets**:
+
+1. **Contact Form Submissions** (Sheet 1) - Contact form entries
+2. **Call Bookings** (Sheet 2) - Call scheduling with dynamic time slots
+3. **Announcement** (Sheet 3) - Website announcements
+4. **FAQs** (Sheet 4) - Frequently asked questions
+5. **Newsletter Subscribers** (Sheet 5) - Newsletter email list
+
+All sheets are fully integrated with your Next.js application and provide real-time data management without requiring code changes or deployments!
    - Customer email for confirmation

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react"
 import LogoBlackSVG from "@/components/ui/LogoBlackSVG"
+import { NewsletterSubscribe } from "@/components/newsletter-subscribe"
 
 const navigation = {
   company: [
@@ -125,6 +126,24 @@ export function Footer() {
                     <span>LinkedIn</span>
                   </a>
                 </div>
+              </div>
+            </div>
+          </div>
+          {/* Newsletter - Full width on mobile, spans Support & Contact Info on desktop */}
+          <div className="mt-10 xl:hidden">
+            <div className="pt-8 border-t border-cyan-300/50">
+              <NewsletterSubscribe />
+            </div>
+          </div>
+        </div>
+        {/* Newsletter for desktop - only visible on xl screens */}
+        <div className="hidden xl:block xl:-mt-16">
+          <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+            <div></div>
+            <div className="xl:col-span-2 grid grid-cols-2 gap-8">
+              <div></div>
+              <div className="pt-8 border-t border-cyan-300/50">
+                <NewsletterSubscribe />
               </div>
             </div>
           </div>
