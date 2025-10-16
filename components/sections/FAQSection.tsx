@@ -13,6 +13,15 @@ export default function FAQSection() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Check cache first
+    const cached = sessionStorage.getItem('faqs');
+    if (cached) {
+      setFaqs(JSON.parse(cached));
+      setIsLoading(false);
+      return;
+    }
+
+    // Fetch if no cache
     const fetchFAQs = async () => {
       try {
         const response = await fetch('/api/get-faqs');
@@ -20,6 +29,8 @@ export default function FAQSection() {
           const data = await response.json();
           if (data.faqs && data.faqs.length > 0) {
             setFaqs(data.faqs);
+            // Cache in sessionStorage
+            sessionStorage.setItem('faqs', JSON.stringify(data.faqs));
           }
         }
       } catch (error) {
