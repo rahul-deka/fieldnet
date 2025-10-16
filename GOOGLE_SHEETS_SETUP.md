@@ -1,17 +1,50 @@
 # Google Sheets Integration Setup Guide
 
-## Step 1: Create a Google Sheet
+## Step 1: Create Google Sheets
 
 1. Go to [Google Sheets](https://sheets.google.com)
 2. Create a new spreadsheet
-3. Name it "Contact Form Submissions" (or any name you prefer)
-4. In the first row, add these headers:
+3. Name it "FieldNet Forms" (or any name you prefer)
+
+### Sheet 1: Contact Form Submissions (Default sheet)
+In the first row, add these headers:
+- Column A: Timestamp
+- Column B: First Name
+- Column C: Last Name
+- Column D: Email
+- Column E: Phone
+- Column F: Message
+
+### Sheet 2: Call Bookings
+1. Create a new sheet and name it "Call Bookings"
+2. In **Row 1**, add the available time slots (these will be displayed in the booking form):
+   - Leave Column A empty
+   - Column B: 09:00 AM - 10:00 AM
+   - Column C: 10:00 AM - 11:00 AM
+   - Column D: 11:00 AM - 12:00 PM
+   - Column E: 02:00 PM - 03:00 PM
+   - Column F: 03:00 PM - 04:00 PM
+   - Column G: 04:00 PM - 05:00 PM
+
+3. Leave **Row 2** empty (spacer)
+
+4. In **Row 3**, add these headers for booking submissions:
    - Column A: Timestamp
    - Column B: First Name
    - Column C: Last Name
    - Column D: Email
    - Column E: Phone
-   - Column F: Message
+   - Column F: Date
+   - Column G: Time Slot
+   - Column H: Purpose
+
+5. Booking submissions will start from **Row 4** onwards
+
+### Sheet 3: Announcement
+Create another sheet named "Announcement" with these headers:
+- Column A: Title
+- Column B: Link
+- Column C: Status
 
 ## Step 2: Create Google Apps Script
 
@@ -19,32 +52,18 @@
 2. Delete any code in the editor and paste the following code:
 
 ```javascript
-// Handle POST requests (Contact Form Submissions)
+// Handle POST requests (Contact Form & Booking Submissions)
 function doPost(e) {
   try {
-    // Get the active spreadsheet
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    
     // Parse the incoming data
     var data = JSON.parse(e.postData.contents);
     
-    // Append the data to the sheet
-    sheet.appendRow([
-      data.timestamp,
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.phone,
-      data.message
-    ]);
-    
-    // Send email notifications
-    sendEmailNotifications(data);
-    
-    // Return success response
-    return ContentService
-      .createTextOutput(JSON.stringify({ status: 'success' }))
-      .setMimeType(ContentService.MimeType.JSON);
+    // Check if this is a booking or contact form submission
+    if (data.action === 'booking') {
+      return handleBookingSubmission(data);
+    } else {
+      return handleContactSubmission(data);
+    }
       
   } catch (error) {
     // Return error response
@@ -57,12 +76,73 @@ function doPost(e) {
   }
 }
 
-// Handle GET requests (Fetch Announcement)
+// Handle Contact Form Submissions
+function handleContactSubmission(data) {
+  // Get the first sheet (Contact Form Submissions)
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheets()[0]; // First sheet
+  
+  // Append the data to the sheet
+  sheet.appendRow([
+    data.timestamp,
+    data.firstName,
+    data.lastName,
+    data.email,
+    data.phone,
+    data.message
+  ]);
+  
+  // Send email notifications
+  sendEmailNotifications(data);
+  
+  // Return success response
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Handle Booking Submissions
+function handleBookingSubmission(data) {
+  // Get the "Call Bookings" sheet
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var bookingSheet = spreadsheet.getSheetByName('Call Bookings');
+  
+  if (!bookingSheet) {
+    throw new Error('Call Bookings sheet not found');
+  }
+  
+  // Append the booking data starting from row 4 (after headers in row 3)
+  bookingSheet.appendRow([
+    data.timestamp,
+    data.firstName,
+    data.lastName,
+    data.email,
+    data.phone,
+    data.date,
+    data.timeSlot,
+    data.purpose
+  ]);
+  
+  // Send booking confirmation emails
+  sendBookingEmailNotifications(data);
+  
+  // Return success response
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+// Handle GET requests (Fetch Announcement & Time Slots)
 function doGet(e) {
   try {
     // Check if this is an announcement request
     if (e.parameter.action === 'getAnnouncement') {
       return getActiveAnnouncement();
+    }
+    
+    // Check if this is a time slots request
+    if (e.parameter.action === 'getTimeSlots') {
+      return getTimeSlots();
     }
     
     return ContentService
@@ -147,6 +227,124 @@ function sendEmailNotifications(data) {
   } catch (emailError) {
     Logger.log("Error sending emails: " + emailError.toString());
     // Don't throw error - we still want to save the data even if email fails
+  }
+}
+
+// Send email notifications for booking submissions
+function sendBookingEmailNotifications(data) {
+  var adminEmail = "rahuldeka072@gmail.com"; // admin email
+  var customerEmail = data.email;
+  var customerName = data.firstName + " " + data.lastName;
+  
+  // Format timestamp
+  var timestamp = new Date(data.timestamp);
+  var formattedDateTime = Utilities.formatDate(timestamp, Session.getScriptTimeZone(), "MMM dd, yyyy 'at' hh:mm a");
+  
+  // Format the booking date
+  var bookingDate = new Date(data.date);
+  var formattedBookingDate = Utilities.formatDate(bookingDate, Session.getScriptTimeZone(), "EEEE, MMM dd, yyyy");
+  
+  // Email to Admin (You)
+  var adminSubject = "📅 New Call Booking from " + customerName;
+  var adminBody = 
+    "You have received a new call booking:\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "📅 BOOKING DETAILS\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "👤 Name: " + customerName + "\n" +
+    "📧 Email: " + customerEmail + "\n" +
+    "📱 Phone: " + data.phone + "\n" +
+    "📆 Date: " + formattedBookingDate + "\n" +
+    "🕐 Time Slot: " + data.timeSlot + "\n" +
+    "🕐 Booked at: " + formattedDateTime + "\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "💼 PURPOSE\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    data.purpose + "\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "📊 View all bookings in your Google Sheet:\n" +
+    SpreadsheetApp.getActiveSpreadsheet().getUrl() + "\n\n" +
+    "---\n" +
+    "This is an automated notification from your booking system.";
+  
+  // Email to Customer (Confirmation)
+  var customerSubject = "✅ Call Scheduled - FieldNet Research";
+  var customerBody = 
+    "Hi " + data.firstName + ",\n\n" +
+    "Great news! Your call with FieldNet Research has been scheduled.\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+    "📅 YOUR BOOKING CONFIRMATION\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "📆 Date: " + formattedBookingDate + "\n" +
+    "🕐 Time: " + data.timeSlot + "\n" +
+    "📧 Email: " + customerEmail + "\n" +
+    "📱 Phone: " + data.phone + "\n\n" +
+    "💼 Discussion Topic:\n" +
+    data.purpose + "\n\n" +
+    "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+    "📞 What to Expect:\n" +
+    "Our team will call you at the scheduled time on the phone number provided: " + data.phone + "\n\n" +
+    "If you need to reschedule or have any questions, please contact us at +91 7738814467 or reply to this email.\n\n" +
+    "Best regards,\n" +
+    "The FieldNet Research Team\n\n" +
+    "---\n" +
+    "This is an automated confirmation email. If you need to make changes, please contact us directly.";
+  
+  try {
+    // Send email to admin
+    MailApp.sendEmail({
+      to: adminEmail,
+      subject: adminSubject,
+      body: adminBody
+    });
+    
+    // Send confirmation email to customer
+    MailApp.sendEmail({
+      to: customerEmail,
+      subject: customerSubject,
+      body: customerBody
+    });
+    
+    Logger.log("Booking emails sent successfully to " + adminEmail + " and " + customerEmail);
+  } catch (emailError) {
+    Logger.log("Error sending booking emails: " + emailError.toString());
+    // Don't throw error - we still want to save the booking even if email fails
+  }
+}
+
+// Get available time slots from the Call Bookings sheet
+function getTimeSlots() {
+  try {
+    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var bookingSheet = spreadsheet.getSheetByName('Call Bookings');
+    
+    if (!bookingSheet) {
+      return ContentService
+        .createTextOutput(JSON.stringify({ error: 'Call Bookings sheet not found' }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Get Row 1 data (time slots)
+    var firstRow = bookingSheet.getRange(1, 1, 1, bookingSheet.getLastColumn()).getValues()[0];
+    
+    // Filter out empty cells and the first column (which should be empty)
+    var timeSlots = [];
+    for (var i = 0; i < firstRow.length; i++) {
+      if (firstRow[i] && firstRow[i].toString().trim() !== '') {
+        timeSlots.push(firstRow[i].toString());
+      }
+    }
+    
+    return ContentService
+      .createTextOutput(JSON.stringify({ 
+        timeSlots: timeSlots 
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ error: error.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
   }
 }
 
@@ -334,3 +532,87 @@ The announcement banner will:
 - Hide if status is "expired" or if there's no active announcement
 - Show a loading state while fetching
 - Users can dismiss it with the X button
+
+## Call Booking System Setup
+
+### Overview
+
+The call booking system allows users to schedule consultation calls directly from your contact page. When users click "Book a Call", the contact form switches to a booking form where they can:
+- Select a preferred date
+- Choose from available time slots
+- Provide their contact information
+- Describe the purpose of the call
+
+### How It Works
+
+1. **User Experience**:
+   - Users click the "Book a Call" button on the contact page
+   - The form switches from contact form to booking form
+   - Users can go back to the contact form using the "Back" button
+   - After submission, both admin and customer receive email confirmations
+
+2. **Data Storage**:
+   - All bookings are stored in the "Call Bookings" sheet
+   - Row 1 contains the available time slots (for reference)
+   - Row 3 contains the column headers
+   - Bookings are appended starting from Row 4
+
+3. **Time Slots**:
+   - Time slots are **dynamically fetched** from Row 1 of the "Call Bookings" sheet
+   - The booking form automatically loads available slots when opened
+   - Simply update Row 1 in your Google Sheet to add/modify/remove slots
+   - No code changes needed - slots are pulled from the sheet in real-time
+   - Format: "HH:MM AM/PM - HH:MM AM/PM"
+   - Example time slots:
+     * 09:00 AM - 10:00 AM
+     * 10:00 AM - 11:00 AM
+     * 11:00 AM - 12:00 PM
+     * 02:00 PM - 03:00 PM
+     * 03:00 PM - 04:00 PM
+     * 04:00 PM - 05:00 PM
+   - **Fallback**: If fetching fails, the form uses default hardcoded slots
+
+### Email Notifications
+
+**Admin Email** (rahuldeka072@gmail.com receives):
+- 📅 New Call Booking notification
+- Customer name, email, phone
+- Booking date and time slot
+- Purpose of the call
+- Link to Google Sheet
+
+**Customer Email** (receives):
+- ✅ Booking confirmation
+- Scheduled date and time
+- Contact information
+- What to expect during the call
+- How to reschedule or contact support
+
+### Customization
+
+**To modify time slots**:
+1. Simply update Row 1 in the "Call Bookings" Google Sheet
+2. Add slots in columns B, C, D, E, F, G, etc. (Column A should remain empty)
+3. Use format: "HH:MM AM/PM - HH:MM AM/PM"
+4. Save the sheet - changes will be reflected immediately on the website
+5. No code deployment or restart needed!
+
+**Example Row 1 setup**:
+```
+| A (Empty) | B                    | C                    | D                    | E                    | F                    | G                    |
+|-----------|----------------------|----------------------|----------------------|----------------------|----------------------|----------------------|
+|           | 09:00 AM - 10:00 AM | 10:00 AM - 11:00 AM | 11:00 AM - 12:00 PM | 02:00 PM - 03:00 PM | 03:00 PM - 04:00 PM | 04:00 PM - 05:00 PM |
+```
+
+**To change admin email**:
+Update the `adminEmail` variable in both `sendEmailNotifications` and `sendBookingEmailNotifications` functions in the Google Apps Script.
+
+### Testing
+
+1. Go to your contact page: `http://localhost:3000/contact`
+2. Click the "Book a Call" button (desktop sidebar or mobile bottom section)
+3. Fill out the booking form with test data
+4. Submit and check:
+   - Google Sheet "Call Bookings" tab for the new entry
+   - Admin email (rahuldeka072@gmail.com) for booking notification
+   - Customer email for confirmation

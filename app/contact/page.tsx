@@ -5,13 +5,19 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, MessageCircle, Mail } from "lucide-react";
-import { useState } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Phone, MessageCircle, Mail, Calendar, ArrowLeft } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const formRef = useRef<HTMLDivElement>(null);
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [timeSlots, setTimeSlots] = useState<string[]>([]);
+  const [isLoadingSlots, setIsLoadingSlots] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,7 +25,59 @@ export default function ContactPage() {
     phone: "",
     message: "",
   });
+  const [bookingData, setBookingData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    date: "",
+    timeSlot: "",
+    purpose: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fetch time slots from Google Sheets when booking form is shown
+  useEffect(() => {
+    if (showBookingForm && timeSlots.length === 0) {
+      fetchTimeSlots();
+    }
+  }, [showBookingForm]);
+
+  const fetchTimeSlots = async () => {
+    setIsLoadingSlots(true);
+    try {
+      const response = await fetch('/api/get-timeslots');
+      if (response.ok) {
+        const data = await response.json();
+        if (data.timeSlots && data.timeSlots.length > 0) {
+          setTimeSlots(data.timeSlots);
+        } else {
+          // Fallback to default slots if none found
+          setTimeSlots([
+            "09:00 AM - 10:00 AM",
+            "10:00 AM - 11:00 AM",
+            "11:00 AM - 12:00 PM",
+            "02:00 PM - 03:00 PM",
+            "03:00 PM - 04:00 PM",
+            "04:00 PM - 05:00 PM",
+          ]);
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch time slots:', error);
+      // Use fallback slots
+      setTimeSlots([
+        "09:00 AM - 10:00 AM",
+        "10:00 AM - 11:00 AM",
+        "11:00 AM - 12:00 PM",
+        "02:00 PM - 03:00 PM",
+        "03:00 PM - 04:00 PM",
+        "04:00 PM - 05:00 PM",
+      ]);
+    } finally {
+      setIsLoadingSlots(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,11 +128,88 @@ export default function ContactPage() {
     }
   };
 
+  const handleBookingSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/submit-booking", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Success!",
+          description: "Your call has been scheduled successfully. We'll send you a confirmation email shortly.",
+          duration: 5000,
+        });
+        // Reset form
+        setBookingData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          date: "",
+          timeSlot: "",
+          purpose: "",
+        });
+        setShowBookingForm(false);
+      } else {
+        toast({
+          title: "Error",
+          description: data.error || "Failed to schedule call. Please try again.",
+          variant: "destructive",
+          duration: 5000,
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Network error. Please check your connection and try again.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleBookingChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setBookingData({
+      ...bookingData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleBookingClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowBookingForm(true);
+    
+    // Scroll to the form section only on mobile (screen width < 1024px)
+    setTimeout(() => {
+      if (formRef.current && window.innerWidth < 1024) {
+        const elementPosition = formRef.current.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - 100; // 100px offset to show the title
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (
@@ -131,12 +266,11 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="https://calendly.com/your-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#book-call"
+                  onClick={handleBookingClick}
                   className="flex items-center space-x-3 p-4 border border-orange-700 bg-orange-600 text-white rounded-lg hover:bg-orange-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
                 >
-                  <Phone className="h-5 w-5" />
+                  <Calendar className="h-5 w-5" />
                   <div>
                     <div className="font-semibold">Book a Call</div>
                     <div className="text-sm text-white/90">Schedule a consultation</div>
@@ -146,8 +280,163 @@ export default function ContactPage() {
             </div>
 
             {/* Right Column - Form */}
-            <div className="bg-white p-8 rounded-lg border border-slate-200 shadow-sm">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <div ref={formRef} className="bg-white p-8 rounded-lg border border-slate-200 shadow-sm">
+              {showBookingForm ? (
+                <>
+                  {/* Back Button */}
+                  <button
+                    onClick={() => setShowBookingForm(false)}
+                    className="flex items-center gap-2 text-cyan-600 hover:text-cyan-700 mb-6 transition-colors"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span className="text-sm font-medium cursor-pointer!">Back to Contact Form</span>
+                  </button>
+
+                  {/* Booking Form */}
+                  <div className="mb-6">
+                    <div className="flex items-center gap-3 mb-2">
+                      <Calendar className="h-6 w-6 text-orange-600" />
+                      <h2 className="text-2xl font-bold text-slate-900">Schedule a Call</h2>
+                    </div>
+                    <p className="text-slate-600">Book a convenient time slot for your consultation</p>
+                  </div>
+
+                  <form onSubmit={handleBookingSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="bookingFirstName" className="text-slate-900">
+                          First Name *
+                        </Label>
+                        <Input
+                          id="bookingFirstName"
+                          name="firstName"
+                          type="text"
+                          required
+                          value={bookingData.firstName}
+                          onChange={handleBookingChange}
+                          placeholder="John"
+                          className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="bookingLastName" className="text-slate-900">
+                          Last Name *
+                        </Label>
+                        <Input
+                          id="bookingLastName"
+                          name="lastName"
+                          type="text"
+                          required
+                          value={bookingData.lastName}
+                          onChange={handleBookingChange}
+                          placeholder="Doe"
+                          className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="bookingEmail" className="text-slate-900">
+                        Email *
+                      </Label>
+                      <Input
+                        id="bookingEmail"
+                        name="email"
+                        type="email"
+                        required
+                        value={bookingData.email}
+                        onChange={handleBookingChange}
+                        placeholder="john.doe@example.com"
+                        className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="bookingPhone" className="text-slate-900">
+                        Phone *
+                      </Label>
+                      <Input
+                        id="bookingPhone"
+                        name="phone"
+                        type="tel"
+                        required
+                        value={bookingData.phone}
+                        onChange={handleBookingChange}
+                        placeholder="+91 98765 43210"
+                        className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="bookingDate" className="text-slate-900">
+                        Preferred Date *
+                      </Label>
+                      <Input
+                        id="bookingDate"
+                        name="date"
+                        type="date"
+                        required
+                        value={bookingData.date}
+                        onChange={handleBookingChange}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="bookingTimeSlot" className="text-slate-900">
+                        Preferred Time Slot *
+                      </Label>
+                      <Select
+                        value={bookingData.timeSlot}
+                        onValueChange={(value) => setBookingData({ ...bookingData, timeSlot: value })}
+                        required
+                        disabled={isLoadingSlots}
+                      >
+                        <SelectTrigger className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500">
+                          <SelectValue placeholder={isLoadingSlots ? "Loading time slots..." : "Select a time slot"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {timeSlots.map((slot) => (
+                            <SelectItem 
+                              key={slot} 
+                              value={slot}
+                              className="focus:bg-orange-500 focus:text-white"
+                            >
+                              {slot}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="bookingPurpose" className="text-slate-900">
+                        Purpose of Call *
+                      </Label>
+                      <Textarea
+                        id="bookingPurpose"
+                        name="purpose"
+                        required
+                        value={bookingData.purpose}
+                        onChange={handleBookingChange}
+                        placeholder="Briefly describe what you'd like to discuss..."
+                        rows={4}
+                        className="mt-2 border-slate-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-500 focus-visible:ring-orange-500"
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-orange-600 hover:bg-orange-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200 text-white !cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+                    >
+                      {isSubmitting ? "Scheduling..." : "Schedule Call"}
+                    </Button>
+                  </form>
+                </>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-sm font-medium text-slate-900 mb-2">
@@ -237,8 +526,7 @@ export default function ContactPage() {
                   {isSubmitting ? "Submitting..." : "Submit Message"}
                 </Button>
               </form>
-
-              
+              )}
             </div>
             {/* OR Divider - Mobile Only */}
               <div className="lg:hidden relative my-4">
@@ -277,12 +565,11 @@ export default function ContactPage() {
                 </a>
 
                 <a
-                  href="https://calendly.com/your-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#book-call"
+                  onClick={handleBookingClick}
                   className="flex items-center space-x-3 p-4 border border-orange-700 bg-orange-600 text-white rounded-lg hover:bg-orange-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
                 >
-                  <Phone className="h-5 w-5" />
+                  <Calendar className="h-5 w-5" />
                   <div>
                     <div className="font-semibold">Book a Call</div>
                     <div className="text-sm text-white/90">Schedule a consultation</div>
