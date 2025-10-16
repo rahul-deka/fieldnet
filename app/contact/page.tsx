@@ -286,9 +286,9 @@ export default function ContactPage() {
                   {/* Back Button */}
                   <button
                     onClick={() => setShowBookingForm(false)}
-                    className="flex items-center gap-2 text-cyan-600 hover:text-cyan-700 mb-6 transition-colors"
+                    className="flex items-center gap-2 text-cyan-600 hover:text-cyan-700 mb-6 transition-colors cursor-pointer!"
                   >
-                    <ArrowLeft className="h-4 w-4" />
+                    <ArrowLeft className="h-4 w-4 cursor-pointer!" />
                     <span className="text-sm font-medium cursor-pointer!">Back to Contact Form</span>
                   </button>
 
