@@ -122,7 +122,7 @@ function sendNewsletterWelcomeEmail(email) {
     "The FieldNet Research Team\n\n" +
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
     "📧 Email: info@fieldnetglobal.com\n" +
-    "📱 Phone: +91 7738814467\n" +
+    "📱 Phone: +91 9892787127\n" +
     "🌐 Website: https://fieldnetglobal.com\n\n" +
     "---\n" +
     "To unsubscribe from this newsletter, please reply to this email with 'Unsubscribe' in the subject line.";

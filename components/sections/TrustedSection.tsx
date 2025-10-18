@@ -5,14 +5,18 @@ import { Clock, Users, Target, Globe } from "lucide-react";
 
 const ANIMATION_DURATION = 2500; // ms
 const stats = [
-  { label: "Years of Experience", value: 19, suffix: "+", icon: Clock, color: "text-cyan-600" },
-  { label: "Interviews Conducted", value: 400, suffix: "K+", icon: Users, color: "text-green-600" },
-  { label: "Focus Groups", value: 2200, suffix: "+", icon: Target, color: "text-amber-600" },
-  { label: "Languages Supported", value: 11, suffix: "", icon: Globe, color: "text-purple-600" },
+  { label: "Consumer Interactions", value: 5, suffix: " Million+", icon: Users, color: "text-green-600" },
+  { label: "Towns, Cities & Rural Centers Covered", value: 1000, suffix: "+", icon: Clock, color: "text-cyan-600" },
+  { label: "Clients Across the Globe", value: 300, suffix: "+", icon: Target, color: "text-amber-600" },
+  // This entry is a textual value (not numeric). We'll render it directly without animation.
+  { label: "Companies served", value: 'Fortune 500', suffix: "", icon: Globe, color: "text-purple-600" },
 ];
 
 export default function TrustedSection() {
-  const [animatedNumbers, setAnimatedNumbers] = useState(stats.map(() => 0));
+  // animatedNumbers can be number (animated) or string (static text like 'Fortune 500')
+  const [animatedNumbers, setAnimatedNumbers] = useState<(number | string)[]>(
+    stats.map((s) => (typeof s.value === 'number' ? 0 : String(s.value)))
+  );
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -34,8 +38,18 @@ export default function TrustedSection() {
   useEffect(() => {
     if (!isVisible) return;
     stats.forEach((stat, idx) => {
+      // If the stat value is not a number (e.g. 'Fortune 500'), don't animate — set directly
+      if (typeof stat.value !== 'number') {
+        setAnimatedNumbers((prev) => {
+          const arr = [...prev];
+          arr[idx] = String(stat.value);
+          return arr;
+        });
+        return;
+      }
+
       const start = 0;
-      const end = stat.value;
+      const end = stat.value as number;
       const duration = ANIMATION_DURATION;
       const startTime = Date.now();
       function animate() {
@@ -43,17 +57,18 @@ export default function TrustedSection() {
         const progress = Math.min(elapsed / duration, 1);
         const ease = 1 - Math.pow(1 - progress, 4);
         const current = Math.floor(start + (end - start) * ease);
-        setAnimatedNumbers(prev => {
+        setAnimatedNumbers((prev) => {
           const arr = [...prev];
           arr[idx] = current;
           return arr;
         });
         if (progress < 1) requestAnimationFrame(animate);
-        else setAnimatedNumbers(prev => {
-          const arr = [...prev];
-          arr[idx] = end;
-          return arr;
-        });
+        else
+          setAnimatedNumbers((prev) => {
+            const arr = [...prev];
+            arr[idx] = end;
+            return arr;
+          });
       }
       setTimeout(animate, idx * 150);
     });

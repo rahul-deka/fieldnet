@@ -188,7 +188,7 @@ export default function WhoWeArePage() {
                 Global Partnership
               </h2>
               <p className="text-lg text-slate-600">
-                Operating across 12 countries, delivering insights worldwide
+                Operating across 20+ countries, delivering insights worldwide
               </p>
             </div>
 
@@ -222,12 +222,17 @@ export default function WhoWeArePage() {
                   { name: "Nepal", code: "np" },
                   { name: "Bhutan", code: "bt" },
                   { name: "Bangladesh", code: "bd" },
+                  { name: "Malaysia", code: "my" },
+                  { name: "Japan", code: "jp" },
                   { name: "Indonesia", code: "id" },
                   { name: "Thailand", code: "th" },
                   { name: "UAE", code: "ae" },
                   { name: "South Africa", code: "za" },
                   { name: "Singapore", code: "sg" },
                   { name: "USA", code: "us" },
+                  { name: "South Korea", code: "kr" },
+                  { name: "China", code: "cn" },
+                  { name: "Vietnam", code: "vn" },
                   // Duplicate for seamless loop
                   { name: "India", code: "in" },
                   { name: "Pakistan", code: "pk" },
@@ -235,12 +240,17 @@ export default function WhoWeArePage() {
                   { name: "Nepal", code: "np" },
                   { name: "Bhutan", code: "bt" },
                   { name: "Bangladesh", code: "bd" },
+                  { name: "Malaysia", code: "my" },
+                  { name: "Japan", code: "jp" },
                   { name: "Indonesia", code: "id" },
                   { name: "Thailand", code: "th" },
                   { name: "UAE", code: "ae" },
                   { name: "South Africa", code: "za" },
                   { name: "Singapore", code: "sg" },
                   { name: "USA", code: "us" },
+                  { name: "South Korea", code: "kr" },
+                  { name: "China", code: "cn" },
+                  { name: "Vietnam", code: "vn" },
                 ].map((country, index) => (
                   <CarouselItem key={`${country.code}-${index}`} className="pl-4 basis-auto">
                     <div className="flex flex-col items-center justify-center px-1">
@@ -248,7 +258,7 @@ export default function WhoWeArePage() {
                         className={`fi fi-${country.code} mb-3 ${country.code === 'np' ? '' : 'shadow-md'}`} 
                         style={{ fontSize: '4rem', display: 'inline-block' }}
                       ></span>
-                      {/* <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p> */}
+                      <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p>
                     </div>
                   </CarouselItem>
                 ))}
@@ -361,7 +371,7 @@ export default function WhoWeArePage() {
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">
-              Trusted by Leading Brands
+              Trusted by Fortune 500 Companies
             </h2>
             <p className="text-lg text-slate-600">
               We've partnered with industry leaders across various sectors to deliver actionable insights

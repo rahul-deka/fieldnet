@@ -112,7 +112,7 @@ export default function WhatWeDoPage() {
       title: "Support Services",
       description:
         "Full range of Market Research support services to provide a seamless service experience and minimize transaction costs.",
-      features: ["Transcription", "Translation", "Digitization", "Verbatim Coding", "Voiceover", "Facilities"],
+      features: ["Transcription", "Translation", "Facilities"],
     },
   ]
 

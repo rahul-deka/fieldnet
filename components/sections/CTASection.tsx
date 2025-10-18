@@ -36,9 +36,17 @@ export default function CTASection() {
             </Button>
           </div>
           <div className="mt-12 hidden sm:flex flex-row items-center justify-center gap-8 text-cyan-100">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.open("https://maps.app.goo.gl/m2y3MsAm4BGHEQrp7", "_blank")}>
               <Building2 className="w-5 h-5" />
               <span>Mumbai, India HQ</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
+              <span>Bengaluru</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
+              <span>Delhi</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5" />

@@ -242,18 +242,18 @@ export default function ContactPage() {
               {/* Quick Contact Buttons */}
               <div className="hidden lg:block space-y-4">
                 <a
-                  href="tel:+917738814467"
+                  href="tel:+919892787127"
                   className="flex items-center space-x-3 p-4 border border-cyan-700 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
                 >
                   <Phone className="h-5 w-5" />
                   <div>
                     <div className="font-semibold">Call Us</div>
-                    <div className="text-sm text-white/90">+91 7738814467</div>
+                    <div className="text-sm text-white/90">+91 9892787127</div>
                   </div>
                 </a>
 
                 <a
-                  href="https://wa.me/917738814467"
+                  href="https://wa.me/919892787127"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-4 border border-green-700 bg-green-600 text-white rounded-lg hover:bg-green-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
@@ -541,18 +541,18 @@ export default function ContactPage() {
               {/* Quick Contact Buttons - Mobile Only */}
               <div className="lg:hidden space-y-4">
                 <a
-                  href="tel:+917738814467"
+                  href="tel:+919892787127"
                   className="flex items-center space-x-3 p-4 border border-cyan-700 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"
                 >
                   <Phone className="h-5 w-5" />
                   <div>
                     <div className="font-semibold">Call Us</div>
-                    <div className="text-sm text-white/90">+91 7738814467</div>
+                    <div className="text-sm text-white/90">+91 9892787127</div>
                   </div>
                 </a>
 
                 <a
-                  href="https://wa.me/917738814467"
+                  href="https://wa.me/919892787127"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-4 border border-green-700 bg-green-600 text-white rounded-lg hover:bg-green-700 hover:-translate-y-1 hover:shadow-lg transition-all duration-200"

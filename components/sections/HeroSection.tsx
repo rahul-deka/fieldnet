@@ -71,14 +71,14 @@ export default function HeroSection() {
             </div>
             <Card className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur shadow-xl border-0">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-cyan-700">19+</div>
-                <div className="text-sm text-muted-foreground">Years Experience</div>
+                <div className="text-2xl font-bold text-cyan-700">20+</div>
+                <div className="text-sm text-muted-foreground">Years of <br />Research Expertise</div>
               </CardContent>
             </Card>
             <Card className="absolute -top-6 -right-6 bg-white/95 backdrop-blur shadow-xl border-0">
               <CardContent className="p-4">
                 <div className="text-2xl font-bold text-amber-600">2,200+</div>
-                <div className="text-sm text-muted-foreground">Focus Groups</div>
+                <div className="text-sm text-muted-foreground">Focus Groups, IDIs</div>
               </CardContent>
             </Card>
           </div>
