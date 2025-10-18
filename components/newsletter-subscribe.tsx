@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Mail } from "lucide-react"
 
-export function NewsletterSubscribe() {
+export function NewsletterSubscribe({ showTitle = true, compact = false }: { showTitle?: boolean; compact?: boolean }) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
@@ -42,14 +42,18 @@ export function NewsletterSubscribe() {
     }
   }
 
+  const containerClass = compact ? "mt-0" : "mt-10 md:mt-0"
+  const formClass = compact ? "space-y-0" : "mt-6 space-y-4"
+  const rowClass = compact ? "flex flex-row gap-2 items-center" : "flex flex-col sm:flex-row gap-2"
+
   return (
-    <div className="mt-10 md:mt-0">
-      <h3 className="text-sm font-semibold leading-6 text-card-foreground">Subscribe to Newsletter</h3>
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-        <div className="flex flex-col sm:flex-row gap-2">
+    <div className={containerClass}>
+      {showTitle && <h3 className="text-sm font-semibold leading-6 text-card-foreground">Subscribe to Newsletter</h3>}
+      <form onSubmit={handleSubmit} className={formClass}>
+        <div className={rowClass}>
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Subscribe to Newsletter"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isSubmitting}
@@ -58,10 +62,10 @@ export function NewsletterSubscribe() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="h-[44px] min-h-[44px] max-h-[44px] inline-flex items-center justify-center rounded-md bg-cyan-600 px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:cursor-not-allowed disabled:opacity-50 whitespace-nowrap  cursor-pointer!"
+            aria-label={isSubmitting ? "Subscribing" : "Subscribe"}
+            className="h-[44px] min-h-[44px] max-h-[44px] inline-flex items-center justify-center rounded-md bg-cyan-600 px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            <Mail className="h-4 w-4 mr-2" />
-            {isSubmitting ? "Subscribing..." : "Subscribe"}
+            <Mail className="h-4 w-4" />
           </button>
         </div>
         {message && (

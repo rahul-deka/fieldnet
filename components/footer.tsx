@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react"
 import LogoBlackSVG from "@/components/ui/LogoBlackSVG"
 import { NewsletterSubscribe } from "@/components/newsletter-subscribe"
+import Image from "next/image"
 
 const navigation = {
   company: [
@@ -104,17 +105,38 @@ export function Footer() {
               </ul>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-cyan-300/50 col-span-1 md:col-start-2 md:col-span-2">
-              <NewsletterSubscribe />
+            <div className="mt-8 pt-6 border-t border-cyan-300/50 col-span-1 md:col-start-1 md:col-span-3">
+              <div className="w-full flex items-center md:justify-between flex-wrap gap-4">
+                <div className="flex-1 flex items-center justify-center">
+                  <Image src="/programs/goldman10.png" alt="goldman" width={140} height={70} className="object-contain" />
+                </div>
+                <div className="flex-1 flex items-center justify-center">
+                  <Image src="/programs/nsrceliimb.png" alt="nsrc" width={140} height={70} className="object-contain" />
+                </div>
+                <div className="flex-1 flex items-center justify-center md:justify-start">
+                  <Image src="/programs/esomer.png" alt="esomer" width={140} height={70} className="object-contain" />
+                </div>
+                <div className="flex-1 flex items-center justify-center md:justify-end">
+                  <Image src="/programs/wombcircle.png" alt="wombcircle" width={140} height={70} className="object-contain" />
+                </div>
+                <div className="flex-1 flex items-center justify-center">
+                  <Image src="/programs/nice.png" alt="nice" width={140} height={70} className="object-contain" />
+                </div>
+              </div>
             </div>
           </div>
           
         </div>
         {/* single newsletter instance maintained above; no duplicate blocks */}
-        <div className="mt-16 border-t border-cyan-300/50 pt-8 sm:mt-20 lg:mt-24 text-center">
-          <p className="text-xs leading-5 text-muted-foreground">
-            &copy; 2025 Fieldnet Global Research LLP. All rights reserved.
-          </p>
+        <div className="mt-16 border-t border-cyan-300/50 sm:mt-20 lg:mt-24 py-6">
+          <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:justify-between gap-4">
+            <div className="w-full md:w-auto">
+              <NewsletterSubscribe showTitle={false} compact />
+            </div>
+            <p className="text-xs leading-5 text-muted-foreground">
+              &copy; 2025 Fieldnet Global Research LLP. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
