@@ -11,6 +11,27 @@ import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Bu
 import Autoplay from "embla-carousel-autoplay";
 
 export default function WhoWeArePage() {
+  React.useEffect(() => {
+    if (typeof window === "undefined") return
+    const hash = window.location.hash
+    if (hash) {
+      const id = hash.slice(1)
+      // Wait a tick for content to render, then scroll
+      setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) {
+          // account for sticky header height so the section isn't hidden
+          const header = document.querySelector('header') as HTMLElement | null
+          const headerHeight = header ? header.offsetHeight : 80
+          const rect = el.getBoundingClientRect()
+          // subtract header height but add a small positive gap so we don't overshoot
+          const targetY = rect.top + window.scrollY - headerHeight + 8
+          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' })
+        }
+      }, 100)
+    }
+  }, [])
+
   return (
     <>
       <Navigation />
@@ -181,7 +202,7 @@ export default function WhoWeArePage() {
         </section>
 
         {/* Global Partnership */}
-        <section className="py-14">
+  <section id="global-partnership" className="py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">

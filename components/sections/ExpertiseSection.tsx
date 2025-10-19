@@ -91,23 +91,25 @@ export default function ExpertiseSection() {
         </div>
 
         {/* Global Research Network - Outside Grid */}
-        <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 p-8 border border-purple-600">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-            <div className="flex items-center gap-4 sm:order-2 order-1">
-              <MapPin className="h-10 w-10 text-purple-600" />
-              <div className="text-right">
-                <div className="text-4xl font-bold text-purple-600">50+</div>
-                <div className="text-sm text-muted-foreground">Countries</div>
+        <Link href="/who-we-are#global-partnership" aria-label="Go to Global Partnership on Who We Are" className="block">
+          <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 p-8 border border-purple-600 cursor-pointer hover:opacity-95">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="flex items-center gap-4 sm:order-2 order-1">
+                <MapPin className="h-10 w-10 text-purple-600" />
+                <div className="text-right">
+                  <div className="text-4xl font-bold text-purple-600">50+</div>
+                  <div className="text-sm text-muted-foreground">Countries</div>
+                </div>
+              </div>
+              <div className="flex-1 sm:order-1 order-2">
+                <h3 className="text-3xl font-bold mb-3 text-foreground">Global Research Network</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin America
+                </p>
               </div>
             </div>
-            <div className="flex-1 sm:order-1 order-2">
-              <h3 className="text-3xl font-bold mb-3 text-foreground">Global Research Network</h3>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Trusted partnerships across Africa, Middle East, Europe, Asia-Pacific, North America, and Latin America
-              </p>
-            </div>
           </div>
-        </div>
+        </Link>
 
         <div className="flex justify-center mt-12">
           <Link href="/what-we-do" passHref legacyBehavior>
