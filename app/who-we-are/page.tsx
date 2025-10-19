@@ -304,8 +304,8 @@ export default function WhoWeArePage() {
             {/* First two cards in a separate row at the top */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 border-b border-slate-200 bg-white">
               {[
-                { name: "Kamlesh Shukla", position: "Founder & Managing Director" },
-                { name: "Ms. Pooja Shukla", position: "CEO" },
+                { name: "Kamlesh Shukla", position: "Founder & Managing Director", years: '—', exCompany: '—' },
+                { name: "Ms. Pooja Shukla", position: "CEO", years: '—', exCompany: '—' },
               ].map((person, index) => (
                 <div
                   key={person.name}
@@ -318,24 +318,29 @@ export default function WhoWeArePage() {
                   />
                   <div className="text-lg font-bold text-slate-900 mb-1 text-center">{person.name}</div>
                   <div className="text-sm text-slate-600 text-center">{person.position}</div>
+                  <div className="text-sm text-slate-600 text-center mt-1">
+                    <span className="font-medium text-slate-700">{person.years || '—'}</span>
+                    <span className="mx-2 text-slate-400">•</span>
+                    <span>{person.exCompany || '—'}</span>
+                  </div>
                 </div>
               ))}
             </div>
             {/* Rest of the cards in a 4-column grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
               {[
-                { name: "Ravish Khare", position: "Head, Retail Audits & AI Research" },
-                { name: "A Ravindran", position: "Senior Research Advisor & Mentor" },
-                { name: "Ms. Geeta Shukla", position: "Executive Director" },
-                { name: "Aneesh Laiwala", position: "Consultant, Analysis" },
-                { name: "Arun Bhalerao", position: "Senior Consultant" },
-                { name: "Ms. Deepa Harjani", position: "Sr. Consultant, Market Research" },
-                { name: "Utpal Ghosh", position: "Research Consultant" },
-                { name: "Supriya Hardikar", position: "Head, Qualitative Research" },
-                { name: "Deepti Rege", position: "Qualitative Researcher (Consultant)" },
-                { name: "Biplab Ghosh", position: "Consultant Adviser" },
-                { name: "Umesh Jha", position: "Consultant, Quantitative Research" },
-                { name: "Manisha Jaiswal", position: "Qual & Quant Client Servicing (Consultant)" },
+                { name: "Ravish Khare", position: "Head, Retail Audits & AI Research", years: '—', exCompany: '—' },
+                { name: "A Ravindran", position: "Senior Research Advisor & Mentor", years: '—', exCompany: '—' },
+                { name: "Ms. Geeta Shukla", position: "Executive Director", years: '—', exCompany: '—' },
+                { name: "Aneesh Laiwala", position: "Consultant, Analysis", years: '—', exCompany: '—' },
+                { name: "Arun Bhalerao", position: "Senior Consultant", years: '—', exCompany: '—' },
+                { name: "Ms. Deepa Harjani", position: "Sr. Consultant, Market Research", years: '—', exCompany: '—' },
+                { name: "Utpal Ghosh", position: "Research Consultant", years: '—', exCompany: '—' },
+                { name: "Supriya Hardikar", position: "Head, Qualitative Research", years: '—', exCompany: '—' },
+                { name: "Deepti Rege", position: "Qualitative Researcher (Consultant)", years: '—', exCompany: '—' },
+                { name: "Biplab Ghosh", position: "Consultant Adviser", years: '—', exCompany: '—' },
+                { name: "Umesh Jha", position: "Consultant, Quantitative Research", years: '—', exCompany: '—' },
+                { name: "Manisha Jaiswal", position: "Qual & Quant Client Servicing (Consultant)", years: '—', exCompany: '—' },
               ].map((person, index, arr) => {
                 const cols = 4;
                 const total = arr.length;
@@ -364,6 +369,11 @@ export default function WhoWeArePage() {
                     />
                     <div className="text-lg font-bold text-slate-900 mb-1 text-center">{person.name}</div>
                     <div className="text-sm text-slate-600 text-center">{person.position}</div>
+                    <div className="text-sm text-slate-600 text-center mt-1">
+                      <span className="font-medium text-slate-700">{person.years || '—'}</span>
+                      <span className="mx-2 text-slate-400">•</span>
+                      <span>{person.exCompany || '—'}</span>
+                    </div>
                   </div>
                 );
               })}
