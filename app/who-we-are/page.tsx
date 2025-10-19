@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Building2, Trophy } from "lucide-react";
+import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Building2, Trophy, CheckCircle, Handshake } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 
 export default function WhoWeArePage() {
@@ -147,33 +147,33 @@ export default function WhoWeArePage() {
         <section id="philosophy" className="border-y border-slate-200 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
-            <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery</p>
+            <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery.</p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
               {[
                 {
+                  icon: <Users2 className="h-6 w-6 text-cyan-700" />,
+                  title: "Client‑centric",
+                  text: "Everything we do is focused on delivering measurable value to our clients."
+                },
+                {
+                  icon: <CheckCircle className="h-6 w-6 text-cyan-700" />,
+                  title: "Data Quality & Transparency",
+                  text: "Rigorous quality controls, transparent methods, and clear reporting."
+                },
+                {
                   icon: <Lightbulb className="h-6 w-6 text-cyan-700" />,
-                  title: "Creativity",
-                  text: "Freedom to think out of the box."
+                  title: "Innovation & Adaptability",
+                  text: "Evolving methodologies and tools to meet changing market needs."
                 },
                 {
-                  icon: <FlaskConical className="h-6 w-6 text-cyan-700" />,
-                  title: "Innovation",
-                  text: "Ideas are welcome from clients, partners, and associates."
+                  icon: <Trophy className="h-6 w-6 text-cyan-700" />,
+                  title: "Commitment to Excellence",
+                  text: "Relentless attention to detail and high standards across every project."
                 },
                 {
-                  icon: <Gauge className="h-6 w-6 text-cyan-700" />,
-                  title: "Speed",
-                  text: "Strong processes enable efficient delivery."
-                },
-                {
-                  icon: <Shuffle className="h-6 w-6 text-cyan-700" />,
-                  title: "Flexibility",
-                  text: "Autonomous yet integrated operations network."
-                },
-                {
-                  icon: <Headphones className="h-6 w-6 text-cyan-700" />,
-                  title: "Responsiveness",
-                  text: "Listen, learn, and course‑correct quickly."
+                  icon: <Handshake className="h-6 w-6 text-cyan-700" />,
+                  title: "Collaboration & Partnership",
+                  text: "Working closely with clients and partners to co‑create effective solutions."
                 }
               ].map((item, index, arr) => {
                 // Show right border except last item on desktop, bottom border except last item on mobile
@@ -189,8 +189,11 @@ export default function WhoWeArePage() {
                   >
                     <div className="flex flex-col p-8 w-full items-start">
                       <div className="flex flex-row items-center mb-2">
-                        <span className="flex items-center justify-center mr-3 shrink-0">{item.icon}</span>
-                        <span className="uppercase text-sm font-medium text-slate-500">{item.title}</span>
+                        {/* fixed-size icon box so all icons align on the same horizontal */}
+                        <span className="flex items-center justify-center mr-3 shrink-0 h-8 w-8 rounded-full">
+                          <span className="flex items-center justify-center text-cyan-700">{item.icon}</span>
+                        </span>
+                        <span className="uppercase text-sm font-medium text-slate-500 leading-tight">{item.title}</span>
                       </div>
                       <div className="text-base text-slate-700 leading-tight pl-1">{item.text}</div>
                     </div>
