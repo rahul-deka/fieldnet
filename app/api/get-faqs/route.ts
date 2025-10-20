@@ -1,20 +1,33 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+async function fetchWithTimeout(url: string, options: RequestInit = {}, timeoutMs = 7000) {
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
-    
-    if (!scriptUrl) {
-      return NextResponse.json(
-        { error: 'Google Script URL not configured' },
-        { status: 500 }
-      );
-    }
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(id);
+    return res;
+  } catch (err) {
+    clearTimeout(id);
+    throw err;
+  }
+}
 
-    // Fetch FAQs from Google Sheets
-    const response = await fetch(`${scriptUrl}?action=getFAQs`, {
+export async function GET() {
+  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+
+  if (!scriptUrl) {
+    return NextResponse.json(
+      { error: 'Google Script URL not configured' },
+      { status: 500 }
+    );
+  }
+
+  try {
+    // Fetch FAQs from Google Apps Script with a timeout to avoid long hangs in dev
+    const response = await fetchWithTimeout(`${scriptUrl}?action=getFAQs`, {
       method: 'GET',
-      cache: 'no-store', // No caching - always fetch fresh data
+      cache: 'no-store', // always fetch fresh data
     });
 
     if (!response.ok) {
@@ -22,13 +35,11 @@ export async function GET() {
     }
 
     const data = await response.json();
-
     return NextResponse.json(data);
   } catch (error) {
+    // Log the original error for debugging
     console.error('Error fetching FAQs:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch FAQs' },
-      { status: 500 }
-    );
+    // Surface an error status for the client
+    return NextResponse.json({ error: 'Failed to fetch FAQs' }, { status: 500 });
   }
 }
