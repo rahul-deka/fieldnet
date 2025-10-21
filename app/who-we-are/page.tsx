@@ -9,6 +9,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Building2, Trophy, CheckCircle, Handshake } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
+import BackToTopButton from "@/components/back-to-top";
 
 export default function WhoWeArePage() {
   React.useEffect(() => {
@@ -112,6 +113,8 @@ export default function WhoWeArePage() {
           </div>
         </section>
 
+        <BackToTopButton />
+
         {/* About Overview */}
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
@@ -205,7 +208,7 @@ export default function WhoWeArePage() {
         </section>
 
         {/* Global Partnership */}
-  <section id="global-partnership" className="py-14">
+        <section id="global-partnership" className="py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">
@@ -219,7 +222,7 @@ export default function WhoWeArePage() {
             <div className="relative">
               {/* Left fade overlay */}
               <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
-              
+
               {/* Right fade overlay */}
               <div className="absolute right-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
@@ -239,55 +242,55 @@ export default function WhoWeArePage() {
                 className="w-full"
               >
                 <CarouselContent className="-ml-4">
-                {[
-                  { name: "India", code: "in" },
-                  { name: "Pakistan", code: "pk" },
-                  { name: "Sri Lanka", code: "lk" },
-                  { name: "Nepal", code: "np" },
-                  { name: "Bhutan", code: "bt" },
-                  { name: "Bangladesh", code: "bd" },
-                  { name: "Malaysia", code: "my" },
-                  { name: "Japan", code: "jp" },
-                  { name: "Indonesia", code: "id" },
-                  { name: "Thailand", code: "th" },
-                  { name: "UAE", code: "ae" },
-                  { name: "South Africa", code: "za" },
-                  { name: "Singapore", code: "sg" },
-                  { name: "USA", code: "us" },
-                  { name: "South Korea", code: "kr" },
-                  { name: "China", code: "cn" },
-                  { name: "Vietnam", code: "vn" },
-                  // Duplicate for seamless loop
-                  { name: "India", code: "in" },
-                  { name: "Pakistan", code: "pk" },
-                  { name: "Sri Lanka", code: "lk" },
-                  { name: "Nepal", code: "np" },
-                  { name: "Bhutan", code: "bt" },
-                  { name: "Bangladesh", code: "bd" },
-                  { name: "Malaysia", code: "my" },
-                  { name: "Japan", code: "jp" },
-                  { name: "Indonesia", code: "id" },
-                  { name: "Thailand", code: "th" },
-                  { name: "UAE", code: "ae" },
-                  { name: "South Africa", code: "za" },
-                  { name: "Singapore", code: "sg" },
-                  { name: "USA", code: "us" },
-                  { name: "South Korea", code: "kr" },
-                  { name: "China", code: "cn" },
-                  { name: "Vietnam", code: "vn" },
-                ].map((country, index) => (
-                  <CarouselItem key={`${country.code}-${index}`} className="pl-4 basis-auto">
-                    <div className="flex flex-col items-center justify-center px-1">
-                      <span 
-                        className={`fi fi-${country.code} mb-3 ${country.code === 'np' ? '' : 'shadow-md'}`} 
-                        style={{ fontSize: '4rem', display: 'inline-block' }}
-                      ></span>
-                      <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
+                  {[
+                    { name: "India", code: "in" },
+                    { name: "Pakistan", code: "pk" },
+                    { name: "Sri Lanka", code: "lk" },
+                    { name: "Nepal", code: "np" },
+                    { name: "Bhutan", code: "bt" },
+                    { name: "Bangladesh", code: "bd" },
+                    { name: "Malaysia", code: "my" },
+                    { name: "Japan", code: "jp" },
+                    { name: "Indonesia", code: "id" },
+                    { name: "Thailand", code: "th" },
+                    { name: "UAE", code: "ae" },
+                    { name: "South Africa", code: "za" },
+                    { name: "Singapore", code: "sg" },
+                    { name: "USA", code: "us" },
+                    { name: "South Korea", code: "kr" },
+                    { name: "China", code: "cn" },
+                    { name: "Vietnam", code: "vn" },
+                    // Duplicate for seamless loop
+                    { name: "India", code: "in" },
+                    { name: "Pakistan", code: "pk" },
+                    { name: "Sri Lanka", code: "lk" },
+                    { name: "Nepal", code: "np" },
+                    { name: "Bhutan", code: "bt" },
+                    { name: "Bangladesh", code: "bd" },
+                    { name: "Malaysia", code: "my" },
+                    { name: "Japan", code: "jp" },
+                    { name: "Indonesia", code: "id" },
+                    { name: "Thailand", code: "th" },
+                    { name: "UAE", code: "ae" },
+                    { name: "South Africa", code: "za" },
+                    { name: "Singapore", code: "sg" },
+                    { name: "USA", code: "us" },
+                    { name: "South Korea", code: "kr" },
+                    { name: "China", code: "cn" },
+                    { name: "Vietnam", code: "vn" },
+                  ].map((country, index) => (
+                    <CarouselItem key={`${country.code}-${index}`} className="pl-4 basis-auto">
+                      <div className="flex flex-col items-center justify-center px-1">
+                        <span
+                          className={`fi fi-${country.code} mb-3 ${country.code === 'np' ? '' : 'shadow-md'}`}
+                          style={{ fontSize: '4rem', display: 'inline-block' }}
+                        ></span>
+                        <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
             </div>
           </div>
         </section>
@@ -349,7 +352,7 @@ export default function WhoWeArePage() {
                 const lastRowStartIndex = Math.floor((total - 1) / cols) * cols;
                 const isInLastRow = index >= lastRowStartIndex;
                 const cardsInLastRow = total - lastRowStartIndex;
-                
+
                 // Show right border if not the last card in the row
                 const showRight = isInLastRow ? colIndex < cardsInLastRow - 1 : colIndex < cols - 1;
                 // Show bottom border if not in the last row
@@ -413,35 +416,45 @@ export default function WhoWeArePage() {
               <div className="hidden lg:block absolute left-[124px] top-0 bottom-0 w-px bg-slate-200 z-0" />
               <div className="space-y-8">
                 {[
-                  { year: '2005', title: 'Humble Beginnings', bullets: [
+                  {
+                    year: '2005', title: 'Humble Beginnings', bullets: [
                       'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established Fieldnet as a proprietary company.',
                       'Employee Strength: 2 dedicated employees.',
                       'Focus: Initially focused on small-scale market research projects.',
-                    ] },
-                    { year: '2015', title: 'The Transformation', bullets: [
+                    ]
+                  },
+                  {
+                    year: '2015', title: 'The Transformation', bullets: [
                       'From Proprietor to LLP: Fieldnet transitioned from a proprietary firm to a Limited Liability Partnership (LLP).',
                       'Employee Strength: 40 in-house employees and a field force of 100.',
                       'Reach: Expanded operations across Pan India.',
                       'Services: Introduced CATI (Computer Assisted Telephone Interviewing), CAPI (Computer Assisted Personal Interviewing), and Software Development services.',
-                    ] },
-                    { year: '2016', title: 'Expansion and Growth', bullets: [
+                    ]
+                  },
+                  {
+                    year: '2016', title: 'Expansion and Growth', bullets: [
                       'Employee Strength: 10 in-house employees and 600 field personnel.',
                       'Global Reach: Expanded operations beyond India into APAC and MENA (Middle East and North Africa).',
                       'Partnerships: Established 20 strategic partnerships across regions.',
                       'Field Strength: Increased to 50 highly skilled professionals, driving success in data collection and analysis.',
-                    ] },
-                    { year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
+                    ]
+                  },
+                  {
+                    year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
                       'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to Fieldnet.',
                       'Focus: Continued innovation in software development and technology integration, laying the foundation for future growth.',
                       'Geographic Expansion: Further strengthened its presence in APAC and MENA regions.',
-                    ] },
-                    { year: 'Present', title: 'A Pan-India Leader', bullets: [
+                    ]
+                  },
+                  {
+                    year: 'Present', title: 'A Pan-India Leader', bullets: [
                       'Employee Strength: 30+ in-house professionals and a field force of over 600.',
                       'Location: Pan-India operations with a strong foothold in global markets.',
                       'Service Expertise: Specializing in market research, software development, and delivering cutting-edge solutions to clients across various industries.',
                       'Vision: Fieldnet continues to innovate under its dynamic leadership, solidifying its place as a trusted partner for research and insights across India and beyond.',
-                    ] },
-                  ].map((m) => (
+                    ]
+                  },
+                ].map((m) => (
                   <div key={m.year} className="relative grid grid-cols-[36px_minmax(0,1fr)] items-start lg:grid-cols-[96px_56px_1fr] lg:items-start">
                     {/* Year column (visible on mobile + desktop), right-aligned */}
                     {/* Year column: hidden on mobile, visible on lg */}
@@ -485,7 +498,7 @@ export default function WhoWeArePage() {
               We've partnered with industry leaders across various sectors to deliver actionable insights
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
             {[
               { name: 'Forrester', logo: 'forrester.png' },
