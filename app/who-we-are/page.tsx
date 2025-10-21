@@ -292,79 +292,6 @@ export default function WhoWeArePage() {
           </div>
         </section>
 
-        {/* Us over the years (Timeline) */}
-        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Us over the years</h2>
-          <p className="mt-3 text-slate-600">A brief timeline showing key milestones in FieldNet's journey.</p>
-
-          <div className="mt-8">
-            <div className="relative">
-              {/* continuous vertical line for timeline (desktop only) */}
-              <div className="absolute left-[18px] lg:left-[124px] top-0 bottom-0 w-0.5 bg-slate-200 z-0" />
-              <div className="space-y-8">
-                {[
-                  { year: '2005', title: 'Humble Beginnings', bullets: [
-                      'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established Fieldnet as a proprietary company.',
-                      'Employee Strength: 2 dedicated employees.',
-                      'Focus: Initially focused on small-scale market research projects.',
-                    ] },
-                    { year: '2015', title: 'The Transformation', bullets: [
-                      'From Proprietor to LLP: Fieldnet transitioned from a proprietary firm to a Limited Liability Partnership (LLP).',
-                      'Employee Strength: 40 in-house employees and a field force of 100.',
-                      'Reach: Expanded operations across Pan India.',
-                      'Services: Introduced CATI (Computer Assisted Telephone Interviewing), CAPI (Computer Assisted Personal Interviewing), and Software Development services.',
-                    ] },
-                    { year: '2016', title: 'Expansion and Growth', bullets: [
-                      'Employee Strength: 10 in-house employees and 600 field personnel.',
-                      'Global Reach: Expanded operations beyond India into APAC and MENA (Middle East and North Africa).',
-                      'Partnerships: Established 20 strategic partnerships across regions.',
-                      'Field Strength: Increased to 50 highly skilled professionals, driving success in data collection and analysis.',
-                    ] },
-                    { year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
-                      'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to Fieldnet.',
-                      'Focus: Continued innovation in software development and technology integration, laying the foundation for future growth.',
-                      'Geographic Expansion: Further strengthened its presence in APAC and MENA regions.',
-                    ] },
-                    { year: 'Present', title: 'A Pan-India Leader', bullets: [
-                      'Employee Strength: 30+ in-house professionals and a field force of over 600.',
-                      'Location: Pan-India operations with a strong foothold in global markets.',
-                      'Service Expertise: Specializing in market research, software development, and delivering cutting-edge solutions to clients across various industries.',
-                      'Vision: Fieldnet continues to innovate under its dynamic leadership, solidifying its place as a trusted partner for research and insights across India and beyond.',
-                    ] },
-                  ].map((m) => (
-                  <div key={m.year} className="relative grid grid-cols-[36px_minmax(0,1fr)] items-start lg:grid-cols-[96px_56px_1fr] lg:items-start">
-                    {/* Year column (visible on mobile + desktop), right-aligned */}
-                    {/* Year column: hidden on mobile, visible on lg */}
-                    <div className="hidden lg:flex items-center justify-end pr-2">
-                      <div className="text-sm uppercase tracking-wider text-slate-500 text-right">{m.year}</div>
-                    </div>
-
-                    {/* Line & marker column */}
-                    <div className="relative flex justify-center">
-                      <div className="relative z-10 mt-0">
-                        <div className="w-4 h-4 rounded-full bg-cyan-600 border border-white shadow-sm" />
-                      </div>
-                      {/* (connector removed) */}
-                    </div>
-
-                    {/* Content column */}
-                    <div className="pl-4 lg:pl-6">
-                      {/* Mobile: show year above content */}
-                      <div className="lg:hidden text-cyan-700 font-medium text-sm mb-2">{m.year}</div>
-                      <div className="text-xl lg:text-2xl font-bold text-slate-900">{m.title}</div>
-                      <ul className="mt-3 list-disc list-inside text-slate-600 space-y-2 max-w-none">
-                        {m.bullets.map((b, i) => (
-                          <li key={i} className="text-slate-600">{b}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Leadership & Advisors */}
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -475,6 +402,79 @@ export default function WhoWeArePage() {
           </div>
         </section>
 
+        {/* Us over the years (Timeline) */}
+        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900">Us over the years</h2>
+          <p className="mt-3 text-slate-600">A brief timeline showing key milestones in FieldNet's journey.</p>
+
+          <div className="mt-8">
+            <div className="relative">
+              {/* continuous vertical line for timeline (desktop only) */}
+              <div className="hidden lg:block absolute left-[124px] top-0 bottom-0 w-px bg-slate-200 z-0" />
+              <div className="space-y-8">
+                {[
+                  { year: '2005', title: 'Humble Beginnings', bullets: [
+                      'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established Fieldnet as a proprietary company.',
+                      'Employee Strength: 2 dedicated employees.',
+                      'Focus: Initially focused on small-scale market research projects.',
+                    ] },
+                    { year: '2015', title: 'The Transformation', bullets: [
+                      'From Proprietor to LLP: Fieldnet transitioned from a proprietary firm to a Limited Liability Partnership (LLP).',
+                      'Employee Strength: 40 in-house employees and a field force of 100.',
+                      'Reach: Expanded operations across Pan India.',
+                      'Services: Introduced CATI (Computer Assisted Telephone Interviewing), CAPI (Computer Assisted Personal Interviewing), and Software Development services.',
+                    ] },
+                    { year: '2016', title: 'Expansion and Growth', bullets: [
+                      'Employee Strength: 10 in-house employees and 600 field personnel.',
+                      'Global Reach: Expanded operations beyond India into APAC and MENA (Middle East and North Africa).',
+                      'Partnerships: Established 20 strategic partnerships across regions.',
+                      'Field Strength: Increased to 50 highly skilled professionals, driving success in data collection and analysis.',
+                    ] },
+                    { year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
+                      'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to Fieldnet.',
+                      'Focus: Continued innovation in software development and technology integration, laying the foundation for future growth.',
+                      'Geographic Expansion: Further strengthened its presence in APAC and MENA regions.',
+                    ] },
+                    { year: 'Present', title: 'A Pan-India Leader', bullets: [
+                      'Employee Strength: 30+ in-house professionals and a field force of over 600.',
+                      'Location: Pan-India operations with a strong foothold in global markets.',
+                      'Service Expertise: Specializing in market research, software development, and delivering cutting-edge solutions to clients across various industries.',
+                      'Vision: Fieldnet continues to innovate under its dynamic leadership, solidifying its place as a trusted partner for research and insights across India and beyond.',
+                    ] },
+                  ].map((m) => (
+                  <div key={m.year} className="relative grid grid-cols-[36px_minmax(0,1fr)] items-start lg:grid-cols-[96px_56px_1fr] lg:items-start">
+                    {/* Year column (visible on mobile + desktop), right-aligned */}
+                    {/* Year column: hidden on mobile, visible on lg */}
+                    <div className="hidden lg:flex items-center justify-end pr-2">
+                      <div className="text-sm uppercase tracking-wider text-slate-500 text-right">{m.year}</div>
+                    </div>
+
+                    {/* Line & marker column */}
+                    <div className="relative flex justify-center">
+                      <div className="relative z-10 mt-0">
+                        <div className="w-4 h-4 rounded-full bg-rose-500 border border-white shadow-sm" />
+                      </div>
+                      {/* short dashed connector to content */}
+                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-8 border-t-2 border-dashed border-slate-200" />
+                    </div>
+
+                    {/* Content column */}
+                    <div className="pl-4 lg:pl-6">
+                      {/* Mobile: show year above content */}
+                      <div className="lg:hidden text-cyan-700 font-medium text-sm mb-2">{m.year}</div>
+                      <div className="text-2xl font-extrabold text-slate-900">{m.title}</div>
+                      <ul className="mt-3 list-disc list-inside pl-4 text-slate-600 space-y-2 max-w-none">
+                        {m.bullets.map((b, i) => (
+                          <li key={i} className="text-slate-600">{b}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
         {/* Previous Clients */}
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="text-center mb-12">
