@@ -626,7 +626,7 @@ export default function ContactPage() {
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#14B8A6', borderColor: '#14B8A6' }} title="Chennai Office" />
                 <div>
-                  <div className="font-semibold text-gray-800">Bangalore Office</div>
+                  <div className="font-semibold text-gray-800">Bangaluru Office</div>
                   <div className="text-sm text-gray-500">789 MG Road, Bangalore, KA</div>
                 </div>
               </div>
