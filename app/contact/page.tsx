@@ -10,7 +10,10 @@ import { Label } from "@/components/ui/label";
 import { Phone, MessageCircle, Mail, Calendar, ArrowLeft } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
+
 import { Toaster } from "@/components/ui/toaster";
+import { MapSVG } from "@/components/map-svg";
+import { OfficeGridMap } from "@/components/office-grid-map";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -579,6 +582,110 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
+      {/* Head Offices Grid & Map */}
+      <section className="w-full flex justify-center py-8">
+        <div className="max-w-6xl w-full px-4">
+          <h2 className="text-2xl font-bold mb-8 text-center">Our Head Offices Across India</h2>
+          <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 w-full">
+            {/* Left: Map (wider) */}
+            <div className="flex items-center justify-center md:pr-8">
+              <div className="w-full h-[400px] md:h-[500px] max-w-2xl relative">
+                <MapSVG className="w-full h-full" />
+              </div>
+            </div>
+            {/* Right: All 6 offices stacked, no gap, no border radius, grid style (narrower) */}
+            <div className="grid grid-cols-1 divide-y divide-gray-200 border border-gray-200 bg-white w-full mx-auto max-w-2xl md:max-w-xs md:mx-0">
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#EF4444', borderColor: '#EF4444' }} title="Mumbai Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Delhi Office</div>
+                  <div className="text-sm text-gray-500">456 Connaught Place, New Delhi, DL</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#3B82F6', borderColor: '#3B82F6' }} title="Delhi Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Mumbai Office</div>
+                  <div className="text-sm text-gray-500">123 Marine Drive, Mumbai, MH</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#22C55E', borderColor: '#22C55E' }} title="Bangalore Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Kolkata Office</div>
+                  <div className="text-sm text-gray-500">654 Park Street, Kolkata, WB</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#F59E42', borderColor: '#F59E42' }} title="Hyderabad Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Hyderabad Office</div>
+                  <div className="text-sm text-gray-500">321 Banjara Hills, Hyderabad, TS</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#14B8A6', borderColor: '#14B8A6' }} title="Chennai Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Bangalore Office</div>
+                  <div className="text-sm text-gray-500">789 MG Road, Bangalore, KA</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 p-4">
+                <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#A855F7', borderColor: '#A855F7' }} title="Kolkata Office" />
+                <div>
+                  <div className="font-semibold text-gray-800">Chennai Office</div>
+                  <div className="text-sm text-gray-500">987 Anna Salai, Chennai, TN</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* FO Offices Grid */}
+      <section className="w-full flex justify-center py-8 bg-white">
+        <div className="max-w-4xl w-full px-4">
+          <h3 className="text-xl font-bold mb-4 text-center">Field Offices (FO)</h3>
+          <div className="grid grid-cols-2 md:grid-cols-6 border border-gray-200 divide-x divide-y divide-gray-200 bg-white max-w-2xl mx-auto">
+            {/* Row 1 */}
+            <div className="flex items-center justify-center p-4 text-center">Lucknow</div>
+            <div className="flex items-center justify-center p-4 text-center">Jaipur</div>
+            <div className="flex items-center justify-center p-4 text-center">Chandigarh</div>
+            <div className="flex items-center justify-center p-4 text-center">Ludhiana</div>
+            <div className="flex items-center justify-center p-4 text-center">Patna</div>
+            <div className="flex items-center justify-center p-4 text-center">Cuttack</div>
+            {/* Row 2 */}
+            <div className="flex items-center justify-center p-4 text-center">Guwahati</div>
+            <div className="flex items-center justify-center p-4 text-center">Ahmedabad</div>
+            <div className="flex items-center justify-center p-4 text-center">Pune</div>
+            <div className="flex items-center justify-center p-4 text-center">Nagpur</div>
+            <div className="flex items-center justify-center p-4 text-center">Cochin</div>
+            <div className="flex items-center justify-center p-4 text-center">Trivandrum</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Local Offices Grid */}
+      <section className="w-full flex justify-center py-8 bg-white">
+        <div className="max-w-4xl w-full px-4">
+          <h3 className="text-xl font-bold mb-4 text-center">Local Offices</h3>
+          <div className="grid grid-cols-2 md:grid-cols-6 border border-gray-200 divide-x divide-y divide-gray-200 bg-white max-w-2xl mx-auto">
+            {/* Row 1 */}
+            <div className="flex items-center justify-center p-4 text-center">Kanpur</div>
+            <div className="flex items-center justify-center p-4 text-center">Allahabad</div>
+            <div className="flex items-center justify-center p-4 text-center">Varanasi</div>
+            <div className="flex items-center justify-center p-4 text-center">Prayagraj</div>
+            <div className="flex items-center justify-center p-4 text-center">Ranchi</div>
+            <div className="flex items-center justify-center p-4 text-center">Bubaneswar</div>
+            {/* Row 2 */}
+            <div className="flex items-center justify-center p-4 text-center">Kolhapur</div>
+            <div className="flex items-center justify-center p-4 text-center">Indore</div>
+            <div className="flex items-center justify-center p-4 text-center">Coimbatore</div>
+            <div className="flex items-center justify-center p-4 text-center">Madurai</div>
+            <div className="flex items-center justify-center p-4 text-center">Vizag</div>
+            <div className="flex items-center justify-center p-4 text-center">Vijaywada</div>
+          </div>
+        </div>
+      </section>
       <Footer />
       <Toaster />
     </>
