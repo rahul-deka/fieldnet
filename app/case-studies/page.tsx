@@ -31,6 +31,7 @@ import {
   Store,
   Vote,
 } from "lucide-react"
+import BackToTopButton from "@/components/back-to-top"
 
 export default function CaseStudiesPage() {
   const [activeFilter, setActiveFilter] = useState("All")
@@ -702,17 +703,8 @@ export default function CaseStudiesPage() {
           </div>
         </section>
       </div>
+      <BackToTopButton />
       <Footer />
-      {/* Back to Top Button */}
-      {showBackToTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-50 bg-cyan-600 hover:bg-cyan-700 text-white rounded-full shadow-lg p-3 transition-colors duration-200 flex items-center justify-center cursor-pointer"
-          aria-label="Back to top"
-        >
-          <ArrowRight className="rotate-[-90deg] w-6 h-6" />
-        </button>
-      )}
-    </>
+      </>
   )
 }

@@ -3,6 +3,7 @@
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import BackToTopButton from "@/components/back-to-top";
 
 const resources = [
   { title: 'Industry Reports', desc: 'Quarterly and annual market research reports across sectors.', href: '#' },
@@ -29,6 +30,7 @@ export default function ResourcesPage() {
           ))}
         </div>
       </main>
+      <BackToTopButton />
       <Footer />
     </>
   );

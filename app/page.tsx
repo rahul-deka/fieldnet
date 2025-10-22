@@ -9,6 +9,7 @@ import DifferentiatorsSection from "@/components/sections/DifferentiatorsSection
 import CTASection from "@/components/sections/CTASection"
 import FAQSection from "@/components/sections/FAQSection"
 import { useEffect, useRef } from "react"
+import BackToTopButton from "@/components/back-to-top";
 import { displayAsciiArt } from "@/components/asciiArt";
 
 export default function HomePage() {
@@ -34,6 +35,7 @@ export default function HomePage() {
       <DifferentiatorsSection />
       <CTASection />
       <FAQSection />
+      <BackToTopButton />
       <Footer />
     </div>
   )

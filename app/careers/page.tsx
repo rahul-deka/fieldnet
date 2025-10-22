@@ -3,6 +3,7 @@
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import BackToTopButton from "@/components/back-to-top";
 
 const jobs = [
   { title: 'Senior Researcher', location: 'Mumbai', type: 'Full-time', apply: '#' },
@@ -32,6 +33,7 @@ export default function CareersPage() {
           ))}
         </div>
       </main>
+      <BackToTopButton />
       <Footer />
     </>
   );

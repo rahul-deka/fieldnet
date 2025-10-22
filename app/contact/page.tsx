@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import { MapSVG } from "@/components/map-svg";
 import { OfficeGridMap } from "@/components/office-grid-map";
+import BackToTopButton from "@/components/back-to-top";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -686,6 +687,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <BackToTopButton />
       <Footer />
       <Toaster />
     </>

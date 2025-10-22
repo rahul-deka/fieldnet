@@ -2,6 +2,7 @@
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import BackToTopButton from '@/components/back-to-top';
 import {
   CheckCircle,
   Users,
@@ -733,6 +734,7 @@ export default function WhatWeDoPage() {
           </div>
         </section>
       </main>
+      <BackToTopButton />
       <Footer />
     </>
   );
