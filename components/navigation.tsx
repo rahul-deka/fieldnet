@@ -70,7 +70,7 @@ export function Navigation() {
             className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg border-0"
             style={{ backgroundColor: "#0891b2" }}
           >
-            <Link href="/contact">Get Started</Link>
+            <a href="tel:+919892787127">Call Us</a>
           </Button>
         </div>
         {/* Hamburger button (mobile only) */}
@@ -127,7 +127,7 @@ export function Navigation() {
                 className="w-full bg-cyan-600 hover:bg-cyan-700 text-white border-0"
                 style={{ backgroundColor: "#0891b2" }}
               >
-                <Link href="/contact">Get Started</Link>
+                <a href="tel:+919892787127">Call Us</a>
               </Button>
               <Button
                 asChild
@@ -136,7 +136,7 @@ export function Navigation() {
               >
                 <Link href="/register" className="flex items-center justify-center gap-2">
                   <LogIn className="h-4 w-4" />
-                  Login / Register
+                  Panel Registration
                 </Link>
               </Button>
             </div>

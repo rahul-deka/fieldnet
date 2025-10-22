@@ -52,7 +52,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-amber-500" />
-                <span>400K+ Interviews</span>
+                <span>5M+ Interviews</span>
               </div>
               <div className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-cyan-600" />

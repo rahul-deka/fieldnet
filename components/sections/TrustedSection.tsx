@@ -9,7 +9,7 @@ const stats = [
   { label: "Towns, Cities & Rural Centers Covered", value: 1000, suffix: "+", icon: Clock, color: "text-cyan-600" },
   { label: "Clients Across the Globe", value: 300, suffix: "+", icon: Target, color: "text-amber-600" },
   // This entry is a textual value (not numeric). We'll render it directly without animation.
-  { label: "Companies served", value: 'Fortune 500', suffix: "", icon: Globe, color: "text-purple-600" },
+  { label: "Projects Done", value: '1000', suffix: "+", icon: Globe, color: "text-purple-600" },
 ];
 
 export default function TrustedSection() {
@@ -79,7 +79,7 @@ export default function TrustedSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-4">
-            Trusted by Organizations Worldwide
+            Trusted by Fortune 500 Companies Worldwide
           </h2>
           <p className="text-xl leading-8 text-muted-foreground max-w-2xl mx-auto">
             Our track record speaks for itself across industries and continents

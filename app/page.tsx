@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer"
 import HeroSection from "@/components/sections/HeroSection"
 import TrustedSection from "@/components/sections/TrustedSection"
 import ExpertiseSection from "@/components/sections/ExpertiseSection"
-import InsightEdgeSection from "@/components/sections/InsightEdgeSection"
+// import InsightEdgeSection from "@/components/sections/InsightEdgeSection"
 import DifferentiatorsSection from "@/components/sections/DifferentiatorsSection"
 import CTASection from "@/components/sections/CTASection"
 import FAQSection from "@/components/sections/FAQSection"
@@ -31,7 +31,7 @@ export default function HomePage() {
       <HeroSection />
       <TrustedSection />
       <ExpertiseSection />
-      <InsightEdgeSection />
+      {/* <InsightEdgeSection /> */}
       <DifferentiatorsSection />
       <CTASection />
       <FAQSection />

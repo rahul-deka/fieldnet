@@ -539,6 +539,26 @@ export default function WhoWeArePage() {
             ))}
           </div>
         </section>
+
+        <section className=" border-slate-200 bg-white py-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="border border-cyan-700 bg-cyan-600 h-full flex flex-col md:flex-row p-8 items-start md:items-center md:justify-between gap-4">
+              <div>
+                <div className="uppercase text-sm font-medium text-white mb-2">Ready to Collaborate?</div>
+                <h3 className="text-xl font-semibold text-white mb-1">Work with a seasoned global research team</h3>
+                <p className="text-white/90 mb-4">
+                  Let’s apply the right methodologies and quality controls to answer your toughest questions.
+                </p>
+              </div>
+              <a
+                href="/contact"
+                className="inline-flex items-center bg-white px-5 py-2.5 text-base font-bold text-cyan-600 shadow-lg transition-colors hover:bg-indigo-50 md:ml-auto"
+              >
+                Contact Us
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

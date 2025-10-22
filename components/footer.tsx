@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Phone, MapPin, Linkedin, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react"
 import LogoBlackSVG from "@/components/ui/LogoBlackSVG"
 import { NewsletterSubscribe } from "@/components/newsletter-subscribe"
 import Image from "next/image"
@@ -15,12 +15,13 @@ const navigation = {
     { name: "Market Research", href: "/services#market-research" },
     { name: "Qualitative Research", href: "/services#qualitative" },
     { name: "Quantitative Research", href: "/services#quantitative" },
-    { name: "Audits & Polls", href: "/services#audits" },
+    { name: "Audits", href: "/services#audits" },
+    { name: "Polls", href: "/services#polls" },
   ],
   Support: [
-    { name: "Careers", href: "" },
-    { name: "Blog", href: "" },
-    { name: "Resources", href: "" },
+    { name: "Careers", href: "/careers" },
+    { name: "Blog", href: "/blog" },
+    { name: "Resources", href: "/resources" },
     { name: "Case Studies", href: "/case-studies" },
   ],
 }
@@ -50,20 +51,24 @@ export function Footer() {
               <div className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
                 <div className="leading-6">
-                  F-220, First Floor, The Dreams Mall, Station Road, Bhandup (West, near Bhandup Railway Station, Mumbai, Maharashtra 400078)
+                  <a href="https://maps.app.goo.gl/94zTawPvjSpKJvEX6">F-220, First Floor, The Dreams Mall, Station Road, Bhandup (West, near Bhandup Railway Station, Mumbai, Maharashtra 400078)</a>
                 </div>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+91 9892787127</span>
+                <span><a href="tel:+919892787127">+91 9892787127</a></span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>info@fieldnetglobal.com</span>
+                <span><a href="mailto:info@fieldnetglobal.com">info@fieldnetglobal.com</a></span>
               </div>
-              <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
                 <Linkedin className="h-4 w-4" />
                 <a href="https://www.linkedin.com/company/fieldnetglobal/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">LinkedIn</a>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Facebook className="h-4 w-4" />
+                <a href="https://www.facebook.com/field.netglobal.8/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Facebook</a>
               </div>
             </div>
           </div>
@@ -81,7 +86,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold leading-6 text-card-foreground">Services</h3>
+              <h3 className="text-sm font-semibold leading-6 text-card-foreground">Research Services</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
@@ -128,13 +133,14 @@ export function Footer() {
           
         </div>
         {/* single newsletter instance maintained above; no duplicate blocks */}
-        <div className="mt-16 border-t border-cyan-300/50 sm:mt-20 lg:mt-24 py-6">
+        <div className="mt-1 border-t border-cyan-300/50 sm:mt-20 lg:mt-24 py-6">
           <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:justify-between gap-4">
             <div className="w-full md:w-auto">
               <NewsletterSubscribe showTitle={false} compact />
             </div>
             <p className="text-xs leading-5 text-muted-foreground">
-              &copy; 2025 Fieldnet Global Research LLP. All rights reserved.
+              &copy; 2005 - Present | Fieldnet Global Research LLP.
+              <span className="block md:inline text-center"> All rights reserved.</span>
             </p>
           </div>
         </div>

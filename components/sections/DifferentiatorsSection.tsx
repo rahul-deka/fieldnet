@@ -74,7 +74,7 @@ export default function DifferentiatorsSection() {
           })}
         </div>
         <div className="flex justify-center mt-12">
-          <Link href="/our-differentiators" passHref legacyBehavior>
+          <Link href="/what-we-do" passHref legacyBehavior>
             <Button
               asChild
               size="lg"

@@ -35,10 +35,10 @@ import { Button } from "@/components/ui/button"
 export default function WhatWeDoPage() {
   // Counter animation for Global Execution Capability
   const globalStats = [
-    { value: 400000, label: 'Surveys Conducted', color: 'text-cyan-400', suffix: '+' },
-    { value: 2200, label: 'Focus Groups', color: 'text-amber-400', suffix: '+' },
-    { value: 11, label: 'Languages', color: 'text-cyan-400', suffix: '' },
-    { value: 50, label: 'Countries', color: 'text-amber-400', suffix: '+' },
+    { value: 5, label: 'Surveys Conducted', color: 'text-cyan-400', suffix: 'M+' },
+    { value: 2200, label: 'Focus Groups & IDI\'s', color: 'text-amber-400', suffix: '+' },
+    { value: 20, label: 'Languages', color: 'text-cyan-400', suffix: '+' },
+    { value: 20, label: 'Countries', color: 'text-amber-400', suffix: '+' },
   ];
   const [animatedGlobalStats, setAnimatedGlobalStats] = React.useState(globalStats.map(() => 0));
   const [globalStatsVisible, setGlobalStatsVisible] = React.useState(false);
@@ -132,7 +132,7 @@ export default function WhatWeDoPage() {
     },
     {
       icon: Monitor,
-      title: "Web Surveys",
+      title: "Mobile Surveys",
       features: [
         "Advanced survey programming capabilities using Confirm IT and other prominent tools",
         "Multilingual support in all major global languages",
@@ -144,12 +144,12 @@ export default function WhatWeDoPage() {
       icon: Users,
       title: "Quantitative Research",
       features: [
-        "Multilingual F2F surveys across India. Over 4,00,000 surveys were conducted",
+        "Multilingual online and offline surveys across APAC. Over 5 Million+ surveys were conducted.",
         "Large scale concept testing (CLT)",
         "Car-Clinics",
         "Intercept surveys",
-        "Integrated Sales, Promotion and Research capability",
-        "Comprehensive urban, semi-urban and rural coverage across India",
+        "Integrated Sales and Promotion using Research capabilities.",
+        "Comprehensive urban, semi-urban and rural coverage across APAC.",
       ],
     },
     {
@@ -158,10 +158,10 @@ export default function WhatWeDoPage() {
       features: [
         "Focus Group Discussions (FGDs) – Extended groups, full groups, mini groups, triads and dyads",
         "In-depth Interviews (IDIs) – Single, paired and supervised",
-        "Observation Research – Ethnography, activity clinics, home or business observation",
-        "Tracking Studies – Diary and Journal based activities",
+        "Observation Research – Mobile Ethnography, activity clinics, home or business observation",
+        "Tracking Studies – Mobile Diary and Journal based activities",
         "Sensory Evaluation – Appearance, odors, texture and taste",
-        "Comprehensive urban, semi-urban and rural coverage across India",
+        "Comprehensive urban, semi-urban and rural coverage across Asia",
         "Content Analysis",
       ],
     },
@@ -171,7 +171,7 @@ export default function WhatWeDoPage() {
       features: [
         "Content Analysis – From IDI and FGD transcripts",
         "Data Tabulation – Quantum tables including proportions, mean tables, summary tables, top-box",
-        "Quantitative Data Analysis – T-tests, correlation, regression, Van Westendorp (Price Sensitivity) analysis",
+        "Quantitative Data Analysis – T-tests, correlation, regression, Conjoint Analysis, Van Westendorp (Price Sensitivity) analysis",
         "Qualitative Analysis – Affinity and interrelationship analysis",
         "Reporting – Recurring reports, basic reports and executive reports",
       ],
@@ -256,7 +256,7 @@ export default function WhatWeDoPage() {
   ]
 
   const auditServices = [
-    { icon: Building2, name: "Location Audits", description: "Identifying most attractive locations for branding" },
+    { icon: Building2, name: "Location Audits/Highway Traffic Analysis", description: "Identifying most attractive locations for branding" },
     {
       icon: ClipboardCheck,
       name: "Shop/Retail Census and Audits",
@@ -286,18 +286,7 @@ export default function WhatWeDoPage() {
       description:
         "Content from video recorded interviews and FGD's and audio files from qualitative in-depth interviews",
     },
-    { icon: Languages, name: "Voiceover", description: "English voiceover for multi-lingual interviews and FGDs" },
     { icon: Globe, name: "Translation", description: "English translation from all major Indian languages" },
-    {
-      icon: Database,
-      name: "Digitization",
-      description: "Data entry for pen-paper surveys, conversion of other content into digital format (ebooks)",
-    },
-    {
-      icon: Code,
-      name: "Verbatim Coding",
-      description: "Intuitive and contextual coding of qualitative survey responses",
-    },
     {
       icon: Building2,
       name: "Facilities",
@@ -355,7 +344,7 @@ export default function WhatWeDoPage() {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 bg-transparent cursor-pointer hover:text-white">
-                Contact Us
+                <a href="/contact">Contact Us</a>
               </Button>
             </div>
           </div>
@@ -569,7 +558,7 @@ export default function WhatWeDoPage() {
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
                 FieldNet Global Research LLP approaches audits and polls with a research mindset enabling us to deliver
                 more than just counts and numbers to our clients. All our projects mandate that the execution team should
-                answer the question <span className="font-semibold text-cyan-700">WHY?</span> – To help our clients get a
+                answer the question <span className="font-bold text-cyan-700 text-2xl">WHY?</span> – To help our clients get a
                 richer perspective on the audit or poll outcomes.
               </p>
             </div>

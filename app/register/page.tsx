@@ -5,11 +5,10 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
-import { LogIn, UserPlus, Mail, Lock, User, Phone, Globe, MapPin, Calendar, Briefcase, GraduationCap, Languages, Wallet } from "lucide-react";
+import { Mail, User, Phone, Globe, MapPin, Calendar, Briefcase, GraduationCap, Languages, Wallet } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
@@ -18,11 +17,11 @@ import Link from "next/link";
 export default function RegisterPage() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
-  const [activeTab, setActiveTab] = useState("login");
+  // Removed OTP flow: keep form simple
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
   const [selectedWorkTypes, setSelectedWorkTypes] = useState<string[]>([]);
   const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
+  const [payoutMethod, setPayoutMethod] = useState<string>("");
 
   const toggleSelection = (value: string, list: string[], setter: (list: string[]) => void) => {
     if (list.includes(value)) {
@@ -30,28 +29,6 @@ export default function RegisterPage() {
     } else {
       setter([...list, value]);
     }
-  };
-
-  const sendOTP = () => {
-    setOtpSent(true);
-    toast({
-      title: "OTP Sent!",
-      description: "Please check your WhatsApp for the verification code.",
-    });
-  };
-
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    // Simulate API call
-    setTimeout(() => {
-      toast({
-        title: "Login functionality coming soon!",
-        description: "This feature is currently under development.",
-      });
-      setIsLoading(false);
-    }, 1000);
   };
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +48,7 @@ export default function RegisterPage() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen py-20 bg-gradient-to-b from-slate-50 to-white">
+      <main className="min-h-screen py-10 bg-gradient-to-b from-slate-50 to-white">
         <div className="mx-auto max-w-md lg:max-w-4xl px-4">
           <div className="mb-6">
             <Link
@@ -81,117 +58,14 @@ export default function RegisterPage() {
               ← Back to Home
             </Link>
           </div>
-          
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-slate-900 mb-2">
-              {activeTab === "login" ? "Welcome Back" : "Welcome to FieldNet Research"}
-            </h1>
-            <p className="text-slate-600">
-              {activeTab === "login" 
-                ? "Sign in to your account to continue" 
-                : "Join as a Respondent & Earn Rewards — Worldwide"}
-            </p>
+            <h1 className="text-4xl font-bold text-slate-900 mb-2">Welcome to FieldNet Global Research</h1>
+            <p className="text-slate-600">Join as a Respondent & Earn Rewards — Worldwide</p>
           </div>
 
-          <Tabs defaultValue="login" className="w-full" onValueChange={setActiveTab}>
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="login" className="flex items-center gap-2">
-                <LogIn className="h-4 w-4" />
-                Login
-              </TabsTrigger>
-              <TabsTrigger value="register" className="flex items-center gap-2">
-                <UserPlus className="h-4 w-4" />
-                Register
-              </TabsTrigger>
-            </TabsList>
-
-            {/* Login Tab */}
-            <TabsContent value="login">
-              <Card>
-                {/* <CardHeader>
-                  <CardTitle>Sign In</CardTitle>
-                  <CardDescription>
-                    Enter your credentials to access your account
-                  </CardDescription>
-                </CardHeader> */}
-                <form onSubmit={handleLogin}>
-                  <CardContent className="space-y-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <div className="h-5 flex items-center">
-                          <Label htmlFor="login-email">Email</Label>
-                        </div>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <Input
-                            id="login-email"
-                            type="email"
-                            placeholder="you@example.com"
-                            className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="h-5 flex items-center justify-between">
-                          <Label htmlFor="login-password">Password</Label>
-                          <Link
-                            href="#"
-                            className="text-sm text-cyan-600 hover:text-cyan-700 hover:underline"
-                          >
-                            Forgot password?
-                          </Link>
-                        </div>
-                        <div className="relative">
-                          <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                          <Input
-                            id="login-password"
-                            type="password"
-                            placeholder="••••••••"
-                            className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex flex-col gap-4 pt-6">
-                    <Button
-                      type="submit"
-                      className="w-full bg-cyan-600 hover:bg-cyan-700"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Signing in..." : "Sign In"}
-                    </Button>
-                    <p className="text-sm text-slate-600 text-center">
-                      Don't have an account?{" "}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const registerTab = document.querySelector('[value="register"]') as HTMLButtonElement;
-                          registerTab?.click();
-                        }}
-                        className="text-cyan-600 hover:text-cyan-700 hover:underline font-semibold"
-                      >
-                        Sign up
-                      </button>
-                    </p>
-                  </CardFooter>
-                </form>
-              </Card>
-            </TabsContent>
-
-            {/* Register Tab */}
-            <TabsContent value="register">
-              <Card>
-                {/* <CardHeader>
-                  <CardTitle>Create Account</CardTitle>
-                  <CardDescription>
-                    Join FieldNet Research - Complete your profile to get started
-                  </CardDescription>
-                </CardHeader> */}
-                <form onSubmit={handleRegister}>
-                  <CardContent className="space-y-6">
+          <Card>
+            <form onSubmit={handleRegister}>
+              <CardContent className="space-y-6">
                     {/* Personal Information */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
@@ -229,25 +103,15 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="phone">Phone (WhatsApp Preferred) *</Label>
-                          <div className="flex gap-2">
-                            <div className="relative flex-1">
-                              <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                              <Input
-                                id="phone"
-                                type="tel"
-                                placeholder="+91 98765 43210"
-                                className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                                required
-                              />
-                            </div>
-                            <Button
-                              type="button"
-                              onClick={sendOTP}
-                              className="whitespace-nowrap bg-cyan-500 text-white hover:bg-cyan-600 disabled:opacity-50"
-                              disabled={otpSent}
-                            >
-                              {otpSent ? "OTP Sent" : "OTP"}
-                            </Button>
+                          <div className="relative">
+                            <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                            <Input
+                              id="phone"
+                              type="tel"
+                              placeholder="+91 98765 43210"
+                              className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                              required
+                            />
                           </div>
                         </div>
 
@@ -270,29 +134,16 @@ export default function RegisterPage() {
                           <Label htmlFor="age">Age *</Label>
                           <Input
                             id="age"
-                            type="number"
+                            type="text"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            maxLength={3}
                             placeholder="25"
-                            min="18"
-                            max="100"
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
                         </div>
                       </div>
-
-                      {otpSent && (
-                        <div className="space-y-2">
-                          <Label htmlFor="otp">Enter OTP *</Label>
-                          <Input
-                            id="otp"
-                            type="text"
-                            placeholder="Enter 6-digit OTP"
-                            maxLength={6}
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
-                        </div>
-                      )}
                     </div>
 
                     {/* Location Information */}
@@ -310,11 +161,44 @@ export default function RegisterPage() {
                               <SelectValue placeholder="Select country" />
                             </SelectTrigger>
                             <SelectContent>
+                              {/* APAC region + UAE + Pakistan + some common western countries */}
                               <SelectItem value="india">India</SelectItem>
+                              <SelectItem value="pakistan">Pakistan</SelectItem>
+                              <SelectItem value="bangladesh">Bangladesh</SelectItem>
+                              <SelectItem value="sri-lanka">Sri Lanka</SelectItem>
+                              <SelectItem value="maldives">Maldives</SelectItem>
+                              <SelectItem value="nepal">Nepal</SelectItem>
+                              <SelectItem value="bhutan">Bhutan</SelectItem>
+
+                              <SelectItem value="china">China</SelectItem>
+                              <SelectItem value="taiwan">Taiwan</SelectItem>
+                              <SelectItem value="hong-kong">Hong Kong</SelectItem>
+                              <SelectItem value="macau">Macau</SelectItem>
+
+                              <SelectItem value="japan">Japan</SelectItem>
+                              <SelectItem value="south-korea">South Korea</SelectItem>
+
+                              <SelectItem value="indonesia">Indonesia</SelectItem>
+                              <SelectItem value="malaysia">Malaysia</SelectItem>
+                              <SelectItem value="singapore">Singapore</SelectItem>
+                              <SelectItem value="thailand">Thailand</SelectItem>
+                              <SelectItem value="philippines">Philippines</SelectItem>
+                              <SelectItem value="vietnam">Vietnam</SelectItem>
+                              <SelectItem value="cambodia">Cambodia</SelectItem>
+                              <SelectItem value="laos">Laos</SelectItem>
+
+                              <SelectItem value="myanmar">Myanmar</SelectItem>
+                              <SelectItem value="brunei">Brunei</SelectItem>
+
+                              <SelectItem value="australia">Australia</SelectItem>
+                              <SelectItem value="new-zealand">New Zealand</SelectItem>
+
+                              <SelectItem value="united-arab-emirates">United Arab Emirates</SelectItem>
+                              <SelectItem value="saudi-arabia">Saudi Arabia</SelectItem>
+
                               <SelectItem value="usa">United States</SelectItem>
                               <SelectItem value="uk">United Kingdom</SelectItem>
                               <SelectItem value="canada">Canada</SelectItem>
-                              <SelectItem value="australia">Australia</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
@@ -370,21 +254,7 @@ export default function RegisterPage() {
                           </Select>
                         </div>
 
-                        <div className="space-y-2 lg:col-span-2">
-                          <Label htmlFor="currency">Preferred Currency *</Label>
-                          <Select required>
-                            <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
-                              <SelectValue placeholder="Select currency" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="inr">INR (₹)</SelectItem>
-                              <SelectItem value="usd">USD ($)</SelectItem>
-                              <SelectItem value="eur">EUR (€)</SelectItem>
-                              <SelectItem value="gbp">GBP (£)</SelectItem>
-                              <SelectItem value="aud">AUD (A$)</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
+                        {/* Preferred Currency removed */}
                       </div>
                     </div>
 
@@ -416,10 +286,11 @@ export default function RegisterPage() {
                           <Label htmlFor="experience">Experience (Years) *</Label>
                           <Input
                             id="experience"
-                            type="number"
+                            type="text"
+                            inputMode="numeric"
+                            pattern="[0-9]*"
+                            maxLength={2}
                             placeholder="0"
-                            min="0"
-                            max="50"
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -538,38 +409,46 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="payoutMethod">Payout Method *</Label>
-                          <Select required>
+                          <Select value={payoutMethod} onValueChange={setPayoutMethod} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select payout method" />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="paypal">PayPal</SelectItem>
-                              <SelectItem value="bank">Bank Transfer</SelectItem>
-                              <SelectItem value="wise">Wise</SelectItem>
                               <SelectItem value="upi">UPI (India)</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="paypalEmail">PayPal Email (if applicable)</Label>
-                          <Input
-                            id="paypalEmail"
-                            type="email"
-                            placeholder="your@paypal.com"
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                          />
-                        </div>
-                      </div>
+                        <div>
+                          {payoutMethod === 'paypal' && (
+                            <div className="space-y-2">
+                              <Label htmlFor="paypalEmail">PayPal Email *</Label>
+                              <Input
+                                id="paypalEmail"
+                                name="paypalEmail"
+                                type="email"
+                                placeholder="your@paypal.com"
+                                className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                                required
+                              />
+                            </div>
+                          )}
 
-                      <div className="space-y-2">
-                        <Label htmlFor="referralCode">Referral Code (Optional)</Label>
-                        <Input
-                          id="referralCode"
-                          type="text"
-                          placeholder="Enter referral code"
-                          className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                        />
+                          {payoutMethod === 'upi' && (
+                            <div className="space-y-2">
+                              <Label htmlFor="upiId">UPI ID *</Label>
+                              <Input
+                                id="upiId"
+                                name="upiId"
+                                type="text"
+                                placeholder="your@upi"
+                                className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                                required
+                              />
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
 
@@ -580,9 +459,9 @@ export default function RegisterPage() {
                       className="w-full bg-cyan-600 hover:bg-cyan-700"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Creating account..." : "Create Account"}
+                      {isLoading ? "Creating account..." : "Register Now"}
                     </Button>
-                    <p className="text-sm text-slate-600 text-center">
+                    {/* <p className="text-sm text-slate-600 text-center">
                       Already have an account?{" "}
                       <button
                         type="button"
@@ -594,12 +473,10 @@ export default function RegisterPage() {
                       >
                         Sign in
                       </button>
-                    </p>
+                    </p> */}
                   </CardFooter>
                 </form>
               </Card>
-            </TabsContent>
-          </Tabs>
         </div>
       </main>
       <Footer />

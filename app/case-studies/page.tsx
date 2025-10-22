@@ -223,7 +223,7 @@ export default function CaseStudiesPage() {
       ],
       metrics: [
         { label: "Sample Size", value: "60" },
-        { label: "Countries", value: "4" },
+        { label: "Countries", value: "Thailand, Brazil, Korea, and China" },
         { label: "Respondent Type", value: "Healthcare Professionals" },
       ],
     },
@@ -363,6 +363,38 @@ export default function CaseStudiesPage() {
           typeof field === 'string' && field.toLowerCase().includes(q)
         );
       });
+
+  // Helper: highlight city names found in text
+  const highlightCities = (text?: string | null | undefined) => {
+    if (!text) return text as any
+    const cities = [
+      'Mumbai',
+      'Delhi',
+      'Lucknow',
+      'Bangalore',
+      'South Bangalore',
+      'Thailand',
+      'Indonesia',
+      'China',
+      'Korea',
+      'Brazil',
+      'Mumbai',
+      'Delhi',
+    ]
+    const unique = Array.from(new Set(cities.filter(Boolean)))
+    const regex = new RegExp(`\\b(${unique.join('|')})\\b`, 'gi')
+    const parts = text.split(regex)
+    return parts.map((part, idx) => {
+      if (unique.some((c) => c.toLowerCase() === part.toLowerCase())) {
+        return (
+          <span key={idx} className="font-semibold text-cyan-700">
+            {part}
+          </span>
+        )
+      }
+      return part
+    })
+  }
 
   return (
     <>
@@ -611,29 +643,17 @@ export default function CaseStudiesPage() {
                           </div>
                         ))}
                       </div>
-
-                      {/* Methodology Tags */}
-                      <div className="mt-6">
-                        <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">Methodology</p>
-                        <div className="flex flex-wrap gap-2">
-                          {study.methodology.map((method, idx) => (
-                            <Badge key={idx} variant="outline" className="border-cyan-600 text-cyan-700 text-xs">
-                              {method}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
                     </div>
 
                     {/* Right Column - Details */}
-                    <div className="lg:col-span-4 p-4 lg:p-8">
+                    <div className="lg:col-span-8 p-4 lg:p-8">
                       {/* Challenge */}
                       <div className="mb-6">
                         <div className="flex items-center gap-2 mb-3">
                           <Target className="h-5 w-5 text-amber-600" />
                           <h4 className="text-lg font-bold text-slate-900">Challenge</h4>
                         </div>
-                        <p className="text-slate-700 leading-relaxed">{study.challenge}</p>
+                        <p className="text-slate-700 leading-relaxed">{highlightCities(study.challenge)}</p>
                       </div>
 
                       {/* Solution */}
@@ -642,7 +662,7 @@ export default function CaseStudiesPage() {
                           <Sparkles className="h-5 w-5 text-cyan-600" />
                           <h4 className="text-lg font-bold text-slate-900">Solution</h4>
                         </div>
-                        <p className="text-slate-700 leading-relaxed">{study.solution}</p>
+                        <p className="text-slate-700 leading-relaxed">{highlightCities(study.solution)}</p>
                       </div>
 
                       {/* Results */}
@@ -655,10 +675,21 @@ export default function CaseStudiesPage() {
                           {study.results.map((result, idx) => (
                             <li key={idx} className="flex items-start gap-3">
                               <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                              <span className="text-slate-700 leading-relaxed">{result}</span>
+                              <span className="text-slate-700 leading-relaxed">{highlightCities(result)}</span>
                             </li>
                           ))}
                         </ul>
+                      </div>
+                      {/* Methodology Tags */}
+                      <div className="mt-6">
+                        <p className="text-xs font-semibold text-slate-700 uppercase tracking-wide mb-2">Methodology</p>
+                        <div className="flex flex-wrap gap-2">
+                          {study.methodology.map((method, idx) => (
+                            <Badge key={idx} variant="outline" className="border-cyan-600 text-cyan-700 text-xs">
+                              {method}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
