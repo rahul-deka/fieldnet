@@ -22,7 +22,7 @@ export async function fetchPosts(): Promise<Post[]> {
     return []
   }
 
-  const groq = `*[_type == "post"]{_id, title, "slug": slug.current, excerpt, publishedAt}|order(publishedAt desc)`
+  const groq = `*[_type == "post"]{_id, title, "slug": slug.current, excerpt, publishedAt, coverImage{alt, asset->{_id, url}}}|order(publishedAt desc)`
   const url = `https://${projectId}.api.sanity.io/v2023-10-21/data/query/${dataset}?query=${encodeURIComponent(groq)}`
 
   const res = await fetch(url, { next: { revalidate: 60 } })
