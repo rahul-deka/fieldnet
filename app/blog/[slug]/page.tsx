@@ -48,7 +48,7 @@ export default async function PostPage({ params }: Props) {
         <div className="max-w-3xl mx-auto px-6 py-20">
           <article>
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-            {post.coverImage?.asset?.url && (
+            {typeof post.coverImage?.asset?.url === 'string' && post.coverImage.asset.url && (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={post.coverImage.asset.url} alt={post.coverImage.alt || post.title} className="mb-6 rounded max-w-full" />
             )}
