@@ -1,3 +1,10 @@
+import { fetchPosts } from '@/lib/sanity'
+export async function generateStaticParams() {
+  const posts = await fetchPosts()
+  return posts
+    .filter((p) => p.slug)
+    .map((p) => ({ slug: p.slug }))
+}
 import React from 'react'
 import { notFound } from 'next/navigation'
 import { Navigation } from '@/components/navigation'
