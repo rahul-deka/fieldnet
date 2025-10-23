@@ -46,6 +46,14 @@ export default async function PostPage({ params }: Props) {
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-6 py-20">
           <article>
+            <div className="mb-6">
+              <a href="/blog" className="inline-flex items-center text-sm text-cyan-600">
+                <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Back to blogs
+              </a>
+            </div>
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
             {(() => {
               const asset = post.coverImage?.asset;
