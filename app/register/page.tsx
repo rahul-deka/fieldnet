@@ -13,11 +13,26 @@ import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Toaster } from "@/components/ui/toaster";
 import Link from "next/link";
+import BackToTopButton from "@/components/back-to-top";
 
 export default function RegisterPage() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  // Removed OTP flow: keep form simple
+  
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
+  const [ageVal, setAgeVal] = useState('');
+  const [countryVal, setCountryVal] = useState('');
+  const [stateVal, setStateVal] = useState('');
+  const [cityVal, setCityVal] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [timezoneVal, setTimezoneVal] = useState('');
+  const [educationVal, setEducationVal] = useState('');
+  const [experienceVal, setExperienceVal] = useState('');
+  const [languagesVal, setLanguagesVal] = useState('');
+
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
   const [selectedWorkTypes, setSelectedWorkTypes] = useState<string[]>([]);
   const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
@@ -35,14 +50,48 @@ export default function RegisterPage() {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      toast({
-        title: "Registration functionality coming soon!",
-        description: "This feature is currently under development.",
+    try {
+      const payload = {
+        fullName,
+        email,
+        phone,
+        gender,
+        age: ageVal,
+        country: countryVal,
+        region: stateVal,
+        city: cityVal,
+        postalCode,
+        timezone: timezoneVal,
+        education: educationVal,
+        experience: experienceVal,
+        languages: languagesVal,
+        availability: selectedAvailability.join(', '),
+        workTypes: selectedWorkTypes.join(', '),
+        sectors: selectedSectors.join(', '),
+        paymentMethod: payoutMethod,
+        paypalEmail: (document.getElementById('paypalEmail') as HTMLInputElement)?.value || '',
+        upiId: (document.getElementById('upiId') as HTMLInputElement)?.value || '',
+      };
+
+      const res = await fetch('/api/submit-registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error || 'Submission failed');
+
+      toast({ title: 'Thank you!', description: 'Your registration has been submitted.' });
+      // Reset form
+      setFullName(''); setEmail(''); setPhone(''); setGender(''); setAgeVal(''); setCountryVal(''); setStateVal(''); setCityVal(''); setPostalCode(''); setTimezoneVal(''); setEducationVal(''); setExperienceVal(''); setLanguagesVal('');
+      setSelectedAvailability([]); setSelectedWorkTypes([]); setSelectedSectors([]); setPayoutMethod('');
+    } catch (err: any) {
+      console.error('Registration submit error', err);
+      toast({ title: 'Submission failed', description: err?.message || 'Please try again later.' });
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -80,6 +129,8 @@ export default function RegisterPage() {
                             id="fullName"
                             type="text"
                             placeholder="Enter your full name"
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -93,6 +144,8 @@ export default function RegisterPage() {
                               id="email"
                               type="email"
                               placeholder="you@example.com"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                               className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                               required
                             />
@@ -109,6 +162,8 @@ export default function RegisterPage() {
                               id="phone"
                               type="tel"
                               placeholder="+91 98765 43210"
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
                               className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                               required
                             />
@@ -117,7 +172,7 @@ export default function RegisterPage() {
 
                         <div className="space-y-2">
                           <Label htmlFor="gender">Gender *</Label>
-                          <Select required>
+                          <Select value={gender} onValueChange={setGender} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select gender" />
                             </SelectTrigger>
@@ -139,6 +194,8 @@ export default function RegisterPage() {
                             pattern="[0-9]*"
                             maxLength={3}
                             placeholder="25"
+                            value={ageVal}
+                            onChange={(e) => setAgeVal(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -156,12 +213,11 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="space-y-2 lg:col-span-2">
                           <Label htmlFor="country">Country *</Label>
-                          <Select required>
+                          <Select value={countryVal} onValueChange={setCountryVal} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select country" />
                             </SelectTrigger>
                             <SelectContent>
-                              {/* APAC region + UAE + Pakistan + some common western countries */}
                               <SelectItem value="india">India</SelectItem>
                               <SelectItem value="pakistan">Pakistan</SelectItem>
                               <SelectItem value="bangladesh">Bangladesh</SelectItem>
@@ -210,6 +266,8 @@ export default function RegisterPage() {
                             id="state"
                             type="text"
                             placeholder="State/Region"
+                            value={stateVal}
+                            onChange={(e) => setStateVal(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -221,6 +279,8 @@ export default function RegisterPage() {
                             id="city"
                             type="text"
                             placeholder="City"
+                            value={cityVal}
+                            onChange={(e) => setCityVal(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -232,6 +292,8 @@ export default function RegisterPage() {
                             id="postalCode"
                             type="text"
                             placeholder="123456"
+                            value={postalCode}
+                            onChange={(e) => setPostalCode(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -239,7 +301,7 @@ export default function RegisterPage() {
 
                         <div className="space-y-2">
                           <Label htmlFor="timezone">Timezone *</Label>
-                          <Select required>
+                          <Select value={timezoneVal} onValueChange={setTimezoneVal} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select timezone" />
                             </SelectTrigger>
@@ -253,8 +315,6 @@ export default function RegisterPage() {
                             </SelectContent>
                           </Select>
                         </div>
-
-                        {/* Preferred Currency removed */}
                       </div>
                     </div>
 
@@ -268,7 +328,7 @@ export default function RegisterPage() {
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="education">Education *</Label>
-                          <Select required>
+                          <Select value={educationVal} onValueChange={setEducationVal} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select education level" />
                             </SelectTrigger>
@@ -291,6 +351,8 @@ export default function RegisterPage() {
                             pattern="[0-9]*"
                             maxLength={2}
                             placeholder="0"
+                            value={experienceVal}
+                            onChange={(e) => setExperienceVal(e.target.value)}
                             className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                             required
                           />
@@ -304,6 +366,8 @@ export default function RegisterPage() {
                               id="languages"
                               type="text"
                               placeholder="English, Hindi, Spanish"
+                              value={languagesVal}
+                              onChange={(e) => setLanguagesVal(e.target.value)}
                               className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                               required
                             />
@@ -459,26 +523,14 @@ export default function RegisterPage() {
                       className="w-full bg-cyan-600 hover:bg-cyan-700"
                       disabled={isLoading}
                     >
-                      {isLoading ? "Creating account..." : "Register Now"}
+                      {isLoading ? "Registering..." : "Register Now"}
                     </Button>
-                    {/* <p className="text-sm text-slate-600 text-center">
-                      Already have an account?{" "}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const loginTab = document.querySelector('[value="login"]') as HTMLButtonElement;
-                          loginTab?.click();
-                        }}
-                        className="text-cyan-600 hover:text-cyan-700 hover:underline font-semibold"
-                      >
-                        Sign in
-                      </button>
-                    </p> */}
                   </CardFooter>
                 </form>
               </Card>
         </div>
       </main>
+      <BackToTopButton />
       <Footer />
       <Toaster />
     </>
