@@ -1,17 +1,18 @@
-import { fetchPosts } from '@/lib/sanity'
+
+import React from 'react'
+import { notFound } from 'next/navigation'
+import { Navigation } from '@/components/navigation'
+import { Footer } from '@/components/footer'
+import { fetchPostBySlug, fetchPosts } from '@/lib/sanity'
+import PortableTextRenderer from '@/lib/portableTextRenderer'
+import { format } from 'date-fns'
+
 export async function generateStaticParams() {
   const posts = await fetchPosts()
   return posts
     .filter((p) => p.slug)
     .map((p) => ({ slug: p.slug }))
 }
-import React from 'react'
-import { notFound } from 'next/navigation'
-import { Navigation } from '@/components/navigation'
-import { Footer } from '@/components/footer'
-import { fetchPostBySlug } from '@/lib/sanity'
-import PortableTextRenderer from '@/lib/portableTextRenderer'
-import { format } from 'date-fns'
 
 type Props = { params: { slug: string } }
 
@@ -24,8 +25,6 @@ export default async function PostPage({ params }: Props) {
   } catch (err: any) {
     error = err?.message || String(err)
     if (typeof window === 'undefined') {
-      // Log to Vercel serverless logs
-      // eslint-disable-next-line no-console
       console.error('Error fetching post:', error)
     }
   }
@@ -48,10 +47,19 @@ export default async function PostPage({ params }: Props) {
         <div className="max-w-3xl mx-auto px-6 py-20">
           <article>
             <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-            {typeof post.coverImage?.asset?.url === 'string' && post.coverImage.asset.url && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={post.coverImage.asset.url} alt={post.coverImage.alt || post.title} className="mb-6 rounded max-w-full" />
-            )}
+            {(() => {
+              const asset = post.coverImage?.asset;
+              if (asset && typeof asset.url === 'string' && asset.url) {
+                // eslint-disable-next-line @next/next/no-img-element
+                return <img src={asset.url} alt={post.coverImage?.alt || post.title} className="mb-6 rounded max-w-full" />
+              }
+              // If asset exists but no url, log for debugging (only in dev/build)
+              if (asset && typeof window === 'undefined') {
+                // eslint-disable-next-line no-console
+                console.warn('Sanity coverImage asset has no url:', JSON.stringify(asset))
+              }
+              return null
+            })()}
             {post.publishedAt && (
               <div className="text-sm text-muted-foreground mb-6">{format(new Date(post.publishedAt), 'd MMM yyyy')}</div>
             )}
