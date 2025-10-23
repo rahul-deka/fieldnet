@@ -233,24 +233,52 @@ export default function WhatWeDoPage() {
       metrics: [],
     },
     {
-      icon: BarChart3,
-      name: "Price Sensitivity Measurement",
+      icon: ClipboardCheck,
+      name: "Feasibility Studies",
       description:
-        "Uses the Van Westendorp technique to determine the acceptable price range for a product or service. Measure consumer price preferences and sensitivity using a graphical plot.",
+        "Assess viability of new products, services or initiatives by combining market, operational and financial analyses to guide investment decisions.",
+      metrics: [],
+    },
+    {
+      icon: Users,
+      name: "Skill Gap Analysis",
+      description:
+        "Identify competency shortfalls across teams or markets to inform training, hiring and organizational development plans.",
+      metrics: [],
+    },
+    {
+      icon: Building2,
+      name: "Retail Audit",
+      description:
+        "Store-level assessments including shelf visibility, compliance, merchandising and availability checks to optimize in-store execution.",
       metrics: [],
     },
     {
       icon: Eye,
-      name: "Sensory Evaluation",
+      name: "Foot Traffic Analysis",
       description:
-        "Used specifically for the Food and Beverage sector. Measures consumer sensory responses to product attributes.",
-      metrics: ["Appearance", "Touch", "Odour", "Texture", "Temperature", "Taste"],
+        "Measure and analyze shopper footfall patterns and dwell times to support store layout optimization and location planning.",
+      metrics: [],
     },
     {
-      icon: MessageSquare,
-      name: "Ethnography/Day in the life Studies",
+      icon: TrendingUp,
+      name: "Impact Analysis",
       description:
-        "Observational and non-intrusive research technique typically used for consumer immersion where a deep understanding of consumer behavior and lifestyle is essential.",
+        "Quantify the effect of interventions or business decisions on sales, brand metrics and other key performance indicators.",
+      metrics: [],
+    },
+    {
+      icon: Target,
+      name: "Advertisement and Campaign Effectiveness",
+      description:
+        "Evaluate ad and campaign performance using lift analysis, brand metrics and conversion measures to optimize creative and media.",
+      metrics: [],
+    },
+    {
+      icon: Globe,
+      name: "Market Entry Strategy Development",
+      description:
+        "Tailored market-entry planning for international markets including competitor landscaping, regulatory considerations and channel strategy.",
       metrics: [],
     },
   ]
@@ -500,20 +528,20 @@ export default function WhatWeDoPage() {
               </p>
             </div>
 
-            <div className="relative grid grid-cols-1 md:grid-cols-2 border border-white/20 bg-white/5">
+            <div className="relative grid grid-cols-1 md:grid-cols-2 border border-white/20 bg-white/5 divide-y divide-white/10">
               {researchSolutions.map((solution, index) => {
-                // 2xN grid: right border except last col, bottom border except last row
+                // 2-column grid: right border except last column on md; on mobile (single column) show bottom border between items
                 const isLastCol = (index + 1) % 2 === 0;
-                const isLastRow = index >= researchSolutions.length - 2;
-                // Add mobile divider between Sensory Evaluation (index 8) and Ethnography (index 9)
-                const isSensoryEvaluation = index === 8;
+                // compute rows and current row to determine last row correctly for md layout
+                const rowCount = Math.ceil(researchSolutions.length / 2);
+                const currentRow = Math.floor(index / 2) + 1; // 1-based
+                const isLastRow = currentRow === rowCount;
+                const isNotLastMobile = index !== researchSolutions.length - 1;
                 return (
                   <div
                     key={index}
                     className={`relative h-full flex items-stretch
-                      ${!isLastCol ? 'md:border-r border-white/20' : ''}
-                      ${!isLastRow ? 'border-b border-white/20' : ''}
-                      ${isSensoryEvaluation ? 'border-b border-white/20 md:border-b-0' : ''}
+                      ${!isLastCol ? 'md:border-r border-white/10' : ''}
                     `}
                   >
                     <div className="flex flex-col p-8 w-full group">
