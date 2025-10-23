@@ -24,6 +24,10 @@ function blockToElement(block: PortableTextBlock, idx: number) {
 
 	if (block._type === 'image') {
 		const asset = block.asset || block.asset?._ref || block.asset?._id
+		// Normalize asset for display: prefer direct URL or id/ref string
+		let assetDisplay: string | undefined
+		if (typeof asset === 'string') assetDisplay = asset
+		else if (asset && typeof asset === 'object') assetDisplay = asset._ref || asset._id || JSON.stringify(asset)
 		if (block.url) {
 			return (
 				// eslint-disable-next-line @next/next/no-img-element
@@ -31,9 +35,9 @@ function blockToElement(block: PortableTextBlock, idx: number) {
 			)
 		}
 		return (
-			<div key={block._key ?? idx} className="my-4 border rounded p-3 text-sm text-muted-foreground">
-				Image: {block.alt || asset || 'unknown'}
-			</div>
+					<div key={block._key ?? idx} className="my-4 border rounded p-3 text-sm text-muted-foreground">
+						Image: {block.alt || assetDisplay || 'unknown'}
+					</div>
 		)
 	}
 
