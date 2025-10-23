@@ -17,7 +17,27 @@ type Props = { params: { slug: string } }
 
 export default async function PostPage({ params }: Props) {
   const { slug } = params
-  const post = await fetchPostBySlug(slug)
+  let post = null
+  let error = null
+  try {
+    post = await fetchPostBySlug(slug)
+  } catch (err: any) {
+    error = err?.message || String(err)
+    if (typeof window === 'undefined') {
+      // Log to Vercel serverless logs
+      // eslint-disable-next-line no-console
+      console.error('Error fetching post:', error)
+    }
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-2xl mx-auto py-20 px-6 text-center text-red-600">
+        <h1 className="text-2xl font-bold mb-4">Error loading post</h1>
+        <pre className="bg-red-50 text-red-800 rounded p-4 text-sm overflow-x-auto">{error}</pre>
+      </div>
+    )
+  }
 
   if (!post) return notFound()
 
