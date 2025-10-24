@@ -5,11 +5,11 @@ import { NewsletterSubscribe } from "@/components/newsletter-subscribe"
 import Image from "next/image"
 
 const navigation = {
-  company: [
+    company: [
     { name: "Who We Are", href: "/who-we-are" },
     { name: "Our Philosophy", href: "/who-we-are#philosophy" },
     { name: "Our Team", href: "/who-we-are#team" },
-    { name: "Global Footprint", href: "/who-we-are#global" },
+    { name: "Global Footprint", href: "/who-we-are#global-partnership" },
   ],
   services: [
     { name: "Market Research", href: "/services#market-research" },

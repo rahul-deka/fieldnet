@@ -7,10 +7,34 @@ export default function BackToTopButton() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const onScroll = () => setVisible(window.scrollY > 300);
+
+    // local flag tracked in closure to avoid re-attaching scroll listener
+    let menuOpen = false;
+
+    const updateVisibility = () => {
+      setVisible(window.scrollY > 300 && !menuOpen);
+    }
+
+    const onScroll = () => updateVisibility();
+
+    const onMenu = (e: Event) => {
+      try {
+        // @ts-ignore - event may be CustomEvent
+        menuOpen = !!e?.detail?.open;
+      } catch (err) {
+        menuOpen = false;
+      }
+      updateVisibility();
+    }
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("mobile-menu", onMenu as EventListener);
+    updateVisibility();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mobile-menu", onMenu as EventListener);
+    };
   }, []);
 
   if (!visible) return null;

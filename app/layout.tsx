@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import AsciiRunner from "@/components/ascii-runner"
 import { AnnouncementBanner } from "@/components/announcement-banner"
 import { AnnouncementBannerSkeleton } from "@/components/announcement-banner-skeleton"
 import "./globals.css"
@@ -25,6 +26,7 @@ export default function RootLayout({
         <link rel="icon" href="/logo-cyan.svg" type="image/svg+xml" />
       </head>
       <body>
+        <AsciiRunner />
         <Suspense fallback={<AnnouncementBannerSkeleton />}>
           <AnnouncementBanner />
         </Suspense>

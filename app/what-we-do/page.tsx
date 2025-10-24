@@ -340,7 +340,9 @@ export default function WhatWeDoPage() {
           </div>
 
           <div className="relative max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-cyan-400/20 backdrop-blur-sm border border-cyan-400/30 rounded-full px-4 py-2 mb-6">
+            {/* tiny-badge: adds extra top margin only on very small screens (<=305px) */}
+            <style jsx>{`@media (max-width:305px){ .tiny-badge{ margin-top:0.5rem !important; } }`}</style>
+            <div className="inline-flex items-center gap-2 bg-cyan-400/20 backdrop-blur-sm border border-cyan-400/30 rounded-full px-4 py-2 mb-6 tiny-badge">
               <Sparkles className="h-4 w-4 text-cyan-400" />
               <span className="text-sm font-medium text-cyan-100">Comprehensive Research Solutions</span>
             </div>
@@ -416,12 +418,12 @@ export default function WhatWeDoPage() {
                         </div>
                         <h3 className="text-xl font-bold text-slate-900">{service.title}</h3>
                       </div>
-                      <p className="text-slate-600 mb-6 leading-relaxed">{service.description}</p>
+                      <p className="text-slate-600 mb-6 leading-relaxed text-justify md:text-left">{service.description}</p>
                       <ul className="space-y-3 flex-grow">
                         {service.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start text-sm text-slate-700">
                             <CheckCircle className="h-4 w-4 text-cyan-600 mr-3 mt-0.5 flex-shrink-0" />
-                            <span>{feature}</span>
+                            <span className="text-justify md:text-left">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -471,7 +473,7 @@ export default function WhatWeDoPage() {
                         {service.features.map((feature, idx) => (
                           <li key={idx} className="flex items-start text-sm text-slate-700">
                             <CheckCircle className="h-4 w-4 text-cyan-600 mr-3 mt-0.5 flex-shrink-0" />
-                            <span>{feature}</span>
+                            <span className="text-justify md:text-left">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -553,7 +555,7 @@ export default function WhatWeDoPage() {
                         </div>
                         <h3 className="text-lg font-bold text-white">{solution.name}</h3>
                       </div>
-                      <p className="text-sm text-slate-300 leading-relaxed mb-3">{solution.description}</p>
+                      <p className="text-sm text-slate-300 leading-relaxed mb-3 text-justify md:text-left">{solution.description}</p>
                       {solution.metrics.length > 0 && (
                         <div className="mt-2 flex flex-wrap gap-2">
                           {solution.metrics.map((metric, idx) => (
@@ -612,7 +614,7 @@ export default function WhatWeDoPage() {
                         </div>
                         <h3 className="text-xl font-bold text-slate-900">{service.name}</h3>
                       </div>
-                      <p className="text-sm text-slate-600 mb-2">{service.description}</p>
+                      <p className="text-sm text-slate-600 mb-2 text-justify md:text-left">{service.description}</p>
                     </div>
                   </div>
                 );
@@ -637,7 +639,7 @@ export default function WhatWeDoPage() {
                         </div>
                         <h3 className="text-xl font-bold text-slate-900">{service.name}</h3>
                       </div>
-                      <p className="text-sm text-slate-600 mb-2">{service.description}</p>
+                      <p className="text-sm text-slate-600 mb-2 text-justify md:text-left">{service.description}</p>
                     </div>
                   </div>
                 ))}
@@ -700,21 +702,20 @@ export default function WhatWeDoPage() {
         <section className="py-20 px-6 bg-slate-900">
           <div className="max-w-7xl mx-auto px-6" ref={globalStatsRef}>
             <div className="flex items-center justify-center mb-8">
-              <Globe className="h-12 w-12 text-cyan-400 mr-4" />
-              <h2 className="text-4xl font-bold text-white">Global Execution Capability</h2>
+              <h2 className="text-4xl font-bold text-white text-center">Global Execution Capability</h2>
             </div>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto mb-12 text-pretty text-center">
               Our project management capabilities coupled with a strong network of partners allows us to optimize project
               execution in all major geographies, handling multilingual and multi-country assignments with ease.
             </p>
-            <div className="relative grid grid-cols-1 md:grid-cols-4 border border-cyan-400 bg-white/5">
+            <div className="relative grid grid-cols-1 md:grid-cols-4 border border-cyan-400 bg-white/5 divide-y divide-cyan-400 md:divide-y-0">
               {globalStats.map((stat, index) => {
                 const isLastCol = (index + 1) % 4 === 0;
                 return (
                   <div
                     key={index}
                     className={`relative h-full flex flex-col items-center justify-center p-8 bg-white/10 backdrop-blur-sm
-                      ${!isLastCol ? 'md:border-r border-cyan-400' : ''}
+                      ${!isLastCol ? 'md:border-r md:border-cyan-400' : ''}
                     `}
                   >
                     <div className={`text-3xl font-bold mb-2 ${stat.color}`}>
@@ -743,7 +744,7 @@ export default function WhatWeDoPage() {
               </div>
               <a
                 href="/contact"
-                className="inline-flex items-center bg-white px-5 py-2.5 text-base font-bold text-cyan-600 shadow-lg transition-colors hover:bg-indigo-50 md:ml-auto"
+                className="inline-flex items-center bg-white px-5 py-2.5 text-base font-bold text-cyan-600 shadow-lg transition-colors hover:bg-indigo-50 md:ml-auto whitespace-nowrap"
               >
                 Contact Us
               </a>

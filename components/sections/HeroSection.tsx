@@ -42,7 +42,7 @@ export default function HeroSection() {
                 className="w-full sm:w-auto border-2 border-cyan-600 text-cyan-700 hover:bg-cyan-50 bg-transparent hover:border-cyan-700 hover:text-cyan-800 transition-transform duration-200 ease-in-out hover:scale-105"
                 asChild
               >
-                <Link href="/services">Explore Our Services</Link>
+                <Link href="/what-we-do">Explore Our Services</Link>
               </Button>
             </div>
             <div className="mt-12 flex items-center gap-8 text-sm text-muted-foreground">

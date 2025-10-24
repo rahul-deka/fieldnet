@@ -455,7 +455,7 @@ export default function CaseStudiesPage() {
                     <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
                       Hair Color Ad Effectiveness Study
                     </h3>
-                    <p className="text-cyan-100 leading-relaxed">
+                    <p className="text-cyan-100 leading-relaxed text-justify md:text-left">
                       Evaluating pre and post campaign effectiveness for a global FMCG major’s hair color brand, driving higher ad recall and purchase intent across metros.
                     </p>
                   </div>
@@ -488,7 +488,7 @@ export default function CaseStudiesPage() {
                         </div>
                         <h4 className="text-lg font-bold text-white">The Challenge</h4>
                       </div>
-                        <p className="text-slate-300 leading-relaxed">
+                        <p className="text-slate-300 leading-relaxed text-justify md:text-left">
                         The client wanted to assess how effectively its latest hair color campaign was influencing brand awareness, ad recall, and purchase intent among women aged 25–45 across urban India.
                       </p>
                     </div>
@@ -501,7 +501,7 @@ export default function CaseStudiesPage() {
                         </div>
                         <h4 className="text-lg font-bold text-white">Our Approach</h4>
                       </div>
-                      <p className="text-slate-300 leading-relaxed">
+                      <p className="text-slate-300 leading-relaxed text-justify md:text-left">
                         Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities. Tracked TV and print campaign effectiveness using pre-post exposure methodology, and measured recall, brand image, and likelihood to purchase.
                       </p>
                     </div>
@@ -653,7 +653,7 @@ export default function CaseStudiesPage() {
                           <Target className="h-5 w-5 text-amber-600" />
                           <h4 className="text-lg font-bold text-slate-900">Challenge</h4>
                         </div>
-                        <p className="text-slate-700 leading-relaxed">{highlightCities(study.challenge)}</p>
+                        <p className="text-slate-700 leading-relaxed text-justify md:text-left">{highlightCities(study.challenge)}</p>
                       </div>
 
                       {/* Solution */}
@@ -662,7 +662,7 @@ export default function CaseStudiesPage() {
                           <Sparkles className="h-5 w-5 text-cyan-600" />
                           <h4 className="text-lg font-bold text-slate-900">Solution</h4>
                         </div>
-                        <p className="text-slate-700 leading-relaxed">{highlightCities(study.solution)}</p>
+                        <p className="text-slate-700 leading-relaxed text-justify md:text-left">{highlightCities(study.solution)}</p>
                       </div>
 
                       {/* Results */}
@@ -675,7 +675,7 @@ export default function CaseStudiesPage() {
                           {study.results.map((result, idx) => (
                             <li key={idx} className="flex items-start gap-3">
                               <CheckCircle className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
-                              <span className="text-slate-700 leading-relaxed">{highlightCities(result)}</span>
+                              <span className="text-slate-700 leading-relaxed text-justify md:text-left">{highlightCities(result)}</span>
                             </li>
                           ))}
                         </ul>
