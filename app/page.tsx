@@ -11,6 +11,7 @@ import FAQSection from "@/components/sections/FAQSection"
 import { useEffect, useRef } from "react"
 import BackToTopButton from "@/components/back-to-top";
 import { displayAsciiArt } from "@/components/asciiArt";
+import Reveal from "@/components/reveal";
 
 export default function HomePage() {
   const installRef = useRef<HTMLDivElement>(null);
@@ -28,13 +29,31 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <HeroSection />
-      <TrustedSection />
-      <ExpertiseSection />
+      <Reveal>
+        <HeroSection />
+      </Reveal>
+
+      <Reveal>
+        <TrustedSection />
+      </Reveal>
+
+      <Reveal>
+        <ExpertiseSection />
+      </Reveal>
+
       {/* <InsightEdgeSection /> */}
-      <DifferentiatorsSection />
-      <CTASection />
-      <FAQSection />
+
+      <Reveal>
+        <DifferentiatorsSection />
+      </Reveal>
+
+      <Reveal>
+        <CTASection />
+      </Reveal>
+
+      <Reveal>
+        <FAQSection />
+      </Reveal>
       <BackToTopButton />
       <Footer />
     </div>
