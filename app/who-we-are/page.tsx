@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
@@ -10,6 +9,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Globe2, Lightbulb, FlaskConical, Gauge, Shuffle, Headphones, Users2, Building2, Trophy, CheckCircle, Handshake } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import BackToTopButton from "@/components/back-to-top";
+import Reveal from "@/components/reveal";
 
 export default function WhoWeArePage() {
   React.useEffect(() => {
@@ -38,14 +38,15 @@ export default function WhoWeArePage() {
       <Navigation />
       <main className="min-h-screen">
         {/* Hero */}
-        <section className="relative border-b border-slate-200 bg-gradient-to-b from-cyan-50 to-white">
+        <Reveal>
+          <section className="relative border-b border-slate-200 bg-gradient-to-b from-cyan-50 to-white">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
                 <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">About FieldNet</Badge>
-                <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-                  Who We Are
-                </h1>
+          <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+              Who We Are
+          </h1>
                 <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600">
                   FieldNet Global Research LLP is a full‑service market research agency, formed in December 2005. We bring
                   a unique blend of client‑side and agency‑side expertise to deliver integrated, insightful research
@@ -111,12 +112,14 @@ export default function WhoWeArePage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         <BackToTopButton />
 
         {/* About Overview */}
-        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+        <Reveal>
+          <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Story</h2>
@@ -144,10 +147,12 @@ export default function WhoWeArePage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Philosophy */}
-        <section id="philosophy" className="border-y border-slate-200 py-24">
+        <Reveal>
+          <section id="philosophy" className="border-y border-slate-200 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
             <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery.</p>
@@ -205,10 +210,12 @@ export default function WhoWeArePage() {
               })}
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Global Partnership */}
-        <section id="global-partnership" className="py-14">
+        <Reveal>
+          <section id="global-partnership" className="py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mb-12">
               <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">
@@ -293,9 +300,11 @@ export default function WhoWeArePage() {
               </Carousel>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
   {/* Leadership & Advisors */}
+  <Reveal>
   <section id="team" className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Leadership & Advisors</h2>
@@ -382,10 +391,12 @@ export default function WhoWeArePage() {
               })}
             </div>
           </div>
-        </section>        
+  </section>        
+  </Reveal>
 
         {/* Us over the years (Timeline) */}
-        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+        <Reveal>
+          <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-slate-900">Us over the years</h2>
           <p className="mt-3 text-slate-600">A brief timeline showing key milestones in FieldNet's journey.</p>
 
@@ -466,7 +477,8 @@ export default function WhoWeArePage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
         {/* Previous Clients */}
         <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="text-center mb-12">

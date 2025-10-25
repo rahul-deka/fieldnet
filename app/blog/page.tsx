@@ -3,6 +3,7 @@ import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
 import { fetchPosts } from '@/lib/sanity'
 import SearchBar from '@/components/blog/search-bar'
+import Reveal from '@/components/reveal'
 
 export default async function BlogPage() {
   const posts = await fetchPosts()
@@ -12,6 +13,7 @@ export default async function BlogPage() {
       <Navigation />
       <main className="min-h-screen bg-white">
         <div className="max-w-6xl mx-auto px-6 py-20">
+          <Reveal>
           <header className="mb-12 text-center">
             <h1 className="text-4xl font-extrabold mb-2">FieldNet Blog</h1>
             <p className="text-lg text-muted-foreground">Insights, updates and case studies from our global team.</p>
@@ -24,6 +26,7 @@ export default async function BlogPage() {
               <SearchBar initialPosts={posts} />
             </>
           )}
+          </Reveal>
         </div>
       </main>
 

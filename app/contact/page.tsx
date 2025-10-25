@@ -15,6 +15,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { MapSVG } from "@/components/map-svg";
 import { OfficeGridMap } from "@/components/office-grid-map";
 import BackToTopButton from "@/components/back-to-top";
+import Reveal from "@/components/reveal";
 
 export default function ContactPage() {
   const { toast } = useToast();
@@ -220,7 +221,8 @@ export default function ContactPage() {
     <>
       <Navigation />
       <main className="min-h-screen py-20">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+        <Reveal>
+          <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             {/* Left Column - Header & Info */}
             <div>
@@ -581,7 +583,8 @@ export default function ContactPage() {
                 </a>
               </div>
           </div>
-        </div>
+          </div>
+        </Reveal>
       </main>
       {/* Head Offices Grid & Map */}
       <section className="w-full flex justify-center py-8">
@@ -600,42 +603,42 @@ export default function ContactPage() {
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#EF4444', borderColor: '#EF4444' }} title="Mumbai Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Delhi Office</div>
-                  <div className="text-sm text-gray-500">456 Connaught Place, New Delhi, DL</div>
+                  {/* <div className="text-sm text-gray-500">456 Connaught Place, New Delhi, DL</div> */}
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#3B82F6', borderColor: '#3B82F6' }} title="Delhi Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Mumbai Office</div>
-                  <div className="text-sm text-gray-500">123 Marine Drive, Mumbai, MH</div>
+                  {/* <div className="text-sm text-gray-500">123 Marine Drive, Mumbai, MH</div> */}
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#22C55E', borderColor: '#22C55E' }} title="Bangalore Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Kolkata Office</div>
-                  <div className="text-sm text-gray-500">654 Park Street, Kolkata, WB</div>
+                  {/* <div className="text-sm text-gray-500">654 Park Street, Kolkata, WB</div> */}
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#F59E42', borderColor: '#F59E42' }} title="Hyderabad Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Hyderabad Office</div>
-                  <div className="text-sm text-gray-500">321 Banjara Hills, Hyderabad, TS</div>
+                  {/* <div className="text-sm text-gray-500">321 Banjara Hills, Hyderabad, TS</div> */}
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#14B8A6', borderColor: '#14B8A6' }} title="Chennai Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Bangaluru Office</div>
-                  <div className="text-sm text-gray-500">789 MG Road, Bangalore, KA</div>
+                  {/* <div className="text-sm text-gray-500">789 MG Road, Bangalore, KA</div> */}
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#A855F7', borderColor: '#A855F7' }} title="Kolkata Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Chennai Office</div>
-                  <div className="text-sm text-gray-500">987 Anna Salai, Chennai, TN</div>
+                  {/* <div className="text-sm text-gray-500">987 Anna Salai, Chennai, TN</div> */}
                 </div>
               </div>
             </div>

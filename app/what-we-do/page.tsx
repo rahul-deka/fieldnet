@@ -31,6 +31,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import Reveal from "@/components/reveal"
 
 export default function WhatWeDoPage() {
   // Counter animation for Global Execution Capability
@@ -328,7 +329,8 @@ export default function WhatWeDoPage() {
       <Navigation />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-cyan-50">
         {/* Hero Section */}
-        <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900">
+        <Reveal>
+          <section className="relative min-h-[calc(100vh-80px)] flex items-center justify-center px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-900 to-slate-900">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div
@@ -378,10 +380,12 @@ export default function WhatWeDoPage() {
               </Button>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Core Services Overview */}
-        <section id="our-services" className="py-24 sm:py-24 bg-white">
+        <Reveal>
+          <section id="our-services" className="py-24 sm:py-24 bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -432,11 +436,13 @@ export default function WhatWeDoPage() {
                 );
               })}
             </div>
-          </div>
-        </section>
+            </div>
+          </section>
+        </Reveal>
 
         {/* Market Research Services - Detailed */}
-        <section className="py-20  bg-white">
+        <Reveal>
+          <section className="py-20  bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -515,10 +521,12 @@ export default function WhatWeDoPage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Market Research Solutions */}
-        <section className="py-20 bg-gradient-to-br from-slate-900 to-cyan-900">
+        <Reveal>
+          <section className="py-20 bg-gradient-to-br from-slate-900 to-cyan-900">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-200 border-cyan-400 bg-white/10">
@@ -575,10 +583,12 @@ export default function WhatWeDoPage() {
               })}
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Audits and Polls */}
-        <section className="py-20 bg-gradient-to-br from-cyan-50 to-amber-50">
+        <Reveal>
+          <section className="py-20 bg-gradient-to-br from-cyan-50 to-amber-50">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -646,10 +656,12 @@ export default function WhatWeDoPage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Support Services */}
-        <section className="py-20 bg-white">
+        <Reveal>
+          <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-amber-700 border-amber-200">
@@ -696,10 +708,12 @@ export default function WhatWeDoPage() {
               ))}
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Global Reach Stats */}
-        <section className="py-20 px-6 bg-slate-900">
+        <Reveal>
+          <section className="py-20 px-6 bg-slate-900">
           <div className="max-w-7xl mx-auto px-6" ref={globalStatsRef}>
             <div className="flex items-center justify-center mb-8">
               <h2 className="text-4xl font-bold text-white text-center">Global Execution Capability</h2>
@@ -729,10 +743,12 @@ export default function WhatWeDoPage() {
               })}
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* CTA */}
-        <section className=" border-slate-200 bg-white py-14">
+        <Reveal>
+          <section className=" border-slate-200 bg-white py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="border border-cyan-700 bg-cyan-600 h-full flex flex-col md:flex-row p-8 items-start md:items-center md:justify-between gap-4">
               <div>
@@ -750,7 +766,8 @@ export default function WhatWeDoPage() {
               </a>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
       </main>
       <BackToTopButton />
       <Footer />

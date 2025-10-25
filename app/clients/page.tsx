@@ -3,6 +3,7 @@
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import Reveal from "@/components/reveal";
 
 export default function ClientsPage() {
   const clients = [
@@ -36,7 +37,8 @@ export default function ClientsPage() {
     <>
       <Navigation />
       <main className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-        <div className="text-center mb-12">
+        <Reveal>
+          <div className="text-center mb-12">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">Clients</h1>
           <p className="text-lg text-slate-600">We've partnered with organizations across sectors to deliver actionable insights.</p>
         </div>
@@ -52,6 +54,7 @@ export default function ClientsPage() {
             </div>
           ))}
         </div>
+        </Reveal>
       </main>
       <Footer />
     </>

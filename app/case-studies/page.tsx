@@ -32,6 +32,7 @@ import {
   Vote,
 } from "lucide-react"
 import BackToTopButton from "@/components/back-to-top"
+import Reveal from "@/components/reveal"
 
 export default function CaseStudiesPage() {
   const [activeFilter, setActiveFilter] = useState("All")
@@ -401,7 +402,8 @@ export default function CaseStudiesPage() {
       <Navigation />
       <div className="min-h-screen bg-background">
         {/* Hero Section - Featured Case Study Spotlight */}
-        <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-950 to-slate-900">
+        <Reveal>
+          <section className="relative py-24 px-6 overflow-hidden bg-gradient-to-br from-slate-900 via-cyan-950 to-slate-900">
           {/* Animated background pattern */}
           <div className="absolute inset-0 opacity-10">
             <div
@@ -578,10 +580,12 @@ export default function CaseStudiesPage() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Filter Section */}
-        <section className="py-8 px-6 bg-white border-slate-200">
+        <Reveal>
+          <section className="py-8 px-6 bg-white border-slate-200">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-wrap gap-3 items-center mb-4">
               <input
@@ -607,10 +611,12 @@ export default function CaseStudiesPage() {
               ))}
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* Case Studies Grid */}
-        <section className="py-16 px-6 from-slate-50 to-white">
+        <Reveal>
+          <section className="py-16 px-6 from-slate-50 to-white">
           <div className="max-w-7xl mx-auto">
             <div className="grid gap-8">
               {filteredStudies.map((study) => (
@@ -703,10 +709,12 @@ export default function CaseStudiesPage() {
               </div>
             )}
           </div>
-        </section>
+          </section>
+        </Reveal>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 bg-gradient-to-br from-slate-900 to-cyan-900">
+        <Reveal>
+          <section className="py-20 px-6 bg-gradient-to-br from-slate-900 to-cyan-900">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-cyan-400/20 backdrop-blur-sm border border-cyan-400/30 rounded-full px-4 py-2 mb-6">
               <Users className="h-4 w-4 text-cyan-400" />
@@ -732,7 +740,8 @@ export default function CaseStudiesPage() {
               </Button>
             </div>
           </div>
-        </section>
+          </section>
+        </Reveal>
       </div>
       <BackToTopButton />
       <Footer />

@@ -4,6 +4,7 @@ import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import BackToTopButton from "@/components/back-to-top";
+import Reveal from "@/components/reveal";
 
 const resources = [
   { title: 'Industry Reports', desc: 'Quarterly and annual market research reports across sectors.', href: '#' },
@@ -16,7 +17,8 @@ export default function ResourcesPage() {
     <>
       <Navigation />
       <main className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
-        <div className="text-center mb-12">
+        <Reveal>
+          <div className="text-center mb-12">
           <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">Resources</h1>
           <p className="text-lg text-slate-600">Helpful whitepapers, reports and methodology notes.</p>
         </div>
@@ -29,6 +31,7 @@ export default function ResourcesPage() {
             </a>
           ))}
         </div>
+        </Reveal>
       </main>
       <BackToTopButton />
       <Footer />

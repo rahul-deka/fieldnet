@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { fetchPostBySlug, fetchPosts } from '@/lib/sanity'
 import PortableTextRenderer from '@/lib/portableTextRenderer'
 import { format } from 'date-fns'
+import Reveal from '@/components/reveal'
 
 export async function generateStaticParams() {
   const posts = await fetchPosts()
@@ -45,6 +46,7 @@ export default async function PostPage({ params }: Props) {
       <Navigation />
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-6 py-20">
+          <Reveal>
           <article>
             <div className="mb-6">
               <a href="/blog" className="inline-flex items-center text-sm text-cyan-600">
@@ -80,6 +82,7 @@ export default async function PostPage({ params }: Props) {
               )}
             </div>
           </article>
+          </Reveal>
         </div>
       </main>
       {/* CTA: Ready to Collaborate (same style as What We Do) */}
