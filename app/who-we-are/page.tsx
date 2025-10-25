@@ -33,6 +33,43 @@ export default function WhoWeArePage() {
     }
   }, [])
 
+  // Clients list and active cycling animation
+  const clients = [
+    { name: 'Forrester', logo: 'forrester.png' },
+    { name: 'Bisleri', logo: 'bisleri.png' },
+    { name: 'Coca-Cola', logo: 'coca-cola.png' },
+    { name: 'Emami', logo: 'emami.png' },
+    { name: 'Epigamia', logo: 'epigamia.png' },
+    { name: 'Visa', logo: 'visa.png' },
+    { name: 'Frost & Sullivan', logo: 'frostandsullivan.png' },
+    { name: 'Genpact', logo: 'genpact.png' },
+    { name: 'Godrej', logo: 'godrej.png' },
+    { name: 'Haier', logo: 'haier.png' },
+    { name: 'LG', logo: 'lg.png' },
+    { name: 'Hersheys', logo: 'hersheys.png' },
+    { name: 'ITC', logo: 'itc.png' },
+    { name: 'HDFC', logo: 'hdfc.png' },
+    { name: 'McDonalds', logo: 'mcd.png' },
+    { name: 'Mother Dairy', logo: 'motherdairy.png' },
+    { name: 'Nielsen', logo: 'nielsen.png' },
+    { name: 'NPCI', logo: 'npci.png' },
+    { name: 'P&G', logo: 'p&g.png' },
+    { name: 'Pepsi', logo: 'pepsi.png' },
+    { name: 'Saffola', logo: 'saffola.png' },
+    { name: 'Unilever', logo: 'unilever.png' },
+    { name: 'Ayush', logo: 'ayush.png' },
+    { name: 'ZMedia', logo: 'zmedia.png' },
+  ];
+
+  const [activeClient, setActiveClient] = React.useState(0);
+  React.useEffect(() => {
+    if (clients.length === 0) return;
+    const interval = setInterval(() => {
+      setActiveClient((i) => (i + 1) % clients.length);
+    }, 900); // change active logo every 900ms
+    return () => clearInterval(interval);
+  }, [clients.length]);
+
   return (
     <>
       <Navigation />
@@ -491,32 +528,7 @@ export default function WhoWeArePage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
-            {[
-              { name: 'Forrester', logo: 'forrester.png' },
-              { name: 'Bisleri', logo: 'bisleri.png' },
-              { name: 'Coca-Cola', logo: 'coca-cola.png' },
-              { name: 'Emami', logo: 'emami.png' },
-              { name: 'Epigamia', logo: 'epigamia.png' },
-              { name: 'Visa', logo: 'visa.png' },
-              { name: 'Frost & Sullivan', logo: 'frostandsullivan.png' },
-              { name: 'Genpact', logo: 'genpact.png' },
-              { name: 'Godrej', logo: 'godrej.png' },
-              { name: 'Haier', logo: 'haier.png' },
-              { name: 'LG', logo: 'lg.png' },
-              { name: 'Hersheys', logo: 'hersheys.png' },
-              { name: 'ITC', logo: 'itc.png' },
-              { name: 'HDFC', logo: 'hdfc.png' },
-              { name: 'McDonalds', logo: 'mcd.png' },
-              { name: 'Mother Dairy', logo: 'motherdairy.png' },
-              { name: 'Nielsen', logo: 'nielsen.png' },
-              { name: 'NPCI', logo: 'npci.png' },
-              { name: 'P&G', logo: 'p&g.png' },
-              { name: 'Pepsi', logo: 'pepsi.png' },
-              { name: 'Saffola', logo: 'saffola.png' },
-              { name: 'Unilever', logo: 'unilever.png' },
-              { name: 'Ayush', logo: 'ayush.png' },
-              { name: 'ZMedia', logo: 'zmedia.png' },
-            ].map((client) => (
+            {clients.map((client, index) => (
               <div
                 key={client.name}
                 className="flex items-center justify-center w-full h-24"
@@ -524,7 +536,9 @@ export default function WhoWeArePage() {
                 <img
                   src={`/clients/${client.logo}`}
                   alt={client.name}
-                  className="max-h-16 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  className={`max-h-16 w-auto object-contain transform transition-all duration-500 ${
+                    index === activeClient ? 'grayscale-0' : 'grayscale'
+                  } hover:grayscale-0`}
                 />
               </div>
             ))}
