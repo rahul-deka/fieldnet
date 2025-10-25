@@ -10,7 +10,7 @@ export default function DifferentiatorsSection() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
-            Why Choose Fieldnet
+            Why Choose FieldNet
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">Our Differentiators</h2>
           <p className="text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">

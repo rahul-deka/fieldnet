@@ -40,7 +40,7 @@ export function Footer() {
     <div className="space-y-8 md:col-span-2">
             <div className="flex items-center space-x-2">
               <LogoBlackSVG className="h-6 w-6" />
-              <span className="text-xl font-bold text-card-foreground">Fieldnet Global Research</span>
+              <span className="text-xl font-bold text-card-foreground">FieldNet Global Research</span>
             </div>
             <p className="text-sm leading-6 text-muted-foreground">
               Full service Market Research agency providing services to clients from across the globe. Established in
@@ -139,7 +139,7 @@ export function Footer() {
               <NewsletterSubscribe showTitle={false} compact />
             </div>
             <p className="text-xs leading-5 text-muted-foreground">
-              &copy; 2005 - Present | Fieldnet Global Research LLP.
+            &copy; 2005 - Present | FieldNet Global Research LLP.
               <span className="block md:inline text-center"> All rights reserved.</span>
             </p>
           </div>

@@ -10,7 +10,7 @@ import { AnnouncementBannerSkeleton } from "@/components/announcement-banner-ske
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Fieldnet Global Research",
+  title: "FieldNet Global Research",
   description:
     "Full-service market research agency providing exceptional quality services to clients across the globe. Established 2005 with 150+ years collective experience.",
 }

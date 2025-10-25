@@ -13,7 +13,7 @@ export default async function BlogPage() {
       <main className="min-h-screen bg-white">
         <div className="max-w-6xl mx-auto px-6 py-20">
           <header className="mb-12 text-center">
-            <h1 className="text-4xl font-extrabold mb-2">Fieldnet Blog</h1>
+            <h1 className="text-4xl font-extrabold mb-2">FieldNet Blog</h1>
             <p className="text-lg text-muted-foreground">Insights, updates and case studies from our global team.</p>
           </header>
 

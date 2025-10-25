@@ -66,14 +66,14 @@ export function Navigation() {
 
   const LogoText = () => (
     <Link href="/" className="-m-1.5 p-1.5 group">
-      <span className="sr-only">Fieldnet Global Research</span>
+      <span className="sr-only">FieldNet Global Research</span>
       <div className="flex items-center space-x-3">
         <div className="relative">
           <LogoSVG className="h-10 w-10 text-cyan-600 group-hover:text-cyan-700 transition-colors" />
         </div>
         <div>
           <span className="text-xl font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">
-            Fieldnet Global Research
+            FieldNet Global Research
           </span>
           <div className="text-xs text-slate-500 font-medium">Market Research Excellence</div>
         </div>

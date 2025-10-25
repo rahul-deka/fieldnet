@@ -64,7 +64,7 @@ export default function HeroSection() {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
                 src="/modern-office-team-analyzing-data-charts-professio.jpg"
-                alt="Fieldnet team analyzing market research data"
+                alt="FieldNet team analyzing market research data"
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>

@@ -42,12 +42,12 @@ export default function WhoWeArePage() {
           <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
-                <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">About Fieldnet</Badge>
+                <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">About FieldNet</Badge>
                 <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                   Who We Are
                 </h1>
                 <p className="mt-4 text-pretty text-lg leading-relaxed text-slate-600">
-                  Fieldnet Global Research LLP is a full‑service market research agency, formed in December 2005. We bring
+                  FieldNet Global Research LLP is a full‑service market research agency, formed in December 2005. We bring
                   a unique blend of client‑side and agency‑side expertise to deliver integrated, insightful research
                   across sectors and geographies.
                 </p>
@@ -295,8 +295,8 @@ export default function WhoWeArePage() {
           </div>
         </section>
 
-        {/* Leadership & Advisors */}
-        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+  {/* Leadership & Advisors */}
+  <section id="team" className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Leadership & Advisors</h2>
             <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100 w-fit">
@@ -397,14 +397,14 @@ export default function WhoWeArePage() {
                 {[
                   {
                     year: '2005', title: 'Humble Beginnings', bullets: [
-                      'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established Fieldnet as a proprietary company.',
+                      'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established FieldNet as a proprietary company.',
                       'Employee Strength: 2 dedicated employees.',
                       'Focus: Initially focused on small-scale market research projects.',
                     ]
                   },
                   {
                     year: '2015', title: 'The Transformation', bullets: [
-                      'From Proprietor to LLP: Fieldnet transitioned from a proprietary firm to a Limited Liability Partnership (LLP).',
+                      'From Proprietor to LLP: FieldNet transitioned from a proprietary firm to a Limited Liability Partnership (LLP).',
                       'Employee Strength: 40 in-house employees and a field force of 100.',
                       'Reach: Expanded operations across Pan India.',
                       'Services: Introduced CATI (Computer Assisted Telephone Interviewing), CAPI (Computer Assisted Personal Interviewing), and Software Development services.',
@@ -420,7 +420,7 @@ export default function WhoWeArePage() {
                   },
                   {
                     year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
-                      'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to Fieldnet.',
+                      'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to FieldNet.',
                       'Focus: Continued innovation in software development and technology integration, laying the foundation for future growth.',
                       'Geographic Expansion: Further strengthened its presence in APAC and MENA regions.',
                     ]
@@ -430,7 +430,7 @@ export default function WhoWeArePage() {
                       'Employee Strength: 30+ in-house professionals and a field force of over 600.',
                       'Location: Pan-India operations with a strong foothold in global markets.',
                       'Service Expertise: Specializing in market research, software development, and delivering cutting-edge solutions to clients across various industries.',
-                      'Vision: Fieldnet continues to innovate under its dynamic leadership, solidifying its place as a trusted partner for research and insights across India and beyond.',
+                      'Vision: FieldNet continues to innovate under its dynamic leadership, solidifying its place as a trusted partner for research and insights across India and beyond.',
                     ]
                   },
                 ].map((m) => (
