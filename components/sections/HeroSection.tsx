@@ -23,8 +23,7 @@ export default function HeroSection() {
               </span>
             </h1>
             <p className="mt-8 text-xl leading-relaxed text-muted-foreground text-pretty max-w-2xl">
-              Full-service market research agency providing exceptional quality and maximum value to clients across
-              the globe. From new product testing to large-scale audits and polls.
+              FieldNet Global Research powers growth with always-on intelligence - connecting research, retail and ROI.
             </p>
             <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Button

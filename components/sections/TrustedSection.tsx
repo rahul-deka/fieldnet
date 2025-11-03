@@ -5,11 +5,13 @@ import { Clock, Users, Target, Globe } from "lucide-react";
 
 const ANIMATION_DURATION = 2500; // ms
 const stats = [
-  { label: "Consumer Interactions", value: 5, suffix: " Million+", icon: Users, color: "text-green-600" },
+  { label: "Consumer Interactions", value: 5, suffix: " M+", icon: Users, color: "text-green-600" },
   { label: "Towns, Cities & Rural Centers Covered", value: 1000, suffix: "+", icon: Clock, color: "text-cyan-600" },
   { label: "Clients Across the Globe", value: 300, suffix: "+", icon: Target, color: "text-amber-600" },
   // This entry is a textual value (not numeric). We'll render it directly without animation.
   { label: "Projects Done", value: '1000', suffix: "+", icon: Globe, color: "text-purple-600" },
+  // New stat: show client impact (fits numeric animation)
+  { label: "Client Impact", value: 250, suffix: " Cr+", icon: Globe, color: "text-rose-600" },
 ];
 
 export default function TrustedSection() {
@@ -85,19 +87,31 @@ export default function TrustedSection() {
             Our track record speaks for itself across industries and continents
           </p>
         </div>
-  <div className="relative grid grid-cols-2 lg:grid-cols-4 border border-slate-200 bg-white">
+  <div className="relative grid grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
           {stats.map((stat, index) => {
-            // For 2x2 grid on small screens: add right border except for last in row, and bottom border except for last row
-            const isLastCol = (index + 1) % 2 === 0;
-            const isLastRow = index >= 2;
+            // Small screens use 2 columns; large screens use 5 columns (single row).
+            const colsSmall = 2;
+            const total = stats.length;
+            const lastRowStartIndex = Math.floor((total - 1) / colsSmall) * colsSmall;
+            const isInLastRow = index >= lastRowStartIndex;
+            const colIndex = index % colsSmall;
+
+            // If the last row contains a single item (total % colsSmall === 1),
+            // make that final item span both small-screen columns so it fills the row.
+            const spanTwo = index === total - 1 && total % colsSmall === 1;
+
+            // For border logic on small screens, avoid right-border when an item spans two columns.
+            const showRight = !spanTwo && colIndex < colsSmall - 1; // small-screen right border
+            const showBottom = !isInLastRow; // small-screen bottom border
+
             return (
               <div
                 key={index}
-                className={`relative h-full
-                  ${!isLastCol ? 'border-r border-slate-200' : ''}
-                  ${!isLastRow ? 'border-b border-slate-200' : ''}
-                  lg:border-0'
-                }`}
+                className={`relative h-full ${spanTwo ? 'col-span-2 lg:col-span-1' : ''}
+                  ${showRight ? 'border-r border-slate-200' : ''}
+                  ${showBottom ? 'border-b border-slate-200' : ''}
+                  lg:border-0
+                `}
               >
                 {/* Vertical divider for large screens */}
                 {index !== stats.length - 1 && (
