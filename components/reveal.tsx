@@ -20,11 +20,29 @@ export default function Reveal({
   delay = 0,
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null)
-  const [visible, setVisible] = useState(false)
+  // Start with true on mobile to avoid hidden content issue
+  const [visible, setVisible] = useState(true)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // Quick viewport check fallback: some mobile browsers/layouts delay IntersectionObserver callbacks
+    // until a user interaction or reflow. If the element is already within the viewport on mount,
+    // show it immediately so content isn't hidden until the user clicks something.
+    const isInViewport = (node: Element) => {
+      const rect = node.getBoundingClientRect()
+      return rect.top < (window.innerHeight || document.documentElement.clientHeight) && rect.bottom > 0
+    }
+
+    if (isInViewport(el)) {
+      if (delay > 0) {
+        const t = setTimeout(() => setVisible(true), delay)
+        if (once) return () => clearTimeout(t)
+      } else {
+        setVisible(true)
+        if (once) return
+      }
+    }
 
     const obs = new IntersectionObserver(
       (entries) => {
