@@ -71,7 +71,7 @@ export default function ClientsPage() {
                   {logos.map((logo, idx) => (
                     <div key={idx} className="flex items-center justify-center p-4 bg-white/0 rounded">
                       <img
-                        src={`/resources/${cat.folder}/${logo}`}
+                        src={`/resources/${encodeURIComponent(cat.folder)}/${encodeURIComponent(logo)}`}
                         alt={logo.replace(/\.(jpg|png)$/i, '')}
                         className="max-h-20 w-auto object-contain md:grayscale md:hover:grayscale-0 transition-all duration-300"
                       />
