@@ -49,16 +49,17 @@ export default function HomePage() {
       </Reveal>
 
       <Reveal>
+        <TestimonialsSection />
+      </Reveal>
+
+      <Reveal>
         <CTASection />
       </Reveal>
 
       <Reveal>
         <FAQSection />
       </Reveal>
-
-      <Reveal>
-        <TestimonialsSection />
-      </Reveal>
+      
       <BackToTopButton />
       <Footer />
     </div>
