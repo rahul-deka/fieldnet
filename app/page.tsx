@@ -8,6 +8,7 @@ import ExpertiseSection from "@/components/sections/ExpertiseSection"
 import DifferentiatorsSection from "@/components/sections/DifferentiatorsSection"
 import CTASection from "@/components/sections/CTASection"
 import FAQSection from "@/components/sections/FAQSection"
+import TestimonialsSection from "@/components/sections/TestimonialsSection"
 import { useEffect, useRef } from "react"
 import BackToTopButton from "@/components/back-to-top";
 import { displayAsciiArt } from "@/components/asciiArt";
@@ -53,6 +54,10 @@ export default function HomePage() {
 
       <Reveal>
         <FAQSection />
+      </Reveal>
+
+      <Reveal>
+        <TestimonialsSection />
       </Reveal>
       <BackToTopButton />
       <Footer />
