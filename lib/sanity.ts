@@ -14,6 +14,21 @@ export type Post = {
   }
 }
 
+export type Resource = {
+  _id: string
+  title: string
+  description: string
+  category: string
+  publishedAt?: string
+  featured?: boolean
+  pdfFile?: {
+    asset?: {
+      url?: string
+      _id?: string
+    }
+  }
+}
+
 export async function fetchPosts(): Promise<Post[]> {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
@@ -51,4 +66,38 @@ export async function fetchPostBySlug(slug: string): Promise<Post | null> {
 
   const json = await res.json()
   return json.result || null
+}
+
+export async function fetchResources(): Promise<Resource[]> {
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+
+  if (!projectId) {
+    return []
+  }
+
+  const groq = `*[_type == "resource"]{
+    _id, 
+    title, 
+    description, 
+    category, 
+    publishedAt, 
+    featured,
+    pdfFile{
+      asset->{
+        _id,
+        url
+      }
+    }
+  }|order(publishedAt desc)`
+  
+  const url = `https://${projectId}.api.sanity.io/v2023-10-21/data/query/${dataset}?query=${encodeURIComponent(groq)}`
+
+  const res = await fetch(url, { next: { revalidate: 60 } })
+  if (!res.ok) {
+    throw new Error(`Failed to fetch Sanity resources: ${res.status} ${res.statusText}`)
+  }
+
+  const json = await res.json()
+  return json.result || []
 }
