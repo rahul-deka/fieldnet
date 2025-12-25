@@ -15,6 +15,8 @@ function doPost(e) {
       return handleNewsletterSubscription(data);
     } else if (action === 'panel_registration') {
       return handlePanelRegistration(data);
+    } else if (action === 'resource_viewer') {
+      return handleResourceViewer(data);
     } else {
       return handleContactSubmission(data);
     }
@@ -235,6 +237,31 @@ function handlePanelRegistration(data) {
   } catch (e) {
     Logger.log('sendPanelRegistrationNotification error: ' + e.toString());
   }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'success' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+/* -----------------------
+   Resource Viewer handler
+   ----------------------- */
+
+function handleResourceViewer(data) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = 'Resource Viewer';
+  var sheet = spreadsheet.getSheetByName(sheetName);
+
+  // Create sheet if it doesn't exist
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(sheetName);
+    sheet.appendRow(['Timestamp', 'Email']);
+  }
+
+  sheet.appendRow([
+    data.timestamp || new Date().toLocaleString(),
+    data.email || ''
+  ]);
 
   return ContentService
     .createTextOutput(JSON.stringify({ status: 'success' }))
