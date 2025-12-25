@@ -97,7 +97,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
                               onClick={(e) =>
                                 handlePdfClick(e, resource.pdfFile.asset.url)
                               }
-                              className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium"
+                              className="inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-medium"
                             >
                               <Eye className="w-4 h-4" />
                               <span>View PDF</span>
