@@ -1,23 +1,44 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function PDFViewerPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const pdfUrl = searchParams.get("url");
   const [error, setError] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Detect mobile device
+    const checkMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
+    
+    setIsMobile(checkMobile());
+
     if (!pdfUrl) {
       setError(true);
+    } else if (checkMobile()) {
+      // On mobile, redirect directly to the PDF URL to use native viewer
+      window.location.href = pdfUrl;
     }
   }, [pdfUrl]);
 
   const handleClose = () => {
-    window.close();
+    if (isMobile) {
+      // On mobile, try to go back in history
+      if (window.history.length > 1) {
+        router.back();
+      } else {
+        router.push('/resources');
+      }
+    } else {
+      window.close();
+    }
   };
 
   if (error || !pdfUrl) {
@@ -29,6 +50,18 @@ export default function PDFViewerPage() {
           <Button onClick={handleClose} variant="outline">
             Close Window
           </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // On mobile, show loading message while redirecting
+  if (isMobile) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-600 mx-auto mb-4"></div>
+          <p className="text-slate-600">Opening PDF...</p>
         </div>
       </div>
     );
