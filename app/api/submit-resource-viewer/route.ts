@@ -15,14 +15,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Configuration error" }, { status: 500 });
     }
 
-    // Format timestamp as dd/mm/yyyy - hh:mm
+    // Format timestamp in Indian timezone
     const now = new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const formattedTimestamp = `${day}/${month}/${year} - ${hours}:${minutes}`;
+    const formatter = new Intl.DateTimeFormat('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+    
+    const parts = formatter.formatToParts(now);
+    const day = parts.find(p => p.type === 'day')?.value;
+    const month = parts.find(p => p.type === 'month')?.value;
+    const year = parts.find(p => p.type === 'year')?.value;
+    const hour = parts.find(p => p.type === 'hour')?.value;
+    const minute = parts.find(p => p.type === 'minute')?.value;
+    const formattedTimestamp = `${day}/${month}/${year} - ${hour}:${minute}`;
 
     const payload = {
       action: "resource_viewer",
