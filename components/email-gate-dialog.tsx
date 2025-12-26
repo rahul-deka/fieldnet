@@ -52,8 +52,8 @@ export function EmailGateDialog({
         throw new Error("Failed to submit email");
       }
 
-      // Store email in sessionStorage to remember for this session
-      sessionStorage.setItem("resourceViewerEmail", email);
+      // Store email in localStorage to remember across sessions
+      localStorage.setItem("resourceViewerEmail", email);
       
       // Call the callback to allow PDF viewing
       onEmailSubmit(email);

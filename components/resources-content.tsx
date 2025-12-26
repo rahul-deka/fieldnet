@@ -14,9 +14,9 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
   const [showEmailDialog, setShowEmailDialog] = useState(false);
   const [pendingPdfUrl, setPendingPdfUrl] = useState<string | null>(null);
 
-  // Check if email was already submitted in this session
+  // Check if email was already submitted (persists across sessions)
   useEffect(() => {
-    const savedEmail = sessionStorage.getItem("resourceViewerEmail");
+    const savedEmail = localStorage.getItem("resourceViewerEmail");
     if (savedEmail) {
       setIsEmailVerified(true);
     }
