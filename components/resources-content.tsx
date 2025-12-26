@@ -41,19 +41,23 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
   };
 
   const handlePdfClick = (e: React.MouseEvent<HTMLAnchorElement>, pdfUrl: string) => {
+    e.preventDefault();
     if (!isEmailVerified) {
-      e.preventDefault();
       setPendingPdfUrl(pdfUrl);
       setShowEmailDialog(true);
+    } else {
+      // Open PDF in custom viewer
+      const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pdfUrl)}`;
+      window.open(viewerUrl, "_blank", "noopener,noreferrer");
     }
-    // If email is verified, allow normal link behavior
   };
 
   const handleEmailSubmit = (email: string) => {
     setIsEmailVerified(true);
-    // Open the pending PDF in a new tab
+    // Open the pending PDF in custom viewer
     if (pendingPdfUrl) {
-      window.open(pendingPdfUrl, "_blank");
+      const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pendingPdfUrl)}`;
+      window.open(viewerUrl, "_blank", "noopener,noreferrer");
       setPendingPdfUrl(null);
     }
   };
@@ -91,9 +95,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
                         <div className="flex items-center justify-between">
                           {resource.pdfFile?.asset?.url && (
                             <a
-                              href={resource.pdfFile.asset.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
+                              href="#"
                               onClick={(e) =>
                                 handlePdfClick(e, resource.pdfFile.asset.url)
                               }
