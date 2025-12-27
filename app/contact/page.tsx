@@ -603,14 +603,14 @@ export default function ContactPage() {
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#EF4444', borderColor: '#EF4444' }} title="Mumbai Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Delhi Office</div>
-                  {/* <div className="text-sm text-gray-500">456 Connaught Place, New Delhi, DL</div> */}
+                  <div className="text-sm text-gray-500">Innov8 - 3rd Floor, Property No. 44, Regal Building, above Madame Tussauds, Connaught Place, New Delhi, Delhi 110001</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#3B82F6', borderColor: '#3B82F6' }} title="Delhi Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Mumbai Office</div>
-                  {/* <div className="text-sm text-gray-500">123 Marine Drive, Mumbai, MH</div> */}
+                  <div className="text-sm text-gray-500">F-220, First Floor, The Dreams Mall, Station Road, Bhandup (West, near Bhandup Railway Station, Mumbai, Maharashtra 400078</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
@@ -631,7 +631,7 @@ export default function ContactPage() {
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#14B8A6', borderColor: '#14B8A6' }} title="Chennai Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Bangaluru Office</div>
-                  {/* <div className="text-sm text-gray-500">789 MG Road, Bangalore, KA</div> */}
+                  <div className="text-sm text-gray-500">BHIVE Premium Whitefield Campus Jbr Tech Park, Plot No. 77, 6th Rd, EPIP Zone, Whitefield, Bengaluru, Karnataka 560066</div>
                 </div>
               </div>
               <div className="flex items-center gap-3 p-4">
