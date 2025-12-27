@@ -613,20 +613,20 @@ export default function ContactPage() {
                   <div className="text-sm text-gray-500">F-220, First Floor, The Dreams Mall, Station Road, Bhandup (West, near Bhandup Railway Station, Mumbai, Maharashtra 400078</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4">
+              {/* <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#22C55E', borderColor: '#22C55E' }} title="Bangalore Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Kolkata Office</div>
-                  {/* <div className="text-sm text-gray-500">654 Park Street, Kolkata, WB</div> */}
+                  <div className="text-sm text-gray-500">654 Park Street, Kolkata, WB</div>
                 </div>
-              </div>
-              <div className="flex items-center gap-3 p-4">
+              </div> */}
+              {/* <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#F59E42', borderColor: '#F59E42' }} title="Hyderabad Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Hyderabad Office</div>
-                  {/* <div className="text-sm text-gray-500">321 Banjara Hills, Hyderabad, TS</div> */}
+                  <div className="text-sm text-gray-500">321 Banjara Hills, Hyderabad, TS</div>
                 </div>
-              </div>
+              </div> */}
               <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#14B8A6', borderColor: '#14B8A6' }} title="Chennai Office" />
                 <div>
@@ -634,13 +634,13 @@ export default function ContactPage() {
                   <div className="text-sm text-gray-500">BHIVE Premium Whitefield Campus Jbr Tech Park, Plot No. 77, 6th Rd, EPIP Zone, Whitefield, Bengaluru, Karnataka 560066</div>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4">
+              {/* <div className="flex items-center gap-3 p-4">
                 <span className="inline-block w-4 h-4 rounded-full border-2" style={{ backgroundColor: '#A855F7', borderColor: '#A855F7' }} title="Kolkata Office" />
                 <div>
                   <div className="font-semibold text-gray-800">Chennai Office</div>
-                  {/* <div className="text-sm text-gray-500">987 Anna Salai, Chennai, TN</div> */}
+                  <div className="text-sm text-gray-500">987 Anna Salai, Chennai, TN</div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
