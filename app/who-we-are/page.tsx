@@ -467,7 +467,7 @@ export default function WhoWeArePage() {
                     ]
                   },
                   {
-                    year: '2019', title: 'Leadership Transition — Scaling New Heights', bullets: [
+                    year: '2019', title: 'Leadership Transition - Scaling New Heights', bullets: [
                       'Pooja Takes Over: Pooja Shukla, one of India\'s youngest CEOs, took over leadership, bringing a fresh vision to FieldNet.',
                       'Focus: Continued innovation in software development and technology integration, laying the foundation for future growth.',
                       'Geographic Expansion: Further strengthened its presence in APAC and MENA regions.',

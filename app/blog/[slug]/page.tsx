@@ -7,6 +7,7 @@ import { fetchPostBySlug, fetchPosts } from '@/lib/sanity'
 import PortableTextRenderer from '@/lib/portableTextRenderer'
 import { format } from 'date-fns'
 import Reveal from '@/components/reveal'
+import ShareButton from '@/components/blog/share-button'
 
 export async function generateStaticParams() {
   const posts = await fetchPosts()
@@ -81,6 +82,8 @@ export default async function PostPage({ params }: Props) {
                 <p className="text-muted-foreground">No content</p>
               )}
             </div>
+
+            <ShareButton title={post.title} url={`/blog/${slug}`} />
           </article>
           </Reveal>
         </div>
