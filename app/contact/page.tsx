@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Phone, MessageCircle, Mail, Calendar, ArrowLeft } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useSearchParams } from "next/navigation";
 
 import { Toaster } from "@/components/ui/toaster";
 import { MapSVG } from "@/components/map-svg";
@@ -19,6 +20,7 @@ import Reveal from "@/components/reveal";
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const searchParams = useSearchParams();
   const formRef = useRef<HTMLDivElement>(null);
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
@@ -47,6 +49,17 @@ export default function ContactPage() {
       fetchTimeSlots();
     }
   }, [showBookingForm]);
+
+  // Pre-fill message from URL parameter if present
+  useEffect(() => {
+    const messageParam = searchParams.get("message");
+    if (messageParam) {
+      setFormData((prev) => ({
+        ...prev,
+        message: decodeURIComponent(messageParam),
+      }));
+    }
+  }, [searchParams]);
 
   const fetchTimeSlots = async () => {
     setIsLoadingSlots(true);

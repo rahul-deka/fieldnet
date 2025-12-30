@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { FileText, Eye } from "lucide-react";
 import { EmailGateDialog } from "@/components/email-gate-dialog";
+import { PdfLimitDialog } from "@/components/pdf-limit-dialog";
 import { type Resource } from "@/lib/sanity";
 
 interface ResourcesContentProps {
@@ -12,15 +13,21 @@ interface ResourcesContentProps {
 export function ResourcesContent({ resources }: ResourcesContentProps) {
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [showEmailDialog, setShowEmailDialog] = useState(false);
+  const [showLimitDialog, setShowLimitDialog] = useState(false);
   const [pendingPdfUrl, setPendingPdfUrl] = useState<string | null>(null);
   const [pendingResourceTitle, setPendingResourceTitle] = useState<string | null>(null);
+  const [pdfViewCount, setPdfViewCount] = useState(0);
 
-  // Check if email was already submitted (persists across sessions)
+  // Check if email was already submitted and get PDF view count
   useEffect(() => {
     const savedEmail = localStorage.getItem("resourceViewerEmail");
     if (savedEmail) {
       setIsEmailVerified(true);
     }
+    
+    // Get current PDF view count
+    const viewCount = parseInt(localStorage.getItem("pdfViewCount") || "0", 10);
+    setPdfViewCount(viewCount);
   }, []);
 
   // Group resources by category
@@ -43,21 +50,38 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
 
   const handlePdfClick = (e: React.MouseEvent<HTMLAnchorElement>, pdfUrl: string, resourceTitle: string) => {
     e.preventDefault();
+    
     if (!isEmailVerified) {
       setPendingPdfUrl(pdfUrl);
       setPendingResourceTitle(resourceTitle);
       setShowEmailDialog(true);
-    } else {
-      // Open PDF in custom viewer
-      const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pdfUrl)}`;
-      window.open(viewerUrl, "_blank", "noopener,noreferrer");
+      return;
     }
+    
+    // Check if user has reached the 3 PDF limit
+    if (pdfViewCount >= 3) {
+      setShowLimitDialog(true);
+      return;
+    }
+    
+    // Increment PDF view count
+    const newCount = pdfViewCount + 1;
+    setPdfViewCount(newCount);
+    localStorage.setItem("pdfViewCount", newCount.toString());
+    
+    // Open PDF in custom viewer
+    const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pdfUrl)}`;
+    window.open(viewerUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleEmailSubmit = (email: string) => {
     setIsEmailVerified(true);
-    // Open the pending PDF in custom viewer
+    // Open the pending PDF in custom viewer and count it as first view
     if (pendingPdfUrl) {
+      const newCount = pdfViewCount + 1;
+      setPdfViewCount(newCount);
+      localStorage.setItem("pdfViewCount", newCount.toString());
+      
       const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pendingPdfUrl)}`;
       window.open(viewerUrl, "_blank", "noopener,noreferrer");
       setPendingPdfUrl(null);
@@ -124,6 +148,11 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
         onOpenChange={setShowEmailDialog}
         onEmailSubmit={handleEmailSubmit}
         resourceTitle={pendingResourceTitle}
+      />
+
+      <PdfLimitDialog
+        open={showLimitDialog}
+        onOpenChange={setShowLimitDialog}
       />
     </>
   );
