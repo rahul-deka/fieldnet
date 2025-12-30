@@ -17,12 +17,14 @@ interface EmailGateDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onEmailSubmit: (email: string) => void;
+  resourceTitle?: string | null;
 }
 
 export function EmailGateDialog({
   open,
   onOpenChange,
   onEmailSubmit,
+  resourceTitle,
 }: EmailGateDialogProps) {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +47,7 @@ export function EmailGateDialog({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, resourceTitle }),
       });
 
       if (!response.ok) {

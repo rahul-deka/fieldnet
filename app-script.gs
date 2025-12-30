@@ -255,12 +255,13 @@ function handleResourceViewer(data) {
   // Create sheet if it doesn't exist
   if (!sheet) {
     sheet = spreadsheet.insertSheet(sheetName);
-    sheet.appendRow(['Timestamp', 'Email']);
+    sheet.appendRow(['Timestamp', 'Email', 'Resource Title']);
   }
 
   sheet.appendRow([
     data.timestamp || new Date().toLocaleString(),
-    data.email || ''
+    data.email || '',
+    data.resourceTitle || 'N/A'
   ]);
 
   return ContentService

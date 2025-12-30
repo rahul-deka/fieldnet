@@ -13,6 +13,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [showEmailDialog, setShowEmailDialog] = useState(false);
   const [pendingPdfUrl, setPendingPdfUrl] = useState<string | null>(null);
+  const [pendingResourceTitle, setPendingResourceTitle] = useState<string | null>(null);
 
   // Check if email was already submitted (persists across sessions)
   useEffect(() => {
@@ -40,10 +41,11 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
     other: "Other Resources",
   };
 
-  const handlePdfClick = (e: React.MouseEvent<HTMLAnchorElement>, pdfUrl: string) => {
+  const handlePdfClick = (e: React.MouseEvent<HTMLAnchorElement>, pdfUrl: string, resourceTitle: string) => {
     e.preventDefault();
     if (!isEmailVerified) {
       setPendingPdfUrl(pdfUrl);
+      setPendingResourceTitle(resourceTitle);
       setShowEmailDialog(true);
     } else {
       // Open PDF in custom viewer
@@ -59,6 +61,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
       const viewerUrl = `/resources/viewer?url=${encodeURIComponent(pendingPdfUrl)}`;
       window.open(viewerUrl, "_blank", "noopener,noreferrer");
       setPendingPdfUrl(null);
+      setPendingResourceTitle(null);
     }
   };
 
@@ -97,7 +100,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
                             <a
                               href="#"
                               onClick={(e) =>
-                                handlePdfClick(e, resource.pdfFile.asset.url)
+                                handlePdfClick(e, resource.pdfFile.asset.url, resource.title)
                               }
                               className="inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-medium"
                             >
@@ -120,6 +123,7 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
         open={showEmailDialog}
         onOpenChange={setShowEmailDialog}
         onEmailSubmit={handleEmailSubmit}
+        resourceTitle={pendingResourceTitle}
       />
     </>
   );
