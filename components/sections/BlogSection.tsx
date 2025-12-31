@@ -61,8 +61,21 @@ export default function BlogSection() {
   }
 
   return (
-    <section className="py-20 sm:py-24 bg-white">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+      </div>
+
+      {/* Top fade from white for smooth transition */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+      {/* Bottom fade to white for smooth transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
           <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
             Insights & Updates
@@ -82,7 +95,7 @@ export default function BlogSection() {
               href={`/blog/${post.slug || post._id}`}
               className="block h-full"
             >
-              <Card className="group hover:shadow-xl transition-all duration-300 border-slate-200 overflow-hidden flex flex-col h-full bg-white cursor-pointer hover:border-cyan-400 pt-0">
+              <Card className="group hover:shadow-xl transition-all duration-300 border-slate-200 overflow-hidden flex flex-col h-full bg-white cursor-pointer hover:border-cyan-400 pt-0 pb-0">
                 <CardContent className="p-0 flex flex-col flex-grow">
                   {/* Image Section */}
                   <div className="relative w-full h-48 bg-gradient-to-br from-cyan-100 via-cyan-50 to-blue-100 overflow-hidden">

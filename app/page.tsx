@@ -9,6 +9,7 @@ import ExpertiseSection from "@/components/sections/ExpertiseSection"
 import DifferentiatorsSection from "@/components/sections/DifferentiatorsSection"
 import CaseStudiesSection from "@/components/sections/CaseStudiesSection"
 import BlogSection from "@/components/sections/BlogSection"
+import ResourcesSection from "@/components/sections/ResourcesSection"
 import CTASection from "@/components/sections/CTASection"
 import FAQSection from "@/components/sections/FAQSection"
 import TestimonialsSection from "@/components/sections/TestimonialsSection"
@@ -61,6 +62,10 @@ export default function HomePage() {
 
       <Reveal>
         <BlogSection />
+      </Reveal>
+
+      <Reveal>
+        <ResourcesSection />
       </Reveal>
 
       <Reveal>
