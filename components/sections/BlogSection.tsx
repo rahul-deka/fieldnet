@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { ArrowRight, Calendar } from "lucide-react"
+import { ArrowRight, Calendar, Newspaper } from "lucide-react"
 import { format } from "date-fns"
 import { useEffect, useState } from "react"
 
@@ -77,7 +77,8 @@ export default function BlogSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+          <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
+            <Newspaper className="w-3 h-3 mr-1" />
             Insights & Updates
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">
@@ -161,7 +162,8 @@ export default function BlogSection() {
             <Button
               asChild
               size="lg"
-              className="cursor-pointer bg-cyan-600 text-white hover:bg-cyan-700 group"
+              variant="outline"
+              className="cursor-pointer border-cyan-600 text-cyan-700 hover:bg-cyan-600 hover:text-white hover:border-cyan-700 group"
             >
               <span className="flex items-center gap-2">
                 See All Posts

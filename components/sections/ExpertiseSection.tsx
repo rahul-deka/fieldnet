@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Target, TrendingUp, CheckCircle, MapPin, Lightbulb } from "lucide-react"
+import { BarChart3, Target, TrendingUp, CheckCircle, MapPin, Lightbulb, Briefcase } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -22,7 +22,8 @@ export default function ExpertiseSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+          <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
+            <Briefcase className="w-3 h-3 mr-1" />
             Our Expertise
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">

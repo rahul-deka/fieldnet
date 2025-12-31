@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { Award, Shield, Globe, Zap } from "lucide-react"
+import { Award, Shield, Globe, Zap, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -22,7 +22,8 @@ export default function DifferentiatorsSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+          <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
+            <Star className="w-3 h-3 mr-1" />
             Why Choose FieldNet
           </Badge>
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">Our Differentiators</h2>

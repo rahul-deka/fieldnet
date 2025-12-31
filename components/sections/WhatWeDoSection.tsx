@@ -95,7 +95,7 @@ export default function WhatWeDoSection() {
       <div className="relative max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
+          <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
             <Sparkles className="w-3 h-3 mr-1" />
             What We Do
           </Badge>
