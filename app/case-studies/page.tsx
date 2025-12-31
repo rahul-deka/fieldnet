@@ -621,8 +621,9 @@ export default function CaseStudiesPage() {
             <div className="grid gap-8">
               {filteredStudies.map((study) => (
                 <Card
+                  id={`case-study-${study.id}`}
                   key={study.id}
-                  className="overflow-hidden border-2 border-slate-200 hover:border-cyan-400 hover:shadow-xl transition-all duration-300 p-0"
+                  className="overflow-hidden border-2 border-slate-200 hover:border-cyan-400 hover:shadow-xl transition-all duration-300 p-0 scroll-mt-24"
                 >
                   <div className="grid lg:grid-cols-12 gap-6 p-0">
                     {/* Left Column - Overview */}
