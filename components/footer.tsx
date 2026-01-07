@@ -10,6 +10,7 @@ const navigation = {
     { name: "Our Philosophy", href: "/who-we-are#philosophy" },
     { name: "Our Team", href: "/who-we-are#team" },
     { name: "Global Footprint", href: "/who-we-are#global-partnership" },
+    { name: "Clients", href: "/clients" },
   ],
   services: [
     { name: "Market Research Services", href: "/what-we-do#market-research-services" },

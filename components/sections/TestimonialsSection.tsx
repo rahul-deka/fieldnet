@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Quote, Star } from "lucide-react";
@@ -64,7 +65,7 @@ export default function TestimonialsSection() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-4">
-            What Our Clients Say
+            What Our <Link href="/clients" className="text-cyan-600 hover:text-cyan-700 underline decoration-2 underline-offset-4">Clients</Link> Say
           </h2>
           <p className="text-xl leading-8 text-slate-600 max-w-2xl mx-auto">
             Don't just take our word for it – hear from the leaders who've experienced the FieldNet difference
