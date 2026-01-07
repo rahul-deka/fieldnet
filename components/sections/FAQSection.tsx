@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 interface FAQ {
@@ -11,6 +11,29 @@ interface FAQ {
 export default function FAQSection() {
   const [faqs, setFaqs] = useState<FAQ[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     // Check cache first
@@ -45,12 +68,16 @@ export default function FAQSection() {
   }, []);
 
   return (
-    <section className="bg-white py-20 px-4 border-t border-cyan-100">
+    <section ref={sectionRef} className="bg-white py-20 px-4 border-t border-cyan-100">
       <div className="max-w-2xl mx-auto">
-        <h2 className="text-3xl font-bold text-cyan-800 mb-10 text-center">Frequently Asked Questions</h2>
+        <h2 className={`text-3xl font-bold text-cyan-800 mb-10 text-center transition-all duration-700 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>Frequently Asked Questions</h2>
         
         {isLoading ? (
-          <div className="rounded-xl shadow-lg bg-cyan-50/40 p-8">
+          <div className={`rounded-xl shadow-lg bg-cyan-50/40 p-8 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
             <div className="space-y-4">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="animate-pulse">
@@ -61,11 +88,15 @@ export default function FAQSection() {
             </div>
           </div>
         ) : faqs.length === 0 ? (
-          <div className="rounded-xl shadow-lg bg-cyan-50/40 p-8 text-center">
+          <div className={`rounded-xl shadow-lg bg-cyan-50/40 p-8 text-center transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
             <p className="text-cyan-700">No FAQs available at the moment. Please check back later.</p>
           </div>
         ) : (
-          <Accordion type="single" collapsible className="rounded-xl shadow-lg bg-cyan-50/40">
+          <Accordion type="single" collapsible className={`rounded-xl shadow-lg bg-cyan-50/40 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
             {faqs.map((faq, idx) => (
               <React.Fragment key={`faq-fragment-${idx}`}>
                 <AccordionItem value={`item-${idx}`} className="border-none">

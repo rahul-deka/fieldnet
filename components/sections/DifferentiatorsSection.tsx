@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Award, Shield, Globe, Zap, Star } from "lucide-react"
@@ -5,8 +8,31 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default function DifferentiatorsSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
   return (
-  <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+  <section ref={sectionRef} className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -22,16 +48,24 @@ export default function DifferentiatorsSection() {
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
         <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
+          <Badge variant="secondary" className={`mb-6 bg-cyan-100 text-cyan-800 border-cyan-200 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             <Star className="w-3 h-3 mr-1" />
             Why Choose FieldNet
           </Badge>
-          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">Our Differentiators</h2>
-          <p className="text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">
+          <h2 className={`text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6 transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>Our Differentiators</h2>
+          <p className={`text-xl leading-8 text-muted-foreground max-w-3xl mx-auto transition-all duration-700 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             What sets us apart in the competitive market research landscape
           </p>
         </div>
-  <div className="relative grid grid-cols-1 sm:grid-cols-2 border border-slate-200 bg-white">
+  <div className={`relative grid grid-cols-1 sm:grid-cols-2 border border-slate-200 bg-white transition-all duration-700 delay-300 ${
+    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+  }`}>
           {[
             {
               icon: Award,
@@ -87,7 +121,9 @@ export default function DifferentiatorsSection() {
             );
           })}
         </div>
-        <div className="flex justify-center mt-12">
+        <div className={`flex justify-center mt-12 transition-all duration-700 delay-500 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
           <Link href="/what-we-do" passHref legacyBehavior>
             <Button
               asChild

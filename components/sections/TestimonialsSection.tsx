@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
@@ -59,15 +59,43 @@ const testimonials = [
 ];
 
 export default function TestimonialsSection() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <section className="py-20 sm:py-24 bg-gradient-to-b from-white to-cyan-50/30">
+    <section ref={sectionRef} className="py-20 sm:py-24 bg-gradient-to-b from-white to-cyan-50/30">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-4">
+          <h2 className={`text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-4 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             What Our <Link href="/clients" className="text-cyan-600 hover:text-cyan-700 underline decoration-2 underline-offset-4">Clients</Link> Say
           </h2>
-          <p className="text-xl leading-8 text-slate-600 max-w-2xl mx-auto">
+          <p className={`text-xl leading-8 text-slate-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+          }`}>
             Don't just take our word for it – hear from the leaders who've experienced the FieldNet difference
           </p>
         </div>
@@ -85,7 +113,9 @@ export default function TestimonialsSection() {
             align: "start",
             loop: true,
           }}
-          className="w-full"
+          className={`w-full transition-all duration-700 delay-200 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
         >
           <CarouselContent className="-ml-4">
             {testimonials.map((testimonial, index) => (

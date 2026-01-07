@@ -51,7 +51,16 @@ const stats = [
 
 export default function WhatWeDoSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentWord, setCurrentWord] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+  
+  const rotatingWords = [
+    "Actionable Insights",
+    "Strategic Decisions",
+    "Growth Opportunities",
+    "Market Intelligence",
+    "Business Success"
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,6 +83,15 @@ export default function WhatWeDoSection() {
     };
   }, []);
 
+  useEffect(() => {
+    if (isVisible) {
+      const interval = setInterval(() => {
+        setCurrentWord((prev) => (prev + 1) % rotatingWords.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isVisible]);
+
   return (
     <section
       ref={sectionRef}
@@ -84,6 +102,24 @@ export default function WhatWeDoSection() {
         <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+        
+        {/* Floating particles */}
+        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400/40 rounded-full animate-float" />
+        <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-amber-400/40 rounded-full animate-float-delayed" />
+        <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-cyan-500/30 rounded-full animate-float-slow" />
+        <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-amber-500/30 rounded-full animate-float-delayed" />
+        <div className="absolute top-1/3 right-1/5 w-2 h-2 bg-cyan-400/35 rounded-full animate-float" />
+        <div className="absolute bottom-1/4 left-1/5 w-3 h-3 bg-amber-400/35 rounded-full animate-float-slow" />
+        <div className="absolute top-2/3 left-2/3 w-2 h-2 bg-cyan-500/40 rounded-full animate-float-delayed" />
+        <div className="absolute bottom-1/2 right-1/4 w-2 h-2 bg-amber-500/35 rounded-full animate-float" />
+        <div className="absolute top-1/5 left-3/4 w-2 h-2 bg-cyan-400/30 rounded-full animate-float-slow" />
+        <div className="absolute bottom-2/3 right-2/3 w-3 h-3 bg-amber-400/30 rounded-full animate-float-delayed" />
+        <div className="absolute top-3/5 left-1/6 w-2 h-2 bg-cyan-500/35 rounded-full animate-float" />
+        <div className="absolute bottom-1/5 right-1/6 w-2 h-2 bg-amber-500/40 rounded-full animate-float-slow" />
+        <div className="absolute top-2/5 right-3/4 w-2 h-2 bg-cyan-400/40 rounded-full animate-float-delayed" />
+        <div className="absolute bottom-3/5 left-3/5 w-3 h-3 bg-amber-400/35 rounded-full animate-float" />
+        <div className="absolute top-4/5 right-2/5 w-2 h-2 bg-cyan-500/30 rounded-full animate-float-slow" />
+        <div className="absolute bottom-2/5 left-2/5 w-2 h-2 bg-amber-500/35 rounded-full animate-float-delayed" />
       </div>
 
       {/* Top fade from white for smooth transition */}
@@ -105,8 +141,21 @@ export default function WhatWeDoSection() {
             }`}
           >
             Transforming Data into
-            <span className="block mt-2 text-cyan-700">
-              Actionable Insights
+            <span className="block mt-2 relative h-[1.2em] overflow-hidden">
+              {rotatingWords.map((word, index) => (
+                <span
+                  key={word}
+                  className={`absolute left-0 right-0 text-center transition-all duration-700 bg-gradient-to-r from-cyan-600 via-cyan-700 to-amber-600 bg-clip-text text-transparent ${
+                    index === currentWord
+                      ? "opacity-100 translate-y-0"
+                      : index < currentWord
+                      ? "opacity-0 -translate-y-full"
+                      : "opacity-0 translate-y-full"
+                  }`}
+                >
+                  {word}
+                </span>
+              ))}
             </span>
           </h2>
           <p
@@ -189,6 +238,51 @@ export default function WhatWeDoSection() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(-20px) translateX(10px);
+            opacity: 0.8;
+          }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.3;
+          }
+          50% {
+            transform: translateY(-30px) translateX(-10px);
+            opacity: 0.7;
+          }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0) translateX(0) scale(1);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(-25px) translateX(15px) scale(1.2);
+            opacity: 0.6;
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 7s ease-in-out infinite 1s;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite 2s;
         }
       `}</style>
     </section>
