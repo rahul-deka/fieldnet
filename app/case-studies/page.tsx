@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Link from "next/link"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Card } from "@/components/ui/card"
@@ -732,13 +733,17 @@ export default function CaseStudiesPage() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
-                Start a Project
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
-                View Our Services
-              </Button>
+              <Link href="/contact">
+                <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
+                  Start a Project
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+              <Link href="/what-we-do">
+                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 hover:text-white bg-transparent">
+                  View Our Services
+                </Button>
+              </Link>
             </div>
           </div>
           </section>

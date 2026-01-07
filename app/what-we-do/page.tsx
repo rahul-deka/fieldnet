@@ -442,7 +442,7 @@ export default function WhatWeDoPage() {
 
         {/* Market Research Services - Detailed */}
         <Reveal>
-          <section className="py-20  bg-white">
+          <section id="market-research-services" className="py-20  bg-white">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -526,7 +526,7 @@ export default function WhatWeDoPage() {
 
         {/* Market Research Solutions */}
         <Reveal>
-          <section className="py-20 bg-gradient-to-br from-slate-900 to-cyan-900">
+          <section id="market-research-solutions" className="py-20 bg-gradient-to-br from-slate-900 to-cyan-900">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-200 border-cyan-400 bg-white/10">
@@ -588,7 +588,7 @@ export default function WhatWeDoPage() {
 
         {/* Audits and Polls */}
         <Reveal>
-          <section className="py-20 bg-gradient-to-br from-cyan-50 to-amber-50">
+          <section id="audits-and-polls" className="py-20 bg-gradient-to-br from-cyan-50 to-amber-50">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-cyan-700 border-cyan-200">
@@ -661,7 +661,7 @@ export default function WhatWeDoPage() {
 
         {/* Support Services */}
         <Reveal>
-          <section className="py-20 bg-white">
+          <section id="market-research-support-services" className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-16">
               <Badge variant="outline" className="mb-4 text-amber-700 border-amber-200">

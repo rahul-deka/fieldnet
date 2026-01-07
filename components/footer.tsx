@@ -12,11 +12,10 @@ const navigation = {
     { name: "Global Footprint", href: "/who-we-are#global-partnership" },
   ],
   services: [
-    { name: "Market Research", href: "/services#market-research" },
-    { name: "Qualitative Research", href: "/services#qualitative" },
-    { name: "Quantitative Research", href: "/services#quantitative" },
-    { name: "Audits", href: "/services#audits" },
-    { name: "Polls", href: "/services#polls" },
+    { name: "Market Research Services", href: "/what-we-do#market-research-services" },
+    { name: "Market Research Solutions", href: "/what-we-do#market-research-solutions" },
+    { name: "Audits and Polls", href: "/what-we-do#audits-and-polls" },
+    { name: "Market Research Support Services", href: "/what-we-do#market-research-support-services" },
   ],
   Support: [
     { name: "Careers", href: "/careers" },
@@ -86,7 +85,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="text-sm font-semibold leading-6 text-card-foreground">Research Services</h3>
+              <h3 className="text-sm font-semibold leading-6 text-card-foreground">Services</h3>
               <ul role="list" className="mt-6 space-y-4">
                 {navigation.services.map((item) => (
                   <li key={item.name}>
