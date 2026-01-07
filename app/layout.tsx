@@ -15,7 +15,6 @@ export const metadata: Metadata = {
     "Full-service market research agency providing exceptional quality services to clients across the globe. Established 2005 with 150+ years collective experience.",
 }
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
