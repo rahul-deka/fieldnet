@@ -51,13 +51,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsStoryVisible(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: isMobile ? 0.3 : 0.5 }
     );
 
     if (storyRef.current) {
@@ -72,13 +73,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsPhilosophyVisible(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: isMobile ? 0.3 : 0.5 }
     );
 
     if (philosophyRef.current) {
@@ -93,13 +95,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsPartnershipVisible(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: isMobile ? 0.3 : 0.5 }
     );
 
     if (partnershipRef.current) {
@@ -114,13 +117,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsLeadershipVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: isMobile ? 0.1 : 0.3 }
     );
 
     if (leadershipRef.current) {
@@ -135,13 +139,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsTimelineVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: isMobile ? 0.1 : 0.3 }
     );
 
     if (timelineRef.current) {
@@ -156,13 +161,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsClientsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: isMobile ? 0.1 : 0.3 }
     );
 
     if (clientsRef.current) {
@@ -177,13 +183,14 @@ export default function WhoWeArePage() {
   }, []);
 
   useEffect(() => {
+    const isMobile = window.innerWidth < 768;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsCtaVisible(true);
         }
       },
-      { threshold: 0.5 }
+      { threshold: isMobile ? 0.3 : 0.5 }
     );
 
     if (ctaRef.current) {
@@ -730,8 +737,10 @@ export default function WhoWeArePage() {
 
           <div className={`mt-8 transition-all duration-700 delay-200 ${isTimelineVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="relative">
-              {/* continuous vertical line for timeline (desktop only) */}
+              {/* continuous vertical line for timeline - desktop */}
               <div className="hidden lg:block absolute left-[124px] top-0 bottom-0 w-px bg-slate-200 z-0" />
+              {/* continuous vertical line for timeline - mobile */}
+              <div className="lg:hidden absolute left-[18px] top-0 bottom-0 w-px bg-slate-200 z-0" />
               <div className="space-y-8">
                 {[
                   {
