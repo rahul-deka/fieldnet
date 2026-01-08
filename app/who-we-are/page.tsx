@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import { Badge } from "@/components/ui/badge";
@@ -12,6 +12,191 @@ import BackToTopButton from "@/components/back-to-top";
 import Reveal from "@/components/reveal";
 
 export default function WhoWeArePage() {
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const [isStoryVisible, setIsStoryVisible] = useState(false);
+  const storyRef = useRef<HTMLDivElement>(null);
+  const [isPhilosophyVisible, setIsPhilosophyVisible] = useState(false);
+  const philosophyRef = useRef<HTMLDivElement>(null);
+  const [isPartnershipVisible, setIsPartnershipVisible] = useState(false);
+  const partnershipRef = useRef<HTMLDivElement>(null);
+  const [isLeadershipVisible, setIsLeadershipVisible] = useState(false);
+  const leadershipRef = useRef<HTMLDivElement>(null);
+  const [isTimelineVisible, setIsTimelineVisible] = useState(false);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [isClientsVisible, setIsClientsVisible] = useState(false);
+  const clientsRef = useRef<HTMLDivElement>(null);
+  const [isCtaVisible, setIsCtaVisible] = useState(false);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsHeroVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => {
+      if (heroRef.current) {
+        observer.unobserve(heroRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsStoryVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (storyRef.current) {
+      observer.observe(storyRef.current);
+    }
+
+    return () => {
+      if (storyRef.current) {
+        observer.unobserve(storyRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsPhilosophyVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (philosophyRef.current) {
+      observer.observe(philosophyRef.current);
+    }
+
+    return () => {
+      if (philosophyRef.current) {
+        observer.unobserve(philosophyRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsPartnershipVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (partnershipRef.current) {
+      observer.observe(partnershipRef.current);
+    }
+
+    return () => {
+      if (partnershipRef.current) {
+        observer.unobserve(partnershipRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsLeadershipVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (leadershipRef.current) {
+      observer.observe(leadershipRef.current);
+    }
+
+    return () => {
+      if (leadershipRef.current) {
+        observer.unobserve(leadershipRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsTimelineVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (timelineRef.current) {
+      observer.observe(timelineRef.current);
+    }
+
+    return () => {
+      if (timelineRef.current) {
+        observer.unobserve(timelineRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsClientsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (clientsRef.current) {
+      observer.observe(clientsRef.current);
+    }
+
+    return () => {
+      if (clientsRef.current) {
+        observer.unobserve(clientsRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsCtaVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (ctaRef.current) {
+      observer.observe(ctaRef.current);
+    }
+
+    return () => {
+      if (ctaRef.current) {
+        observer.unobserve(ctaRef.current);
+      }
+    };
+  }, []);
+
   React.useEffect(() => {
     if (typeof window === "undefined") return
     const hash = window.location.hash
@@ -76,7 +261,7 @@ export default function WhoWeArePage() {
       <main className="min-h-screen">
         {/* Hero */}
         <Reveal>
-          <section className="relative bg-gradient-to-b from-cyan-50 to-white overflow-hidden">
+          <section ref={heroRef} className="relative bg-gradient-to-b from-cyan-50 to-white overflow-hidden lg:pt-24">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -115,7 +300,7 @@ export default function WhoWeArePage() {
           
           <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-              <div>
+              <div className={`transition-all duration-700 ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">
                   <Handshake className="w-3 h-3 mr-1" />
                   About FieldNet
@@ -140,9 +325,9 @@ export default function WhoWeArePage() {
                   </Badge>
                 </div>
               </div>
-              <div className="relative">
+              <div className={`relative transition-all duration-700 ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 {/* Gradient background */}
-                <div className="absolute inset-0 -inset-x-4 -inset-y-4 bg-gradient-to-br from-amber-200 via-orange-200 to-amber-300 rounded-lg blur-2xl opacity-70 -z-10"></div>
+                <div className="absolute inset-0 -inset-x-4 -inset-y-4 bg-gradient-to-br from-amber-150 via-orange-150 to-amber-250 rounded-lg blur-2xl opacity-40 -z-10"></div>
                 
                 <div className="relative grid grid-cols-1 sm:grid-cols-2 border border-slate-200 bg-white shadow-lg">
                 {[
@@ -197,13 +382,13 @@ export default function WhoWeArePage() {
         </Reveal>
 
         {/* Divider */}
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-16 sm:mt-20 lg:mt-24">
           <div className="border-t border-slate-200"></div>
         </div>
 
         {/* About Overview */}
         <Reveal>
-          <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          <section ref={storyRef} className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -219,7 +404,7 @@ export default function WhoWeArePage() {
 
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-7">
+            <div className={`lg:col-span-7 transition-all duration-700 ${isStoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Story</h2>
               <p className="mt-4 text-slate-600 leading-relaxed">
                 The company is led by passionate veterans from the Market Research industry. With a collective Market
@@ -233,7 +418,7 @@ export default function WhoWeArePage() {
                 management at highly competitive costs.
               </p>
             </div>
-            <div className="lg:col-span-5">
+            <div className={`lg:col-span-5 transition-all duration-700 ${isStoryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div className="border border-slate-200 bg-white h-full flex flex-col p-8 justify-start">
                 <div className="uppercase text-sm font-medium text-slate-500 mb-2">What Clients Gain</div>
                 <ul className="space-y-3 text-slate-600 pl-4 list-disc">
@@ -251,7 +436,7 @@ export default function WhoWeArePage() {
 
         {/* Philosophy */}
         <Reveal>
-          <section id="philosophy" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          <section ref={philosophyRef} id="philosophy" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -266,9 +451,9 @@ export default function WhoWeArePage() {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
-            <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery.</p>
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
+            <h2 className={`text-2xl font-bold tracking-tight text-slate-900 transition-all duration-700 ${isPhilosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>Our Philosophy</h2>
+            <p className={`mt-3 text-slate-600 transition-all duration-700 delay-100 ${isPhilosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>FieldNet bases its work philosophy on striking an optimal balance on 'five pillars of work' that foster trust, productivity and exceptional quality of service delivery.</p>
+            <div className={`mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white transition-all duration-700 delay-200 ${isPhilosophyVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               {[
                 {
                   icon: <Users2 className="h-6 w-6 text-cyan-700" />,
@@ -327,9 +512,9 @@ export default function WhoWeArePage() {
 
         {/* Global Partnership */}
         <Reveal>
-          <section id="global-partnership" className="py-14">
+          <section ref={partnershipRef} id="global-partnership" className="py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mb-12">
+            <div className={`mb-12 transition-all duration-700 ${isPartnershipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-4">
                 Global Partnership
               </h2>
@@ -338,7 +523,7 @@ export default function WhoWeArePage() {
               </p>
             </div>
 
-            <div className="relative">
+            <div className={`relative transition-all duration-700 delay-200 ${isPartnershipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               {/* Left fade overlay */}
               <div className="absolute left-0 top-0 bottom-0 w-12 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
 
@@ -417,7 +602,7 @@ export default function WhoWeArePage() {
 
   {/* Leadership & Advisors */}
   <Reveal>
-  <section id="team" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+  <section ref={leadershipRef} id="team" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -432,13 +617,13 @@ export default function WhoWeArePage() {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-all duration-700 ${isLeadershipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Leadership & Advisors</h2>
             <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100 w-fit">
               150+ years combined experience
             </Badge>
           </div>
-          <div className="mt-8 border border-slate-200 bg-white">
+          <div className={`mt-8 border border-slate-200 bg-white transition-all duration-700 delay-200 ${isLeadershipVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {/* First two cards in a separate row at the top */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 border-b border-slate-200 bg-white">
               {[
@@ -523,7 +708,7 @@ export default function WhoWeArePage() {
 
         {/* Us over the years (Timeline) */}
         <Reveal>
-          <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          <section ref={timelineRef} className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -538,10 +723,12 @@ export default function WhoWeArePage() {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className={`transition-all duration-700 ${isTimelineVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900">Us over the years</h2>
           <p className="mt-3 text-slate-600">A brief timeline showing key milestones in FieldNet's journey.</p>
+          </div>
 
-          <div className="mt-8">
+          <div className={`mt-8 transition-all duration-700 delay-200 ${isTimelineVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <div className="relative">
               {/* continuous vertical line for timeline (desktop only) */}
               <div className="hidden lg:block absolute left-[124px] top-0 bottom-0 w-px bg-slate-200 z-0" />
@@ -621,7 +808,7 @@ export default function WhoWeArePage() {
         </Reveal>
         {/* Previous Clients */}
         <Reveal>
-        <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+        <section ref={clientsRef} className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
           {/* Animated background elements */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
@@ -636,7 +823,7 @@ export default function WhoWeArePage() {
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
 
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className={`text-center mb-12 transition-all duration-700 ${isClientsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">
               Trusted by Fortune 500 Companies
             </h2>
@@ -645,7 +832,7 @@ export default function WhoWeArePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+          <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center transition-all duration-700 delay-200 ${isClientsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
             {clients.map((client, index) => (
               <div
                 key={client.name}
@@ -665,9 +852,9 @@ export default function WhoWeArePage() {
         </section>
         </Reveal>
 
-        <section className=" border-slate-200 bg-white py-14">
+        <section ref={ctaRef} className=" border-slate-200 bg-white py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="border border-cyan-700 bg-cyan-600 h-full flex flex-col md:flex-row p-8 items-start md:items-center md:justify-between gap-4">
+            <div className={`border border-cyan-700 bg-cyan-600 h-full flex flex-col md:flex-row p-8 items-start md:items-center md:justify-between gap-4 transition-all duration-700 ${isCtaVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div>
                 <div className="uppercase text-sm font-medium text-white mb-2">Ready to Collaborate?</div>
                 <h3 className="text-xl font-semibold text-white mb-1">Work with a seasoned global research team</h3>
