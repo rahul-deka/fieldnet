@@ -76,11 +76,50 @@ export default function WhoWeArePage() {
       <main className="min-h-screen">
         {/* Hero */}
         <Reveal>
-          <section className="relative border-b border-slate-200 bg-gradient-to-b from-cyan-50 to-white">
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+          <section className="relative bg-gradient-to-b from-cyan-50 to-white overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            
+            {/* Floating particles */}
+            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-400/40 rounded-full animate-float" />
+            <div className="absolute top-3/4 right-1/4 w-3 h-3 bg-amber-400/40 rounded-full animate-float-delayed" />
+            <div className="absolute bottom-1/3 left-1/3 w-2 h-2 bg-cyan-500/30 rounded-full animate-float-slow" />
+            <div className="absolute top-1/2 right-1/3 w-2 h-2 bg-amber-500/30 rounded-full animate-float-delayed" />
+            <div className="absolute top-1/3 right-1/5 w-2 h-2 bg-cyan-400/35 rounded-full animate-float" />
+            <div className="absolute bottom-1/4 left-1/5 w-3 h-3 bg-amber-400/35 rounded-full animate-float-slow" />
+            <div className="absolute top-2/3 left-2/3 w-2 h-2 bg-cyan-500/40 rounded-full animate-float-delayed" />
+            <div className="absolute bottom-1/2 right-1/4 w-2 h-2 bg-amber-500/35 rounded-full animate-float" />
+            <div className="absolute top-1/5 left-3/4 w-2 h-2 bg-cyan-400/30 rounded-full animate-float-slow" />
+            <div className="absolute bottom-2/3 right-2/3 w-3 h-3 bg-amber-400/30 rounded-full animate-float-delayed" />
+            <div className="absolute top-3/5 left-1/6 w-2 h-2 bg-cyan-500/35 rounded-full animate-float" />
+            <div className="absolute bottom-1/5 right-1/6 w-2 h-2 bg-amber-500/40 rounded-full animate-float-slow" />
+            <div className="absolute top-2/5 right-3/4 w-2 h-2 bg-cyan-400/40 rounded-full animate-float-delayed" />
+            <div className="absolute bottom-3/5 left-3/5 w-3 h-3 bg-amber-400/35 rounded-full animate-float" />
+            <div className="absolute top-4/5 right-2/5 w-2 h-2 bg-cyan-500/30 rounded-full animate-float-slow" />
+            <div className="absolute bottom-2/5 left-2/5 w-2 h-2 bg-amber-500/35 rounded-full animate-float-delayed" />
+            
+            {/* Additional particles focused on right side (stats area) */}
+            <div className="absolute top-1/6 right-1/5 w-2 h-2 bg-amber-400/45 rounded-full animate-float" />
+            <div className="absolute top-2/6 right-1/3 w-3 h-3 bg-orange-400/40 rounded-full animate-float-slow" />
+            <div className="absolute top-3/6 right-1/4 w-2 h-2 bg-amber-500/40 rounded-full animate-float-delayed" />
+            <div className="absolute top-4/6 right-2/5 w-2 h-2 bg-orange-500/35 rounded-full animate-float" />
+            <div className="absolute top-5/6 right-1/6 w-3 h-3 bg-amber-400/40 rounded-full animate-float-slow" />
+            <div className="absolute top-1/3 right-2/6 w-2 h-2 bg-orange-400/45 rounded-full animate-float-delayed" />
+            <div className="absolute top-2/3 right-3/5 w-2 h-2 bg-amber-500/40 rounded-full animate-float" />
+            <div className="absolute top-1/2 right-1/5 w-2 h-2 bg-orange-500/40 rounded-full animate-float-slow" />
+            <div className="absolute bottom-1/6 right-2/5 w-3 h-3 bg-amber-400/35 rounded-full animate-float-delayed" />
+            <div className="absolute bottom-2/6 right-1/4 w-2 h-2 bg-orange-400/40 rounded-full animate-float" />
+          </div>
+          
+          <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
               <div>
-                <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">About FieldNet</Badge>
+                <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100">
+                  <Handshake className="w-3 h-3 mr-1" />
+                  About FieldNet
+                </Badge>
           <h1 className="mt-4 text-balance text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
               Who We Are
           </h1>
@@ -101,7 +140,11 @@ export default function WhoWeArePage() {
                   </Badge>
                 </div>
               </div>
-              <div className="relative grid grid-cols-1 sm:grid-cols-2 border border-slate-200 bg-white">
+              <div className="relative">
+                {/* Gradient background */}
+                <div className="absolute inset-0 -inset-x-4 -inset-y-4 bg-gradient-to-br from-amber-200 via-orange-200 to-amber-300 rounded-lg blur-2xl opacity-70 -z-10"></div>
+                
+                <div className="relative grid grid-cols-1 sm:grid-cols-2 border border-slate-200 bg-white shadow-lg">
                 {[
                   {
                     icon: <Trophy className="h-8 w-8 text-amber-500" />,
@@ -147,16 +190,34 @@ export default function WhoWeArePage() {
                   );
                 })}
               </div>
+              </div>
             </div>
           </div>
           </section>
         </Reveal>
 
-        <BackToTopButton />
+        {/* Divider */}
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="border-t border-slate-200"></div>
+        </div>
 
         {/* About Overview */}
         <Reveal>
-          <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+          <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+          </div>
+
+          {/* Top fade from white for smooth transition */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+          {/* Bottom fade to white for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Story</h2>
@@ -184,13 +245,27 @@ export default function WhoWeArePage() {
               </div>
             </div>
           </div>
+          </div>
           </section>
         </Reveal>
 
         {/* Philosophy */}
         <Reveal>
-          <section id="philosophy" className="border-y border-slate-200 py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <section id="philosophy" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+          </div>
+
+          {/* Top fade from white for smooth transition */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+          {/* Bottom fade to white for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Our Philosophy</h2>
             <p className="mt-3 text-slate-600">FieldNet bases its work philosophy on striking an optimal balance on ‘five pillars of work’ that foster trust, productivity and exceptional quality of service delivery.</p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
@@ -342,7 +417,21 @@ export default function WhoWeArePage() {
 
   {/* Leadership & Advisors */}
   <Reveal>
-  <section id="team" className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+  <section id="team" className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+          </div>
+
+          {/* Top fade from white for smooth transition */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+          {/* Bottom fade to white for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h2 className="text-2xl font-bold tracking-tight text-slate-900">Leadership & Advisors</h2>
             <Badge className="bg-cyan-100 text-cyan-800 hover:bg-cyan-100 w-fit">
@@ -428,12 +517,27 @@ export default function WhoWeArePage() {
               })}
             </div>
           </div>
+          </div>
   </section>        
   </Reveal>
 
         {/* Us over the years (Timeline) */}
         <Reveal>
-          <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+          <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+          </div>
+
+          {/* Top fade from white for smooth transition */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+          {/* Bottom fade to white for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-slate-900">Us over the years</h2>
           <p className="mt-3 text-slate-600">A brief timeline showing key milestones in FieldNet's journey.</p>
 
@@ -494,8 +598,6 @@ export default function WhoWeArePage() {
                       <div className="relative z-10 mt-0">
                         <div className="w-4 h-4 rounded-full bg-rose-500 border border-white shadow-sm" />
                       </div>
-                      {/* short dashed connector to content */}
-                      <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-8 border-t-2 border-dashed border-slate-200" />
                     </div>
 
                     {/* Content column */}
@@ -514,10 +616,26 @@ export default function WhoWeArePage() {
               </div>
             </div>
           </div>
+          </div>
           </section>
         </Reveal>
         {/* Previous Clients */}
-        <section className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
+        <Reveal>
+        <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+          </div>
+
+          {/* Top fade from white for smooth transition */}
+          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/50 to-transparent pointer-events-none" />
+
+          {/* Bottom fade to white for smooth transition */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/50 to-transparent pointer-events-none" />
+
+          <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-4">
               Trusted by Fortune 500 Companies
@@ -543,7 +661,9 @@ export default function WhoWeArePage() {
               </div>
             ))}
           </div>
+          </div>
         </section>
+        </Reveal>
 
         <section className=" border-slate-200 bg-white py-14">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -565,7 +685,55 @@ export default function WhoWeArePage() {
           </div>
         </section>
       </main>
+      <BackToTopButton />
       <Footer />
+      
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(-20px) translateX(10px);
+            opacity: 0.8;
+          }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.3;
+          }
+          50% {
+            transform: translateY(-30px) translateX(-10px);
+            opacity: 0.7;
+          }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0) translateX(0) scale(1);
+            opacity: 0.4;
+          }
+          50% {
+            transform: translateY(-25px) translateX(15px) scale(1.2);
+            opacity: 0.6;
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 7s ease-in-out infinite 1s;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 8s ease-in-out infinite 2s;
+        }
+      `}</style>
     </>
   );
 }
