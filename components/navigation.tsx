@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, LogIn, CircleUser } from "lucide-react"
 import LogoSVG from "@/components/ui/LogoSVG"
@@ -67,17 +68,23 @@ export function Navigation() {
   const LogoText = () => (
     <Link href="/" className="-m-1.5 p-1.5 group">
       <span className="sr-only">FieldNet Global Research</span>
-      <div className="flex items-center space-x-3">
-        <div className="relative">
-          <LogoSVG className="h-10 w-10 text-cyan-600 group-hover:text-cyan-700 transition-colors" />
-        </div>
-        <div>
-          <span className="text-xl font-bold text-slate-900 group-hover:text-cyan-700 transition-colors">
-            FieldNet Global Research
-          </span>
-          <div className="text-xs text-slate-500 font-medium">Market Research Excellence</div>
-        </div>
-      </div>
+      <Image 
+        // src="/logo/1.png"
+        src="/logo/2.png"
+        // src="/logo/3.png"
+        // src="/logo/4.png" 
+        // src="/logo/5-removebg-preview.png"
+        // src="/logo/6-removebg-preview.png"
+        // src="/logo/7-removebg-preview.png"
+        // src="/logo/8-removebg-preview.png"
+        // src="/logo/9-removebg-preview.png"
+        // src="/logo/10-removebg-preview.png"
+        alt="FieldNet Global Research" 
+        width={180} 
+        height={60} 
+        className="h-auto w-auto max-h-12"
+        priority
+      />
     </Link>
   );
 
