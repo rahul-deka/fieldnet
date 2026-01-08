@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <link rel="icon" href="/logo-cyan.svg" type="image/svg+xml" />
+        <link rel="icon" href="/tab.png" type="image/png" />
       </head>
       <body>
         <AsciiRunner />
