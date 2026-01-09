@@ -32,7 +32,7 @@ export default function CTASection() {
               className="border-white/30 text-white hover:text-white hover:bg-white/10 bg-transparent backdrop-blur min-w-[200px]"
               asChild
             >
-              <Link href="/case-studies">View Success Stories</Link>
+              <Link href="/case-studies">View Case Studies</Link>
             </Button>
           </div>
           <div className="mt-12 hidden sm:flex flex-row items-center justify-center gap-8 text-cyan-100">
@@ -42,11 +42,19 @@ export default function CTASection() {
             </div>
             <div className="flex items-center gap-2">
               <Building2 className="w-5 h-5" />
+              <span>Delhi</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
               <span>Bengaluru</span>
             </div>
             <div className="flex items-center gap-2">
               <Building2 className="w-5 h-5" />
-              <span>Delhi</span>
+              <span>Singapore</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
+              <span>New York</span>
             </div>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5" />
