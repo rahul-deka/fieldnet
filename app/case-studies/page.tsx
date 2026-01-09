@@ -63,146 +63,6 @@ export default function CaseStudiesPage() {
   const caseStudies = [
     {
       id: 1,
-      category: "Advertising Research",
-      industry: "Consumer Electronics",
-      icon: Tv,
-      title: "Advertising Effectiveness Tracking for a Leading Consumer Electronics Firm",
-      client: "Leading Consumer Electronics Manufacturer",
-      challenge:
-        "The client wanted to measure the effectiveness of its TV and print advertising campaigns in influencing brand preference, purchase intent, and perception over time across major Indian cities.",
-      solution:
-        "Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities over 12 months with SEC A, B & C decision makers. The study tracked brand health metrics, recall, and message clarity, and analyzed advertisement resonance across regions.",
-      methodology: [
-        "Face-to-Face Interviews",
-        "Brand Tracking",
-        "Advertising Recall Measurement",
-        "Quantitative Analysis",
-      ],
-      results: [
-        "Mapped shifts in brand image and purchase likelihood across campaign periods",
-        "Identified regional variations in ad recall and message understanding",
-        "Helped client refine future creative and media planning based on audience insights",
-      ],
-      metrics: [
-        { label: "Sample Size", value: "7,200" },
-        { label: "Cities Covered", value: "9" },
-        { label: "Study Duration", value: "12 months" },
-      ],
-    },
-    {
-      id: 2,
-      category: "Product Testing",
-      industry: "FMCG",
-      icon: FlaskConical,
-      title: "New Product Test for a Leading FMCG Firm",
-      client: "Top FMCG Company",
-      challenge:
-        "The client planned to launch a new hair color neutralizer but needed to test product efficacy, acceptance, and pricing with core target consumers before rollout.",
-      solution:
-        "Conducted 800 face-to-face interviews with working women and housewives (SEC A & B) in three metros and one mini-metro. Participants used the product for 45 days before evaluation. Gathered reactions on product quality, price points, and communication concepts.",
-      methodology: [
-        "Usage & Attitude Study",
-        "Face-to-Face Interviews",
-        "Concept Evaluation",
-        "Price Sensitivity Testing",
-      ],
-      results: [
-        "Identified strong acceptance drivers linked to fragrance and after-use shine",
-        "Validated optimal price points and SKUs for urban markets",
-        "Provided creative direction for advertising communication and product packaging",
-      ],
-      metrics: [
-        { label: "Sample Size", value: "800" },
-        { label: "Cities", value: "4" },
-        { label: "Test Duration", value: "45 days" },
-      ],
-    },
-    {
-      id: 3,
-      category: "Industry Assessment",
-      industry: "Manufacturing",
-      icon: Factory,
-      title: "Market Landscape for Electroplating Companies",
-      client: "Industry Development Board",
-      challenge:
-        "The client needed an overview of the electroplating industry in Thailand and Indonesia, including market size, leading players, and outsourcing potential.",
-      solution:
-        "Executed 50 telephonic depth interviews with key electroplating companies in both countries. Gathered insights on production capacity, export potential, and operational challenges to support industry development initiatives.",
-      methodology: [
-        "Telephonic Interviews",
-        "B2B Research",
-        "Market Profiling",
-        "Industry Benchmarking",
-      ],
-      results: [
-        "Created detailed profiles of top electroplating firms by region and segment",
-        "Highlighted outsourcing and export opportunities for small and mid-tier firms",
-        "Developed strategic recommendations for cross-border collaborations",
-      ],
-      metrics: [
-        { label: "Sample Size", value: "50" },
-        { label: "Countries", value: "2" },
-        { label: "Research Type", value: "B2B" },
-      ],
-    },
-    {
-      id: 4,
-      category: "Product Testing",
-      industry: "Tobacco",
-      icon: Cigarette,
-      title: "Sensory Evaluation and Package Test for an International Cigarette Brand",
-      client: "Global Tobacco Company",
-      challenge:
-        "The client wanted to introduce a new cigarette blend and packaging in India and needed to evaluate consumer perception, sensory feedback, and brand switching potential.",
-      solution:
-        "Conducted 18 Focus Group Discussions in Mumbai and Delhi among SEC B & C adult decision makers. Evaluated blend taste, aroma, and packaging preferences, and assessed drivers of brand loyalty and switching.",
-      methodology: [
-        "Focus Group Discussions (FGDs)",
-        "Sensory Evaluation",
-        "Packaging Test",
-        "Brand Switching Analysis",
-      ],
-      results: [
-        "Identified preferred tobacco blend tailored to Indian taste preferences",
-        "Determined ideal pack size and pricing strategy for launch",
-        "Discovered key triggers influencing brand switching decisions",
-      ],
-      metrics: [
-        { label: "Focus Groups", value: "18" },
-        { label: "Cities", value: "2" },
-        { label: "Target Segment", value: "SEC B & C" },
-      ],
-    },
-    {
-      id: 5,
-      category: "Concept Testing",
-      industry: "FMCG",
-      icon: Droplet,
-      title: "New Shampoo Concept Test for a Global FMCG Firm",
-      client: "International Personal Care Brand",
-      challenge:
-        "The client sought to test a new sachet-based shampoo concept in a competitive market and identify improvement areas before national rollout.",
-      solution:
-        "Conducted 10 Focus Group Discussions and 12 In-Depth Interviews in Lucknow among SEC B & C shampoo users. Evaluated perceptions of quality, packaging, pricing, and innovative features through in-home product usage.",
-      methodology: [
-        "Focus Groups",
-        "In-Depth Interviews (IDIs)",
-        "Product Usage Observation",
-        "Concept Evaluation",
-      ],
-      results: [
-        "Identified opportunities to enhance texture and fragrance to align with local preferences",
-        "Validated competitive advantage in sachet convenience and price appeal",
-        "Recommended communication themes emphasizing quality at value pricing",
-      ],
-      metrics: [
-        { label: "FGDs", value: "10" },
-        { label: "IDIs", value: "12" },
-        { label: "Location", value: "Lucknow" },
-      ],
-    },
-    {
-      id: 6,
       category: "Market Potential",
       industry: "Pharmaceuticals",
       icon: Pill,
@@ -230,7 +90,7 @@ export default function CaseStudiesPage() {
       ],
     },
     {
-      id: 7,
+      id: 2,
       category: "Retail Audit",
       industry: "FMCG",
       icon: Store,
@@ -258,7 +118,176 @@ export default function CaseStudiesPage() {
       ],
     },
     {
+      id: 3,
+      category: "Advertising Research",
+      industry: "FMCG",
+      icon: ShoppingCart,
+      title: "Hair Color Ad Effectiveness Study",
+      client: "Global FMCG Major",
+      challenge:
+        "The client wanted to assess how effectively its latest hair color campaign was influencing brand awareness, ad recall, and purchase intent among women aged 25–45 across urban India.",
+      solution:
+        "Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities. Tracked TV and print campaign effectiveness using pre-post exposure methodology, and measured recall, brand image, and likelihood to purchase.",
+      methodology: [
+        "Face-to-Face Interviews",
+        "Brand Tracking",
+        "Advertising Recall Measurement",
+        "Quantitative Analysis",
+      ],
+      results: [
+        "78% ad recall among exposed audience",
+        "+29% increase in purchase intent post campaign",
+        "Identified strongest creative themes driving recall",
+        "Provided actionable media optimization insights",
+      ],
+      metrics: [
+        { label: "Sample Size", value: "7,200" },
+        { label: "Cities Covered", value: "9" },
+        { label: "Purchase Intent Increase", value: "+29%" },
+      ],
+    },
+    {
+      id: 4,
+      category: "Advertising Research",
+      industry: "Consumer Electronics",
+      icon: Tv,
+      title: "Advertising Effectiveness Tracking for a Leading Consumer Electronics Firm",
+      client: "Leading Consumer Electronics Manufacturer",
+      challenge:
+        "The client wanted to measure the effectiveness of its TV and print advertising campaigns in influencing brand preference, purchase intent, and perception over time across major Indian cities.",
+      solution:
+        "Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities over 12 months with SEC A, B & C decision makers. The study tracked brand health metrics, recall, and message clarity, and analyzed advertisement resonance across regions.",
+      methodology: [
+        "Face-to-Face Interviews",
+        "Brand Tracking",
+        "Advertising Recall Measurement",
+        "Quantitative Analysis",
+      ],
+      results: [
+        "Mapped shifts in brand image and purchase likelihood across campaign periods",
+        "Identified regional variations in ad recall and message understanding",
+        "Helped client refine future creative and media planning based on audience insights",
+      ],
+      metrics: [
+        { label: "Sample Size", value: "7,200" },
+        { label: "Cities Covered", value: "9" },
+        { label: "Study Duration", value: "12 months" },
+      ],
+    },
+    {
+      id: 5,
+      category: "Product Testing",
+      industry: "FMCG",
+      icon: FlaskConical,
+      title: "New Product Test for a Leading FMCG Firm",
+      client: "Top FMCG Company",
+      challenge:
+        "The client planned to launch a new hair color neutralizer but needed to test product efficacy, acceptance, and pricing with core target consumers before rollout.",
+      solution:
+        "Conducted 800 face-to-face interviews with working women and housewives (SEC A & B) in three metros and one mini-metro. Participants used the product for 45 days before evaluation. Gathered reactions on product quality, price points, and communication concepts.",
+      methodology: [
+        "Usage & Attitude Study",
+        "Face-to-Face Interviews",
+        "Concept Evaluation",
+        "Price Sensitivity Testing",
+      ],
+      results: [
+        "Identified strong acceptance drivers linked to fragrance and after-use shine",
+        "Validated optimal price points and SKUs for urban markets",
+        "Provided creative direction for advertising communication and product packaging",
+      ],
+      metrics: [
+        { label: "Sample Size", value: "800" },
+        { label: "Cities", value: "4" },
+        { label: "Test Duration", value: "45 days" },
+      ],
+    },
+    {
+      id: 6,
+      category: "Industry Assessment",
+      industry: "Manufacturing",
+      icon: Factory,
+      title: "Market Landscape for Electroplating Companies",
+      client: "Industry Development Board",
+      challenge:
+        "The client needed an overview of the electroplating industry in Thailand and Indonesia, including market size, leading players, and outsourcing potential.",
+      solution:
+        "Executed 50 telephonic depth interviews with key electroplating companies in both countries. Gathered insights on production capacity, export potential, and operational challenges to support industry development initiatives.",
+      methodology: [
+        "Telephonic Interviews",
+        "B2B Research",
+        "Market Profiling",
+        "Industry Benchmarking",
+      ],
+      results: [
+        "Created detailed profiles of top electroplating firms by region and segment",
+        "Highlighted outsourcing and export opportunities for small and mid-tier firms",
+        "Developed strategic recommendations for cross-border collaborations",
+      ],
+      metrics: [
+        { label: "Sample Size", value: "50" },
+        { label: "Countries", value: "2" },
+        { label: "Research Type", value: "B2B" },
+      ],
+    },
+    {
+      id: 7,
+      category: "Product Testing",
+      industry: "Tobacco",
+      icon: Cigarette,
+      title: "Sensory Evaluation and Package Test for an International Cigarette Brand",
+      client: "Global Tobacco Company",
+      challenge:
+        "The client wanted to introduce a new cigarette blend and packaging in India and needed to evaluate consumer perception, sensory feedback, and brand switching potential.",
+      solution:
+        "Conducted 18 Focus Group Discussions in Mumbai and Delhi among SEC B & C adult decision makers. Evaluated blend taste, aroma, and packaging preferences, and assessed drivers of brand loyalty and switching.",
+      methodology: [
+        "Focus Group Discussions (FGDs)",
+        "Sensory Evaluation",
+        "Packaging Test",
+        "Brand Switching Analysis",
+      ],
+      results: [
+        "Identified preferred tobacco blend tailored to Indian taste preferences",
+        "Determined ideal pack size and pricing strategy for launch",
+        "Discovered key triggers influencing brand switching decisions",
+      ],
+      metrics: [
+        { label: "Focus Groups", value: "18" },
+        { label: "Cities", value: "2" },
+        { label: "Target Segment", value: "SEC B & C" },
+      ],
+    },
+    {
       id: 8,
+      category: "Concept Testing",
+      industry: "FMCG",
+      icon: Droplet,
+      title: "New Shampoo Concept Test for a Global FMCG Firm",
+      client: "International Personal Care Brand",
+      challenge:
+        "The client sought to test a new sachet-based shampoo concept in a competitive market and identify improvement areas before national rollout.",
+      solution:
+        "Conducted 10 Focus Group Discussions and 12 In-Depth Interviews in Lucknow among SEC B & C shampoo users. Evaluated perceptions of quality, packaging, pricing, and innovative features through in-home product usage.",
+      methodology: [
+        "Focus Groups",
+        "In-Depth Interviews (IDIs)",
+        "Product Usage Observation",
+        "Concept Evaluation",
+      ],
+      results: [
+        "Identified opportunities to enhance texture and fragrance to align with local preferences",
+        "Validated competitive advantage in sachet convenience and price appeal",
+        "Recommended communication themes emphasizing quality at value pricing",
+      ],
+      metrics: [
+        { label: "FGDs", value: "10" },
+        { label: "IDIs", value: "12" },
+        { label: "Location", value: "Lucknow" },
+      ],
+    },
+    {
+      id: 9,
       category: "Customer Satisfaction",
       industry: "Retail",
       icon: Users,
@@ -286,7 +315,7 @@ export default function CaseStudiesPage() {
       ],
     },
     {
-      id: 9,
+      id: 10,
       category: "Database Creation",
       industry: "Civic Engagement",
       icon: Vote,
@@ -449,17 +478,17 @@ export default function CaseStudiesPage() {
                     <Badge className="bg-amber-500 text-slate-900 font-semibold mb-4">Featured Case Study</Badge>
                     <div className="flex items-center gap-3 mb-6">
                       <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
-                        <ShoppingCart className="h-8 w-8 text-white" />
+                        <BarChart3 className="h-8 w-8 text-white" />
                       </div>
                       <div>
-                        <div className="text-sm text-cyan-100 font-medium">FMCG • Advertising Research</div>
+                        <div className="text-sm text-cyan-100 font-medium">Consumer Electronics • Advertising Research</div>
                       </div>
                     </div>
                     <h3 className="text-3xl font-bold text-white mb-4 leading-tight">
-                      Hair Color Ad Effectiveness Study
+                      Advertising Effectiveness Tracking for a Leading Consumer Electronics Firm
                     </h3>
                     <p className="text-cyan-100 leading-relaxed text-justify md:text-left">
-                      Evaluating pre and post campaign effectiveness for a global FMCG major’s hair color brand, driving higher ad recall and purchase intent across metros.
+                      Conducting a 12-month pre and post-campaign study for a consumer electronics brand to measure shifts in brand awareness, ad recall, and purchase intent across nine major cities.
                     </p>
                   </div>
 
@@ -474,8 +503,8 @@ export default function CaseStudiesPage() {
                       <div className="text-xs text-cyan-200">Cities</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-3xl font-bold text-white">+29%</div>
-                      <div className="text-xs text-cyan-200">Purchase Intent</div>
+                      <div className="text-3xl font-bold text-white">12</div>
+                      <div className="text-xs text-cyan-200">Months</div>
                     </div>
                   </div>
                 </div>
@@ -492,7 +521,7 @@ export default function CaseStudiesPage() {
                         <h4 className="text-lg font-bold text-white">The Challenge</h4>
                       </div>
                         <p className="text-slate-300 leading-relaxed text-justify md:text-left">
-                        The client wanted to assess how effectively its latest hair color campaign was influencing brand awareness, ad recall, and purchase intent among women aged 25–45 across urban India.
+                        The client needed to understand how effectively its television and print campaigns were influencing brand recall and consumer purchase decisions across a 12-month period in multiple cities.
                       </p>
                     </div>
 
@@ -505,7 +534,7 @@ export default function CaseStudiesPage() {
                         <h4 className="text-lg font-bold text-white">Our Approach</h4>
                       </div>
                       <p className="text-slate-300 leading-relaxed text-justify md:text-left">
-                        Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities. Tracked TV and print campaign effectiveness using pre-post exposure methodology, and measured recall, brand image, and likelihood to purchase.
+                        Executed a comprehensive pre and post-campaign assessment involving 7,200 face-to-face interviews conducted across 9 major cities. Measured shifts in aided and unaided brand recall, ad recognition, and purchase intent throughout the 12-month period.
                       </p>
                     </div>
 
@@ -521,25 +550,25 @@ export default function CaseStudiesPage() {
                         <div className="flex items-start gap-2">
                           <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
                           <span className="text-slate-300 text-sm">
-                            78% ad recall among exposed audience
+                            Measured campaign impact across 9 cities over 12 months
                           </span>
                         </div>
                         <div className="flex items-start gap-2">
                           <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
                           <span className="text-slate-300 text-sm">
-                            +29% increase in purchase intent post campaign
+                            Tracked significant improvements in brand recall and purchase intent
                           </span>
                         </div>
                         <div className="flex items-start gap-2">
                           <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
                           <span className="text-slate-300 text-sm">
-                            Identified strongest creative themes driving recall
+                            Identified most effective campaign elements and media channels
                           </span>
                         </div>
                         <div className="flex items-start gap-2">
                           <CheckCircle className="h-5 w-5 text-green-400 flex-shrink-0 mt-0.5" />
                           <span className="text-slate-300 text-sm">
-                            Provided actionable media optimization insights
+                            Provided quarterly insights for media strategy optimization
                           </span>
                         </div>
                       </div>

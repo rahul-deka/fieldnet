@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Tv, FlaskConical, Factory, ArrowRight, CheckCircle, Trophy } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 
 export default function CaseStudiesSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,62 +35,63 @@ export default function CaseStudiesSection() {
   const featuredCaseStudies = [
     {
       id: 1,
-      category: "Advertising Research",
-      industry: "Consumer Electronics",
-      icon: Tv,
-      title: "Advertising Effectiveness Tracking for a Leading Consumer Electronics Firm",
-      client: "Leading Consumer Electronics Manufacturer",
+      category: "Market Potential",
+      industry: "Pharmaceuticals",
+      icon: Trophy, // Use Trophy for visual distinction, or import Pill if available
+      title: "Market Potential Assessment for a Pharma Major",
+      client: "Global Pharmaceutical Company",
       description:
-        "Conducted 7,200 face-to-face interviews across 9 metro cities over 12 months to measure TV and print advertising campaign effectiveness in influencing brand preference and purchase intent.",
+        "Conducted 60 In-Depth Interviews with doctors, lab managers, and blood bank professionals across Thailand, Brazil, Korea, and China. Combined telephonic interviews with a web-based conjoint analysis to capture preferences and trade-offs.",
       metrics: [
-        { label: "Sample Size", value: "7,200" },
-        { label: "Cities Covered", value: "9" },
-        { label: "Study Duration", value: "12 months" },
+        { label: "Sample Size", value: "60" },
+        { label: "Countries", value: "5" },
+        { label: "Respondent Type", value: "Healthcare" },
       ],
       results: [
-        "Mapped shifts in brand image across campaign periods",
-        "Identified regional variations in ad recall",
-        "Refined future creative and media planning",
+        "Identified key feature preferences and acceptable price ranges across markets",
+        "Quantified demand for high-sensitivity test kits and automation capabilities",
+        "Delivered market entry strategy recommendations per country",
       ],
     },
     {
       id: 2,
-      category: "Product Testing",
+      category: "Retail Audit",
       industry: "FMCG",
-      icon: FlaskConical,
-      title: "New Product Test for a Leading FMCG Firm",
-      client: "Top FMCG Company",
+      icon: Factory, // Use Factory for visual distinction, or import Store if available
+      title: "Shop Census for a Leading FMCG Firm",
+      client: "National FMCG Brand",
       description:
-        "Conducted 800 face-to-face interviews testing a new hair color neutralizer with working women and housewives in four major cities, evaluating product quality, pricing, and communication concepts.",
+        "Executed a full retail census of 50,000 kirana, pan, chemist, confectionery, and bakery shops across Mumbai using map-based beat planning for data accuracy.",
       metrics: [
-        { label: "Sample Size", value: "800" },
-        { label: "Cities", value: "4" },
-        { label: "Test Duration", value: "45 days" },
+        { label: "Shops Covered", value: "50,000" },
+        { label: "City", value: "Mumbai" },
+        { label: "Duration", value: "8 weeks" },
       ],
       results: [
-        "Validated optimal price points and SKUs",
-        "Identified strong acceptance drivers",
-        "Provided creative direction for advertising",
+        "Mapped all outlets selling branded/unbranded wafers citywide",
+        "Created detailed merchandising heatmaps for targeted outreach",
+        "Enabled data-driven retail expansion and sales planning",
       ],
     },
     {
       id: 3,
-      category: "Industry Assessment",
-      industry: "Manufacturing",
-      icon: Factory,
-      title: "Market Landscape for Electroplating Companies",
-      client: "Industry Development Board",
+      category: "Advertising Research",
+      industry: "FMCG",
+      icon: ShoppingCart,
+      title: "Hair Color Ad Effectiveness Study",
+      client: "Global FMCG Major",
       description:
-        "Executed 50 telephonic depth interviews with key electroplating companies in Thailand and Indonesia to assess market size, leading players, and outsourcing potential.",
+        "Conducted 7,200 face-to-face interviews across 9 metro and tier-1 cities. Tracked TV and print campaign effectiveness using pre-post exposure methodology, and measured recall, brand image, and likelihood to purchase.",
       metrics: [
-        { label: "Sample Size", value: "50" },
-        { label: "Countries", value: "2" },
-        { label: "Research Type", value: "B2B" },
+        { label: "Sample Size", value: "7,200" },
+        { label: "Cities Covered", value: "9" },
+        { label: "Purchase Intent Increase", value: "+29%" },
       ],
       results: [
-        "Created detailed firm profiles by region",
-        "Highlighted outsourcing opportunities",
-        "Developed strategic recommendations",
+        "78% ad recall among exposed audience",
+        "+29% increase in purchase intent post campaign",
+        "Identified strongest creative themes driving recall",
+        "Provided actionable media optimization insights",
       ],
     },
   ]
