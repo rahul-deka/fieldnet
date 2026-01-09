@@ -103,24 +103,24 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="relative whitespace-nowrap text-sm font-semibold leading-6 text-slate-700 hover:text-cyan-600 transition-all duration-200 px-3 py-2 rounded-lg hover:bg-cyan-50 group"
+                  className="relative whitespace-nowrap text-sm font-semibold leading-6 text-slate-700 hover:text-[#C97A11] transition-all duration-200 px-3 py-2 rounded-lg hover:bg-[#FFF7D1] group"
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-cyan-600 transition-all duration-200 group-hover:w-full group-hover:left-0"></span>
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-[#e3743d] transition-all duration-200 group-hover:w-full group-hover:left-0"></span>
                 </Link>
               ))}
             </div>
             <Link
               href="/register"
-              className="flex items-center justify-center p-2 rounded-lg hover:bg-cyan-50 transition-colors group"
+              className="flex items-center justify-center p-2 rounded-lg hover:bg-[#FFF7D1] transition-colors group"
               title="Login / Register"
             >
-              <CircleUser className="h-5 w-5 text-slate-700 group-hover:text-cyan-600 transition-colors" />
+              <CircleUser className="h-5 w-5 text-slate-700 group-hover:text-[#C97A11] transition-colors" />
             </Link>
             <Button
               asChild
-              className="bg-cyan-600 hover:bg-cyan-700 text-white shadow-lg border-0"
-              style={{ backgroundColor: "#0891b2" }}
+              className="bg-[#d75519] hover:bg-[#d75519] text-white shadow-lg border-0"
+              style={{ backgroundColor: "#e3743d" }}
             >
               <a href="tel:+919892787127">Call Us</a>
             </Button>
@@ -161,7 +161,7 @@ export function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block rounded-xl px-4 py-3 text-base font-semibold leading-7 text-slate-700 hover:bg-cyan-50 hover:text-cyan-700 transition-colors"
+                  className="block rounded-xl px-4 py-3 text-base font-semibold leading-7 text-slate-700 hover:bg-[#FFF7D1] hover:text-[#C97A11] transition-colors"
                   onClick={closeMobileMenu}
                 >
                   {item.name}
@@ -178,8 +178,8 @@ export function Navigation() {
               </Button> */}
               <Button
                 asChild
-                className="w-full bg-cyan-600 hover:bg-cyan-700 text-white border-0"
-                style={{ backgroundColor: "#0891b2" }}
+                className="w-full bg-[#d75519] hover:bg-[#d75519] text-white border-0"
+                style={{ backgroundColor: "#d75519" }}
               >
                 <a href="tel:+919892787127">Call Us</a>
               </Button>
