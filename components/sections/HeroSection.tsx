@@ -16,7 +16,7 @@ export default function HeroSection() {
               <Award className="w-3 h-3 mr-1" />
               Established 2005 • 150+ Years Collective Experience
             </Badge>
-            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-7xl text-balance leading-tight">
+            <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl text-balance leading-tight">
               Global Market
               <span className="block text-transparent bg-gradient-to-r from-cyan-600 to-cyan-800 bg-clip-text">
                 Research Excellence
