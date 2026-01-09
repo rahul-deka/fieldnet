@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <link rel="icon" href="/tab.png" type="image/png" />
+        <link rel="icon" href="/logo/logo%20brandmark.png" type="image/png" />
       </head>
       <body>
         <AsciiRunner />

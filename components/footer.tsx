@@ -38,9 +38,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
   <div className="md:grid md:grid-cols-5 md:gap-8">
     <div className="space-y-8 md:col-span-2">
-            <div className="flex items-center space-x-2">
-              <LogoBlackSVG className="h-6 w-6" />
-              <span className="text-xl font-bold text-card-foreground">FieldNet Global Research</span>
+            <div className="flex items-center">
+              <img src="/logo/logo%20full.svg" alt="FieldNet Global Research" className="h-8 w-auto" />
             </div>
             <p className="text-sm leading-6 text-muted-foreground">
               Full service Market Research agency providing services to clients from across the globe. Established in
