@@ -17,6 +17,7 @@ import { useEffect, useRef } from "react"
 import BackToTopButton from "@/components/back-to-top";
 import { displayAsciiArt } from "@/components/asciiArt";
 import Reveal from "@/components/reveal";
+import ClientsCarouselSection from "@/components/sections/ClientsCarouselSection";
 
 export default function HomePage() {
   const installRef = useRef<HTMLDivElement>(null);
@@ -66,6 +67,10 @@ export default function HomePage() {
 
       <Reveal>
         <ResourcesSection />
+      </Reveal>
+
+      <Reveal>
+        <ClientsCarouselSection />
       </Reveal>
 
       <Reveal>
