@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from "lucide-react"
+import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, UserPlus } from "lucide-react"
 import LogoBlackSVG from "@/components/ui/LogoBlackSVG"
 import { NewsletterSubscribe } from "@/components/newsletter-subscribe"
 import Image from "next/image"
@@ -70,6 +70,12 @@ export function Footer() {
                 <Facebook className="h-4 w-4" />
                 <a href="https://www.facebook.com/field.netglobal.8/" target="_blank" rel="noopener noreferrer" className="hover:text-primary">Facebook</a>
               </div>
+              <div className="mt-2">
+                <a href="/register" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-cyan-600 text-white font-semibold shadow hover:bg-cyan-700 transition-colors text-sm">
+                  <UserPlus className="h-4 w-4 text-white" />
+                  Be a part of panel
+                </a>
+              </div>
             </div>
           </div>
           <div className="mt-16 md:col-span-3 md:mt-0 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -134,7 +140,7 @@ export function Footer() {
         </div>
         {/* single newsletter instance maintained above; no duplicate blocks */}
         <div className="mt-1 border-t border-cyan-300/50 sm:mt-20 lg:mt-24 py-6">
-          <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:justify-between gap-4">
+          <div className="mx-auto max-w-7xl px-6 md:px-0 flex flex-col md:flex-row items-center md:justify-between gap-4">
             <div className="w-full md:w-auto">
               <NewsletterSubscribe showTitle={false} compact />
             </div>

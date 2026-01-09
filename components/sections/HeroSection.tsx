@@ -82,7 +82,7 @@ export default function HeroSection() {
             <Card className="absolute -top-6 -right-6 bg-white/95 backdrop-blur shadow-xl border-2 border-amber-600 transition-transform duration-700 ease-out animate-fadeInUp hover:scale-105">
               <CardContent className="p-4">
                 <div className="text-2xl font-bold text-amber-600">
-                  <AnimatedCounter end={500} suffix="M+" />
+                  $<AnimatedCounter end={500} suffix="M+" />
                 </div>
                 <div className="text-sm text-muted-foreground">Impact delivered</div>
               </CardContent>
