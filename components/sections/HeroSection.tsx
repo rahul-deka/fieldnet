@@ -2,11 +2,14 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter"
 import { Award, ArrowRight, CheckCircle, Star, Globe } from "lucide-react"
 
 export default function HeroSection() {
   return (
     <section className="relative overflow-hidden">
+      {/* Animation CSS import for fadeInUp */}
+      <link rel="stylesheet" href="/styles/fadeInUp.css" />
       <div className="absolute inset-0 bg-gradient-to-br from-cyan-50 via-white to-amber-50 dark:from-cyan-950/20 dark:via-background dark:to-amber-950/20"></div>
       <div className="absolute inset-0 bg-[url('/abstract-geometric-pattern-subtle-lines.jpg')] opacity-5"></div>
       <div className="relative mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-10">
@@ -23,7 +26,7 @@ export default function HeroSection() {
               </span>
             </h1>
             <p className="mt-8 text-xl leading-relaxed text-muted-foreground text-pretty max-w-2xl">
-              FieldNet Global Research powers growth with always-on intelligence - connecting research, retail and ROI.
+              FieldNet Global Research powers growth with always-on intelligence - connecting research, retail, QSR and ROI.
             </p>
             <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <Button
@@ -68,16 +71,20 @@ export default function HeroSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
-            <Card className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur shadow-xl border-0">
+            <Card className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur shadow-xl border-2 border-cyan-700 transition-transform duration-700 ease-out animate-fadeInUp hover:scale-105">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-cyan-700">20+</div>
+                <div className="text-2xl font-bold text-cyan-700">
+                  <AnimatedCounter end={20} suffix="+" />
+                </div>
                 <div className="text-sm text-muted-foreground">Years of <br />Research Expertise</div>
               </CardContent>
             </Card>
-            <Card className="absolute -top-6 -right-6 bg-white/95 backdrop-blur shadow-xl border-0">
+            <Card className="absolute -top-6 -right-6 bg-white/95 backdrop-blur shadow-xl border-2 border-amber-600 transition-transform duration-700 ease-out animate-fadeInUp hover:scale-105">
               <CardContent className="p-4">
-                <div className="text-2xl font-bold text-amber-600">2,200+</div>
-                <div className="text-sm text-muted-foreground">Focus Groups, IDIs</div>
+                <div className="text-2xl font-bold text-amber-600">
+                  <AnimatedCounter end={500} suffix="M+" />
+                </div>
+                <div className="text-sm text-muted-foreground">Impact delivered</div>
               </CardContent>
             </Card>
           </div>
