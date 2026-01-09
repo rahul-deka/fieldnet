@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 import Reveal from "@/components/reveal";
@@ -59,6 +59,14 @@ export default function ClientsPage() {
         <div className="space-y-12">
           {categories.map((cat) => {
             const logos = getLogosForCategory(cat.folder);
+            const [activeLogo, setActiveLogo] = useState(0);
+            useEffect(() => {
+              if (logos.length <= 1) return;
+              const interval = setInterval(() => {
+                setActiveLogo((prev) => (prev + 1) % logos.length);
+              }, 1600);
+              return () => clearInterval(interval);
+            }, [logos.length]);
             if (logos.length === 0) return null; // Skip empty categories
             return (
               <section key={cat.name} className="">
@@ -73,7 +81,10 @@ export default function ClientsPage() {
                       <img
                         src={`/Resources/${encodeURIComponent(cat.folder)}/${encodeURIComponent(logo)}`}
                         alt={logo.replace(/\.(jpg|png)$/i, '')}
-                        className="max-h-20 w-auto object-contain md:grayscale md:hover:grayscale-0 transition-all duration-300"
+                        className={`max-h-28 w-auto object-contain transition-all duration-300 ${
+                          idx === activeLogo ? 'grayscale-0' : 'grayscale'
+                        } hover:grayscale-0`}
+                        onMouseEnter={() => setActiveLogo(idx)}
                       />
                     </div>
                   ))}
