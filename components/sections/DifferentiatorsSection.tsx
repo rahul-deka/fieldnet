@@ -71,7 +71,7 @@ export default function DifferentiatorsSection() {
               icon: Award,
               title: "Experienced Leadership",
               description:
-                "Our management team combines 150+ years of experience with both client and agency perspectives, having worked with leading organizations like AC Nielsen, IMRB, and Cadbury.",
+                "Our management team combines 150+ years of experience with both client and agency perspectives, having worked with leading organizations like AC Nielsen, IMRB, and Ipsos.",
               color: "bg-gradient-to-br from-cyan-500 to-cyan-600",
             },
             {

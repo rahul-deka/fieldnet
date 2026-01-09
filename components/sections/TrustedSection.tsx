@@ -9,7 +9,7 @@ const stats = [
   { label: "Towns, Cities & Rural Centers Covered", value: 1000, suffix: "+", icon: Clock, color: "text-cyan-600" },
   { label: "Clients Across the Globe", value: 300, suffix: "+", icon: Target, color: "text-amber-600" },
   // This entry is a textual value (not numeric). We'll render it directly without animation.
-  { label: "Projects Done", value: 1000, suffix: "+", icon: Globe, color: "text-purple-600" },
+  { label: "Projects Done", value: 10000, suffix: "+", icon: Globe, color: "text-purple-600" },
 ];
 
 export default function TrustedSection() {

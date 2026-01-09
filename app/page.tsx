@@ -3,7 +3,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import HeroSection from "@/components/sections/HeroSection"
 import TrustedSection from "@/components/sections/TrustedSection"
-import WhatWeDoSection from "@/components/sections/WhatWeDoSection"
+// import WhatWeDoSection from "@/components/sections/WhatWeDoSection"
 import ExpertiseSection from "@/components/sections/ExpertiseSection"
 // import InsightEdgeSection from "@/components/sections/InsightEdgeSection"
 import DifferentiatorsSection from "@/components/sections/DifferentiatorsSection"
@@ -42,9 +42,9 @@ export default function HomePage() {
         <TrustedSection />
       </Reveal>
 
-      <Reveal>
+      {/* <Reveal>
         <WhatWeDoSection />
-      </Reveal>
+      </Reveal> */}
 
       <Reveal>
         <ExpertiseSection />

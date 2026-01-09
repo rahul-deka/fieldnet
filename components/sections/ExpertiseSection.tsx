@@ -3,9 +3,12 @@
 import { useState, useEffect, useRef } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import { BarChart3, Target, TrendingUp, CheckCircle, MapPin, Lightbulb, Briefcase } from "lucide-react"
+import { BarChart3, Target, TrendingUp, CheckCircle, MapPin, Lightbulb, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import Image from "next/image"
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 export default function ExpertiseSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,6 +35,24 @@ export default function ExpertiseSection() {
     };
   }, []);
 
+  const [currentWord, setCurrentWord] = useState(0);
+  const rotatingWords = [
+    "Actionable Insights",
+    "Strategic Decisions",
+    "Growth Opportunities",
+    "Market Intelligence",
+    "Business Success"
+  ];
+
+  useEffect(() => {
+    if (isVisible) {
+      const interval = setInterval(() => {
+        setCurrentWord((prev) => (prev + 1) % rotatingWords.length);
+      }, 3000);
+      return () => clearInterval(interval);
+    }
+  }, [isVisible]);
+
   return (
     <section ref={sectionRef} className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
       {/* Animated background elements */}
@@ -52,13 +73,31 @@ export default function ExpertiseSection() {
           <Badge variant="secondary" className={`mb-6 bg-cyan-100 text-cyan-800 border-cyan-200 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            <Briefcase className="w-3 h-3 mr-1" />
-            Our Expertise
+            <Sparkles className="w-3 h-3 mr-1" />
+            What We Do
           </Badge>
-          <h2 className={`text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6 transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}>
-            Comprehensive Research Solutions
+          <h2
+            className={`text-4xl md:text-5xl font-bold text-slate-900 mb-6 transition-all duration-700 delay-100 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+            }`}
+          >
+            Transforming Data into
+            <span className="block mt-2 relative h-[1.2em] overflow-hidden">
+              {rotatingWords.map((word, index) => (
+                <span
+                  key={word}
+                  className={`absolute left-0 right-0 text-center transition-all duration-700 bg-gradient-to-r from-cyan-600 via-cyan-700 to-amber-600 bg-clip-text text-transparent ${
+                    index === currentWord
+                      ? "opacity-100 translate-y-0"
+                      : index < currentWord
+                      ? "opacity-0 -translate-y-full"
+                      : "opacity-0 translate-y-full"
+                  }`}
+                >
+                  {word}
+                </span>
+              ))}
+            </span>
           </h2>
           <p className={`text-xl leading-8 text-muted-foreground max-w-3xl mx-auto transition-all duration-700 delay-200 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -121,17 +160,28 @@ export default function ExpertiseSection() {
             </CardContent>
           </Card>
 
-          <Card className="lg:col-span-3 p-8 bg-gradient-to-r from-orange-50 to-rose-50 border-0 shadow-none rounded-none">
+          <Card className="lg:col-span-3 p-8 bg-black border-0 shadow-none rounded-none">
             <CardContent className="p-0">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex items-center gap-4 mb-4 sm:mb-0 order-1">
-                  <Lightbulb className="h-8 w-8 text-orange-600 flex-shrink-0" />
-                </div>
-                <div className="flex-1 order-2">
-                  <h3 className="text-2xl font-bold mb-2 text-foreground">Kaizen Synergy</h3>
-                  <p className="text-muted-foreground text-lg">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                <div className="flex-1 order-1">
+                  <h3 className="text-2xl font-bold mb-2 text-white flex items-center gap-2">
+                    <Sparkles className="w-6 h-6 text-red-600" />
+                    Kaizen Synergy
+                  </h3>
+                  <p className="text-white/80 text-lg">
                     Brand strategy development, creative testing, product innovation, packaging design research, and customer experience optimization
                   </p>
+                </div>
+                <div className="flex items-center gap-4 order-2 sm:order-2">
+                  <a
+                    href="https://www.kaizeneventsandpromotionllp.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-right inline-flex items-center gap-2 px-7 py-4 bg-black border-2 border-red-600 text-white font-bold text-lg shadow-lg hover:bg-white hover:text-black hover:border-red-700 transition-all duration-300"
+                  >
+                    <Image src="/kaizen.png" alt="Kaizen" width={24} height={24} className="mr-1" />
+                    Visit Kaizen
+                  </a>
                 </div>
               </div>
             </CardContent>
@@ -139,11 +189,86 @@ export default function ExpertiseSection() {
 
         </div>
 
-        {/* Global Research Network - Outside Grid */}
-        <Link href="/who-we-are#global-partnership" aria-label="Go to Global Partnership on Who We Are" className={`block transition-all duration-700 delay-500 ${
+        {/* Country Flags Carousel */}
+        <div className={`mt-12 transition-all duration-700 delay-400 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}>
-          <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 p-8 border border-purple-600 cursor-pointer hover:opacity-95">
+          
+
+          <div className="relative">
+            <Carousel
+              plugins={[
+                Autoplay({
+                  delay: 1000,
+                  stopOnInteraction: false,
+                  stopOnMouseEnter: true,
+                }),
+              ]}
+              opts={{
+                align: "start",
+                loop: true,
+                dragFree: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {[
+                  { name: "India", code: "in" },
+                  { name: "Pakistan", code: "pk" },
+                  { name: "Sri Lanka", code: "lk" },
+                  { name: "Nepal", code: "np" },
+                  { name: "Bhutan", code: "bt" },
+                  { name: "Bangladesh", code: "bd" },
+                  { name: "Malaysia", code: "my" },
+                  { name: "Japan", code: "jp" },
+                  { name: "Indonesia", code: "id" },
+                  { name: "Thailand", code: "th" },
+                  { name: "UAE", code: "ae" },
+                  { name: "South Africa", code: "za" },
+                  { name: "Singapore", code: "sg" },
+                  { name: "USA", code: "us" },
+                  { name: "South Korea", code: "kr" },
+                  { name: "China", code: "cn" },
+                  { name: "Vietnam", code: "vn" },
+                  // Duplicate for seamless loop
+                  { name: "India", code: "in" },
+                  { name: "Pakistan", code: "pk" },
+                  { name: "Sri Lanka", code: "lk" },
+                  { name: "Nepal", code: "np" },
+                  { name: "Bhutan", code: "bt" },
+                  { name: "Bangladesh", code: "bd" },
+                  { name: "Malaysia", code: "my" },
+                  { name: "Japan", code: "jp" },
+                  { name: "Indonesia", code: "id" },
+                  { name: "Thailand", code: "th" },
+                  { name: "UAE", code: "ae" },
+                  { name: "South Africa", code: "za" },
+                  { name: "Singapore", code: "sg" },
+                  { name: "USA", code: "us" },
+                  { name: "South Korea", code: "kr" },
+                  { name: "China", code: "cn" },
+                  { name: "Vietnam", code: "vn" },
+                ].map((country, index) => (
+                  <CarouselItem key={`${country.code}-${index}`} className="pl-4 basis-auto">
+                    <div className="flex flex-col items-center justify-center px-1">
+                      <span
+                        className={`fi fi-${country.code} mb-3 ${country.code === 'np' ? '' : 'shadow-md'}`}
+                        style={{ fontSize: '4rem', display: 'inline-block' }}
+                      ></span>
+                      <p className="text-sm font-semibold text-slate-900 whitespace-nowrap">{country.name}</p>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
+        </div>
+
+        {/* Global Research Network - Outside Grid */}
+        <div className={`block transition-all duration-700 delay-500 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        }`}>
+          <div className="mt-6 bg-gradient-to-r from-purple-50 to-pink-50 p-8 border border-purple-600">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div className="flex items-center gap-4 sm:order-2 order-1">
                 <MapPin className="h-10 w-10 text-purple-600" />
@@ -160,7 +285,7 @@ export default function ExpertiseSection() {
               </div>
             </div>
           </div>
-        </Link>
+        </div>
 
         <div className={`flex justify-center mt-12 transition-all duration-700 delay-700 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
