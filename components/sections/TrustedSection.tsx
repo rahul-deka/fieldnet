@@ -9,9 +9,7 @@ const stats = [
   { label: "Towns, Cities & Rural Centers Covered", value: 1000, suffix: "+", icon: Clock, color: "text-cyan-600" },
   { label: "Clients Across the Globe", value: 300, suffix: "+", icon: Target, color: "text-amber-600" },
   // This entry is a textual value (not numeric). We'll render it directly without animation.
-  { label: "Projects Done", value: '1000', suffix: "+", icon: Globe, color: "text-purple-600" },
-  // New stat: show client impact (fits numeric animation)
-  { label: "Client Impact", value: 250, suffix: " Cr+", icon: Globe, color: "text-rose-600" },
+  { label: "Projects Done", value: 1000, suffix: "+", icon: Globe, color: "text-purple-600" },
 ];
 
 export default function TrustedSection() {
@@ -87,7 +85,7 @@ export default function TrustedSection() {
             Our track record speaks for itself across industries and continents
           </p>
         </div>
-  <div className="relative grid grid-cols-2 lg:grid-cols-5 border border-slate-200 bg-white">
+  <div className="relative grid grid-cols-2 lg:grid-cols-4 border border-slate-200 bg-white">
           {stats.map((stat, index) => {
             // Small screens use 2 columns; large screens use 5 columns (single row).
             const colsSmall = 2;
