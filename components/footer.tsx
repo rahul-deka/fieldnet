@@ -43,7 +43,7 @@ export function Footer() {
             </div>
             <p className="text-sm leading-6 text-muted-foreground">
               Full service Market Research agency providing services to clients from across the globe. Established in
-              December 2005 with over 150 years of collective experience.
+              December 2004 with over 150 years of collective experience.
             </p>
             {/* Contact info moved here (logos removed) */}
             <div className="mt-6 space-y-4 text-sm text-muted-foreground">
@@ -72,7 +72,7 @@ export function Footer() {
               <div className="mt-2">
                 <a href="/register" className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-cyan-600 text-white font-semibold shadow hover:bg-cyan-700 transition-colors text-sm">
                   <UserPlus className="h-4 w-4 text-white" />
-                  Be a part of panel
+                  Be part of Respondent Panel
                 </a>
               </div>
             </div>
@@ -144,7 +144,7 @@ export function Footer() {
               <NewsletterSubscribe showTitle={false} compact />
             </div>
             <p className="text-xs leading-5 text-muted-foreground">
-            &copy; 2005 - Present | FieldNet Global Research LLP.
+            &copy; 2004 - Present | FieldNet Global Research LLP.
               <span className="block md:inline text-center"> All rights reserved.</span>
             </p>
           </div>

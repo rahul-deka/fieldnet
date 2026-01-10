@@ -590,7 +590,7 @@ export default function CaseStudiesPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 mt-12 border border-slate-700 rounded-xl overflow-hidden bg-slate-800/50 backdrop-blur-sm">
               <div className="flex flex-col items-center justify-center p-8 text-center">
                 <BarChart3 className="h-8 w-8 text-cyan-400 mb-3" />
-                <div className="text-3xl font-bold text-cyan-500 mb-1">50+</div>
+                <div className="text-3xl font-bold text-cyan-500 mb-1">1000+</div>
                 <div className="text-sm text-slate-400">Projects Delivered</div>
               </div>
               <div className="flex flex-col items-center justify-center p-8 text-center border-l border-slate-700">
@@ -600,8 +600,8 @@ export default function CaseStudiesPage() {
               </div>
               <div className="flex flex-col items-center justify-center p-8 text-center border-t md:border-t-0 md:border-l border-slate-700">
                 <Users className="h-8 w-8 text-green-400 mb-3" />
-                <div className="text-3xl font-bold text-green-600 mb-1">10K+</div>
-                <div className="text-sm text-slate-400">Respondents Surveyed</div>
+                <div className="text-3xl font-bold text-green-600 mb-1">1M+</div>
+                <div className="text-sm text-slate-400">Interview Surveyed</div>
               </div>
               <div className="flex flex-col items-center justify-center p-8 text-center border-l border-t md:border-t-0 border-slate-700">
                 <Award className="h-8 w-8 text-purple-400 mb-3" />
