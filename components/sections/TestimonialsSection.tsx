@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
 import { Quote, Star } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -91,12 +91,13 @@ export default function TestimonialsSection() {
           <h2 className={`text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl mb-4 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            What Our <Link href="/clients" className="text-cyan-600 hover:text-cyan-700 underline decoration-2 underline-offset-4">Clients</Link> Say
+            {/* What Our <Link href="/clients" className="text-cyan-600 hover:text-cyan-700 underline decoration-2 underline-offset-4">Clients</Link> Say */}
+            Recognition & Highlights
           </h2>
           <p className={`text-xl leading-8 text-slate-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
-            Don't just take our word for it – hear from the leaders who've experienced the FieldNet difference
+            Don't just take our word for it – see what <Link href="/clients" className="text-cyan-600 hover:text-cyan-700 underline decoration-2 underline-offset-4">clients</Link>, partners, and the industry are saying about us.
           </p>
         </div>
 
@@ -107,7 +108,7 @@ export default function TestimonialsSection() {
               delay: 2000,
               stopOnInteraction: false,
               stopOnMouseEnter: true,
-            }),
+            }) as any,
           ]}
           opts={{
             align: "start",
@@ -120,7 +121,7 @@ export default function TestimonialsSection() {
           <CarouselContent className="-ml-4">
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                <Card className="border-2 border-slate-200 hover:border-cyan-400 hover:shadow-xl transition-all duration-300 h-full">
+                <Card className="border-2 border-slate-200 hover:border-cyan-400 hover:shadow-xl transition-all duration-300 h-full shadow-none bg-white">
                   <CardContent className="p-6 flex flex-col h-full">
                     {/* Quote Icon */}
                     <div className="mb-4">
@@ -157,22 +158,34 @@ export default function TestimonialsSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="hidden md:flex" />
-          <CarouselNext className="hidden md:flex" />
         </Carousel>
 
-        {/* Bottom CTA */}
-        {/* <div className="mt-16 text-center">
-          <p className="text-lg text-slate-600 mb-6">
-            Join hundreds of satisfied clients who trust FieldNet for their research needs
-          </p>
-          <a
-            href="/contact"
-            className="inline-flex items-center bg-cyan-600 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-cyan-700 transition-colors"
-          >
-            Start Your Project
-          </a>
-        </div> */}
+        {/* Newsroom Card (single) */}
+        <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-orange-300 hover:border-orange-500 transition-all duration-200 max-w-full">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 justify-between">
+            <div className="hidden sm:flex items-center gap-2">
+              <span className="font-bold text-orange-500 tracking-wide text-sm">MEDIA COVERAGE</span>
+              <span className="mx-1 text-gray-300 text-lg">•</span>
+              <span className="text-gray-400 font-semibold tracking-wide text-sm">JAN 2026</span>
+            </div>
+            <div className="flex items-center gap-2 mt-2 sm:mt-0">
+              <img src="/midday2.png" alt="Midday Logo" className="h-7 sm:h-10 w-auto rounded" />
+              <span className="bg-orange-500 text-white text-xs sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm">LATEST</span>
+            </div>
+          </div>
+          <h3 className="text-xl sm:text-3xl font-bold mb-2 text-left">Wonder Women Entrepreneurs of India - January 2026</h3>
+          <div className="flex sm:hidden items-center gap-2 mb-2">
+            <span className="font-bold text-orange-500 tracking-wide text-sm">MEDIA COVERAGE</span>
+            <span className="mx-1 text-gray-300 text-lg">•</span>
+            <span className="text-gray-400 font-semibold tracking-wide text-sm">JAN 2026</span>
+          </div>
+          <div className="relative flex flex-col">
+            <p className="text-base sm:text-lg text-slate-700 text-justify sm:pr-12 flex-1">
+              The article brings together stories of women entrepreneurs across India, featuring our CEO for her contribution to building practical, growth-focused businesses and creating meaningful impact within the country’s evolving startup ecosystem.
+              <a href="/dummy-url" className="inline-block ml-2 text-orange-500 font-semibold underline align-baseline">Read more</a>
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
