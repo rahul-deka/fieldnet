@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArrowRight, FileText, Eye, BookOpen } from "lucide-react"
+import ResourcesSectionSkeleton from "./ResourcesSectionSkeleton"
 import { useEffect, useState } from "react"
 
 type Resource = {
@@ -48,11 +49,26 @@ export default function ResourcesSection() {
 
   if (loading) {
     return (
-      <section className="py-20 sm:py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <p className="text-muted-foreground">Loading resources...</p>
+      <section className="relative py-20 sm:py-24 overflow-hidden bg-gradient-to-br from-cyan-50 via-white to-amber-50">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-200/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-amber-200/20 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-100/20 rounded-full blur-3xl animate-pulse delay-500" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
+              <BookOpen className="w-3 h-3 mr-1" />
+              Knowledge Hub
+            </Badge>
+            <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl mb-6">
+              Featured Resources
+            </h2>
+            <p className="text-xl leading-8 text-muted-foreground max-w-3xl mx-auto">
+              Access whitepapers, reports, and methodology notes to help you make informed research decisions
+            </p>
           </div>
+          <ResourcesSectionSkeleton />
         </div>
       </section>
     )

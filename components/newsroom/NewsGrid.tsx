@@ -73,6 +73,8 @@ const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
               <span className="text-xs text-gray-400">{item.date}</span>
               <a
                 href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-black no-underline group/readmore"
                 tabIndex={0}
               >

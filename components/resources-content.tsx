@@ -102,9 +102,9 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
       <div className="space-y-12">
         {Object.entries(groupedResources).map(([category, categoryResources]) => (
           <div key={category}>
-            <h2 className="text-2xl font-semibold text-slate-900 mb-6">
+            {/* <h2 className="text-2xl font-semibold text-slate-900 mb-6">
               {categoryTitles[category] || category}
-            </h2>
+            </h2> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {categoryResources.map((resource) => (
                 <div
@@ -120,18 +120,18 @@ export function ResourcesContent({ resources }: ResourcesContentProps) {
                         </h3>
                         <p className="text-slate-600 mb-4">{resource.description}</p>
                         <div className="flex items-center justify-between">
-                          {resource.pdfFile?.asset?.url && (
+                          {resource.pdfFile?.asset?.url ? (
                             <a
                               href="#"
                               onClick={(e) =>
-                                handlePdfClick(e, resource.pdfFile.asset.url, resource.title)
+                                handlePdfClick(e, resource.pdfFile!.asset!.url!, resource.title)
                               }
                               className="inline-flex items-center space-x-2 text-cyan-600 hover:text-cyan-700 font-medium"
                             >
                               <Eye className="w-4 h-4" />
                               <span>View PDF</span>
                             </a>
-                          )}
+                          ) : null}
                         </div>
                       </div>
                     </div>

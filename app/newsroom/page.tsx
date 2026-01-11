@@ -11,6 +11,7 @@ import { fetchNewsroom, Newsroom } from "@/lib/newsroom";
 // import Pagination from "@/components/newsroom/Pagination";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
+import BackToTopButton from "@/components/back-to-top";
 
 
 
@@ -134,6 +135,7 @@ export default function NewsroomPage() {
             <MediaLogosStrip logos={mediaLogos} />
           </div>
         </div> */}
+        <BackToTopButton />
       </main>
       {/* CTA Section */}
       <section className="border-slate-200 bg-white py-14">

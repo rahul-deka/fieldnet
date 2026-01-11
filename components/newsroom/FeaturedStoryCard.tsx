@@ -67,7 +67,9 @@ const FeaturedStoryCard: React.FC<FeaturedStoryCardProps> = ({ story }) => (
         <span className="text-sm text-gray-400">{story.date}</span>
         <a
           href={story.link}
-            className="inline-flex items-center gap-2 text-gray-500 font-semibold hover:text-black transition-all duration-200 group"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-gray-500 font-semibold hover:text-black transition-all duration-200 group"
         >
           Read More
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

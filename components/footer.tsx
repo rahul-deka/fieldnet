@@ -23,6 +23,7 @@ const navigation = {
     { name: "Blog", href: "/blog" },
     { name: "Resources", href: "/resources" },
     { name: "Case Studies", href: "/case-studies" },
+    { name: "News Room", href: "/newsroom" }
   ],
 }
 
