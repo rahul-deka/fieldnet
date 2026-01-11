@@ -28,11 +28,26 @@ const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {news.map((item, idx) => (
-        <a
+        <div
           key={item.id}
-          href={item.link}
-          className="group bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-all duration-300 fade-in-up flex flex-col"
-          style={{ animationDelay: `${idx * 50}ms` }}
+          className="group bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition-all duration-300 fade-in-up flex flex-col"
+          style={{
+            animationDelay: `${idx * 50}ms`,
+            ...(item.category === 'Press Releases' && {}),
+            ...(item.category === 'Media Coverage' && {}),
+            ...(item.category === 'Awards' && {}),
+            ...(item.category === 'Announcements' && {}),
+          }}
+          onMouseEnter={e => {
+            const el = e.currentTarget;
+            if (item.category === 'Press Releases') el.style.borderColor = '#38bdf8';
+            else if (item.category === 'Media Coverage') el.style.borderColor = '#a78bfa';
+            else if (item.category === 'Awards') el.style.borderColor = '#fbbf24';
+            else if (item.category === 'Announcements') el.style.borderColor = '#34d399';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.borderColor = '';
+          }}
         >
           <div className="relative h-40 sm:h-48 overflow-hidden bg-gray-100">
             <Image
@@ -48,7 +63,7 @@ const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
             >
               {item.category}
             </span>
-            <h3 className="text-base sm:text-lg font-bold leading-tight text-balance group-hover:text-blue-600 transition-colors">
+            <h3 className="text-base sm:text-lg font-bold leading-tight text-balance transition-colors">
               {item.headline}
             </h3>
             {item.description && (
@@ -56,10 +71,17 @@ const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
             )}
             <div className="flex items-center justify-between pt-2 mt-auto">
               <span className="text-xs text-gray-400">{item.date}</span>
-              <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
+              <a
+                href={item.link}
+                className="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-black no-underline group/readmore"
+                tabIndex={0}
+              >
+                Read More
+                <ArrowRight className="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-all group-hover/readmore:text-black hover:text-black" />
+              </a>
             </div>
           </div>
-        </a>
+        </div>
       ))}
     </div>
   );

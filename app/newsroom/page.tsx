@@ -1,55 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeroSection from "@/components/newsroom/HeroSection";
 import NewsroomTabs from "@/components/newsroom/NewsroomTabs";
 import FeaturedStoryCard from "@/components/newsroom/FeaturedStoryCard";
 import NewsGrid from "@/components/newsroom/NewsGrid";
+import NewsroomSkeleton from "@/components/newsroom/NewsroomSkeleton";
+import { fetchNewsroom, Newsroom } from "@/lib/newsroom";
 // import AwardsSection from "@/components/newsroom/AwardsSection";
 // import MediaLogosStrip from "@/components/newsroom/MediaLogosStrip";
 // import Pagination from "@/components/newsroom/Pagination";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";
 
-// Demo/mock data (featuredStory merged into newsData)
-const newsData = [
-  {
-    id: "0",
-    category: "Media Coverage",
-    headline: "FieldNet featured in TechCrunch for innovative SaaS platform",
-    summary: "Our platform is transforming how businesses manage field operations. Read about our journey and vision in this exclusive feature.",
-    date: "Jan 10, 2026",
-    image: "/Resources/featured-story.jpg",
-    link: "#",
-  },
-  {
-    id: "1",
-    category: "Press Releases",
-    headline: "FieldNet launches new AI-powered analytics suite",
-    summary: "The new suite offers real-time insights for field teams.",
-    date: "Jan 5, 2026",
-    image: "/Resources/news1.jpg",
-    link: "#",
-  },
-  {
-    id: "2",
-    category: "Media Coverage",
-    headline: "FieldNet CEO on SaaS trends in 2026",
-    summary: "Interview with our CEO in Forbes.",
-    date: "Dec 20, 2025",
-    image: "/Resources/forbes-logo.png",
-    link: "#",
-  },
-  {
-    id: "3",
-    category: "Awards",
-    headline: "Best SaaS Startup 2025",
-    summary: "Awarded by Global SaaS Awards.",
-    date: "Nov 15, 2025",
-    image: "/Resources/saas-award.png",
-    link: "#",
-  },
-  // ...more items
-];
+
 
 const awards = [
   {
@@ -84,12 +47,22 @@ const tabs = [
   "Announcements",
 ];
 
+
 export default function NewsroomPage() {
   const [activeTab, setActiveTab] = useState("All");
   const [visibleCount, setVisibleCount] = useState(6);
+  const [news, setNews] = useState<Newsroom[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchNewsroom().then((data) => {
+      setNews(data);
+      setLoading(false);
+    });
+  }, []);
 
   // Sort news by date (latest first)
-  const sortedNews = [...newsData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedNews = [...news].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   // Filter by tab
   const filteredNews =
@@ -98,7 +71,7 @@ export default function NewsroomPage() {
       : sortedNews.filter((item) => item.category === activeTab);
 
   // The latest news is the featured story
-  const [featuredStory, ...restNews] = filteredNews.filter(item => typeof item.summary === "string");
+  const [featuredStory, ...restNews] = filteredNews;
   const visibleNews = restNews.slice(0, visibleCount);
   const hasMore = visibleCount < restNews.length;
 
@@ -112,10 +85,45 @@ export default function NewsroomPage() {
             <NewsroomTabs activeTab={activeTab} onTabChange={setActiveTab} />
           </div>
           <div className="mt-4 sm:mt-8">
-            {featuredStory && <FeaturedStoryCard story={featuredStory} />}
-          </div>
-          <div className="mt-4 sm:mt-8">
-            <NewsGrid news={visibleNews} />
+            {loading ? (
+              <NewsroomSkeleton />
+            ) : (
+              <>
+                {featuredStory && (
+                  <FeaturedStoryCard
+                    story={{
+                      category: featuredStory.category,
+                      headline: featuredStory.headline,
+                      summary: featuredStory.summary,
+                      description: featuredStory.summary,
+                      date: featuredStory.date,
+                      image:
+                        typeof featuredStory.image === "string"
+                          ? featuredStory.image
+                          : featuredStory.image?.asset?.url || "",
+                      link: featuredStory.link || "#",
+                    }}
+                  />
+                )}
+                <div className="mt-4 sm:mt-8">
+                  <NewsGrid
+                    news={visibleNews.map((item) => ({
+                      id: item._id,
+                      category: item.category,
+                      headline: item.headline,
+                      description: item.summary,
+                      date: item.date,
+                      image:
+                        typeof item.image === "string"
+                          ? item.image
+                          : item.image?.asset?.url || "",
+                      logo: undefined,
+                      link: item.link || "#",
+                    }))}
+                  />
+                </div>
+              </>
+            )}
           </div>
         </div>
         {/* <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
