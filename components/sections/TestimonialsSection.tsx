@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { fetchNewsroom, Newsroom } from "@/lib/newsroom";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
@@ -58,9 +59,12 @@ const testimonials = [
   }
 ];
 
+
 export default function TestimonialsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [latestNews, setLatestNews] = useState<Newsroom | null>(null);
+  const [loadingNews, setLoadingNews] = useState(true);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -71,17 +75,30 @@ export default function TestimonialsSection() {
       },
       { threshold: 0.1 }
     );
-
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
       }
     };
   }, []);
+
+  useEffect(() => {
+    fetchNewsroom().then((data) => {
+      if (data && data.length > 0) {
+        setLatestNews(data[0]);
+      }
+      setLoadingNews(false);
+    });
+  }, []);
+
+  function formatMonthYear(dateStr?: string) {
+    if (!dateStr) return "";
+    const date = new Date(dateStr);
+    return date.toLocaleString("default", { month: "short", year: "numeric" }).toUpperCase();
+  }
 
   return (
     <section ref={sectionRef} className="py-20 sm:py-24 bg-gradient-to-b from-white to-cyan-50/30">
@@ -160,32 +177,63 @@ export default function TestimonialsSection() {
           </CarouselContent>
         </Carousel>
 
-        {/* Newsroom Card (single) */}
-        <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-orange-300 hover:border-orange-500 transition-all duration-200 max-w-full">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 justify-between">
-            <div className="hidden sm:flex items-center gap-2">
-              <span className="font-bold text-orange-500 tracking-wide text-sm">MEDIA COVERAGE</span>
+        {/* Newsroom Card (latest) */}
+        {loadingNews ? (
+          <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-orange-200 animate-pulse max-w-full">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 justify-between">
+              <div className="hidden sm:flex items-center gap-2">
+                <span className="h-4 w-24 bg-orange-100 rounded" />
+                <span className="mx-1 text-gray-200 text-lg">•</span>
+                <span className="h-4 w-16 bg-gray-100 rounded" />
+              </div>
+              <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                <span className="h-7 sm:h-10 w-10 bg-gray-100 rounded" />
+                <span className="bg-orange-200 text-white text-xs sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm">&nbsp;</span>
+              </div>
+            </div>
+            <div className="h-6 sm:h-8 w-3/4 bg-gray-100 rounded mb-2" />
+            <div className="flex sm:hidden items-center gap-2 mb-2">
+              <span className="h-4 w-24 bg-orange-100 rounded" />
+              <span className="mx-1 text-gray-200 text-lg">•</span>
+              <span className="h-4 w-16 bg-gray-100 rounded" />
+            </div>
+            <div className="relative flex flex-col">
+              <div className="h-5 w-full bg-gray-100 rounded mb-2" />
+              <div className="h-5 w-2/3 bg-gray-100 rounded mb-2" />
+              <div className="h-5 w-1/2 bg-gray-100 rounded" />
+            </div>
+          </div>
+        ) : latestNews && (
+          <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-orange-300 hover:border-orange-500 transition-all duration-200 max-w-full">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2 justify-between">
+              <div className="hidden sm:flex items-center gap-2">
+                <span className="font-bold text-orange-500 tracking-wide text-sm">{latestNews.category?.toUpperCase()}</span>
+                <span className="mx-1 text-gray-300 text-lg">•</span>
+                <span className="text-gray-400 font-semibold tracking-wide text-sm">{formatMonthYear(latestNews.date)}</span>
+              </div>
+              <div className="flex items-center gap-2 mt-2 sm:mt-0">
+                {latestNews.logo?.asset?.url && (
+                  <img src={latestNews.logo.asset.url} alt="Logo" className="h-7 sm:h-10 w-auto rounded bg-white p-0.5" />
+                )}
+                <span className="bg-orange-500 text-white text-xs sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm">LATEST</span>
+              </div>
+            </div>
+            <h3 className="text-xl sm:text-3xl font-bold mb-2 text-left">{latestNews.headline}</h3>
+            <div className="flex sm:hidden items-center gap-2 mb-2">
+              <span className="font-bold text-orange-500 tracking-wide text-sm">{latestNews.category?.toUpperCase()}</span>
               <span className="mx-1 text-gray-300 text-lg">•</span>
-              <span className="text-gray-400 font-semibold tracking-wide text-sm">JAN 2026</span>
+              <span className="text-gray-400 font-semibold tracking-wide text-sm">{formatMonthYear(latestNews.date)}</span>
             </div>
-            <div className="flex items-center gap-2 mt-2 sm:mt-0">
-              <img src="/midday2.png" alt="Midday Logo" className="h-7 sm:h-10 w-auto rounded" />
-              <span className="bg-orange-500 text-white text-xs sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm">LATEST</span>
+            <div className="relative flex flex-col">
+              <p className="text-base sm:text-lg text-slate-700 text-justify sm:pr-12 flex-1">
+                {latestNews.summary}
+                {latestNews.link && (
+                  <a href={latestNews.link} className="inline-block ml-2 text-orange-500 font-semibold underline align-baseline" target="_blank" rel="noopener noreferrer">Read more</a>
+                )}
+              </p>
             </div>
           </div>
-          <h3 className="text-xl sm:text-3xl font-bold mb-2 text-left">Wonder Women Entrepreneurs of India - January 2026</h3>
-          <div className="flex sm:hidden items-center gap-2 mb-2">
-            <span className="font-bold text-orange-500 tracking-wide text-sm">MEDIA COVERAGE</span>
-            <span className="mx-1 text-gray-300 text-lg">•</span>
-            <span className="text-gray-400 font-semibold tracking-wide text-sm">JAN 2026</span>
-          </div>
-          <div className="relative flex flex-col">
-            <p className="text-base sm:text-lg text-slate-700 text-justify sm:pr-12 flex-1">
-              The article brings together stories of women entrepreneurs across India, featuring our CEO for her contribution to building practical, growth-focused businesses and creating meaningful impact within the country’s evolving startup ecosystem.
-              <a href="/dummy-url" className="inline-block ml-2 text-orange-500 font-semibold underline align-baseline">Read more</a>
-            </p>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );
