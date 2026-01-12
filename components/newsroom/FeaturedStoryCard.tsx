@@ -10,6 +10,7 @@ interface FeaturedStoryCardProps {
     description?: string;
     date: string;
     image: string;
+    logo?: string;
     link: string;
   };
 }
@@ -53,13 +54,22 @@ const FeaturedStoryCard: React.FC<FeaturedStoryCardProps> = ({ story }) => (
     <div className="space-y-3 sm:space-y-4 relative">
       <div className="flex flex-wrap items-center gap-2 sm:gap-3 justify-between">
         <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          {story.logo && (
+            <Image
+              src={story.logo}
+              alt="Logo"
+              width={100}
+              height={100}
+              className="object-contain rounded bg-white p-0.5 mr-1"
+            />
+          )}
           <span
             className={`px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[story.category] || "bg-gray-100 text-gray-800"}`}
           >
             {story.category}
           </span>
         </div>
-        <span className="bg-black/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow ml-auto">Latest</span>
+        <span className="hidden sm:inline bg-black/80 text-white text-xs font-bold px-3 py-1 rounded-full shadow ml-auto">Latest</span>
       </div>
       <h2 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight text-balance">{story.headline}</h2>
       <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{story.summary || story.description}</p>
@@ -69,7 +79,7 @@ const FeaturedStoryCard: React.FC<FeaturedStoryCardProps> = ({ story }) => (
           href={story.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-gray-500 font-semibold hover:text-black transition-all duration-200 group"
+          className="inline-flex items-center text-xs gap-2 text-gray-400 font-semibold hover:text-black transition-all duration-200 group"
         >
           Read More
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

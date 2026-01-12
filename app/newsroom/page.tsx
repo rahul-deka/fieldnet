@@ -102,6 +102,10 @@ export default function NewsroomPage() {
                         typeof featuredStory.image === "string"
                           ? featuredStory.image
                           : featuredStory.image?.asset?.url || "",
+                      logo:
+                        typeof featuredStory.logo === "string"
+                          ? featuredStory.logo
+                          : featuredStory.logo?.asset?.url || undefined,
                       link: featuredStory.link || "#",
                     }}
                   />
@@ -118,7 +122,10 @@ export default function NewsroomPage() {
                         typeof item.image === "string"
                           ? item.image
                           : item.image?.asset?.url || "",
-                      logo: undefined,
+                      logo:
+                        typeof item.logo === "string"
+                          ? item.logo
+                          : item.logo?.asset?.url || undefined,
                       link: item.link || "#",
                     }))}
                   />

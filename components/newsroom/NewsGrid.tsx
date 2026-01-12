@@ -58,11 +58,22 @@ const NewsGrid: React.FC<NewsGridProps> = ({ news }) => {
             />
           </div>
           <div className="p-4 sm:p-8 space-y-2 sm:space-y-3 flex-1 flex flex-col">
-            <span
-              className={`inline-block px-3 py-1 rounded-full text-xs font-semibold mb-2 ${categoryColors[item.category] || "bg-gray-100 text-gray-800"}`}
-            >
-              {item.category}
-            </span>
+            <div className="flex items-center gap-2 mb-2">
+              {item.logo && (
+                <Image
+                  src={item.logo}
+                  alt="Logo"
+                  width={100}
+                  height={100}
+                  className="object-contain rounded bg-white p-0.5"
+                />
+              )}
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${categoryColors[item.category] || "bg-gray-100 text-gray-800"}`}
+              >
+                {item.category}
+              </span>
+            </div>
             <h3 className="text-base sm:text-lg font-bold leading-tight text-balance transition-colors">
               {item.headline}
             </h3>
