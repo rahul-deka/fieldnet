@@ -555,11 +555,9 @@ export default function WhoWeArePage() {
                 <CarouselContent className="-ml-4">
                   {[
                     { name: "India", code: "in" },
-                    { name: "Pakistan", code: "pk" },
                     { name: "Sri Lanka", code: "lk" },
                     { name: "Nepal", code: "np" },
                     { name: "Bhutan", code: "bt" },
-                    { name: "Bangladesh", code: "bd" },
                     { name: "Malaysia", code: "my" },
                     { name: "Japan", code: "jp" },
                     { name: "Indonesia", code: "id" },
@@ -573,11 +571,9 @@ export default function WhoWeArePage() {
                     { name: "Vietnam", code: "vn" },
                     // Duplicate for seamless loop
                     { name: "India", code: "in" },
-                    { name: "Pakistan", code: "pk" },
                     { name: "Sri Lanka", code: "lk" },
                     { name: "Nepal", code: "np" },
                     { name: "Bhutan", code: "bt" },
-                    { name: "Bangladesh", code: "bd" },
                     { name: "Malaysia", code: "my" },
                     { name: "Japan", code: "jp" },
                     { name: "Indonesia", code: "id" },

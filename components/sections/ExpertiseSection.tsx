@@ -166,10 +166,10 @@ export default function ExpertiseSection() {
                 <div className="flex-1 order-1">
                   <h3 className="text-2xl font-bold mb-2 text-white flex items-center gap-2">
                     <Sparkles className="w-6 h-6 text-red-600" />
-                    Kaizen Synergy
+                    Kaizen Events & Promotions
                   </h3>
                   <p className="text-white/80 text-lg">
-                    Brand strategy development, creative testing, product innovation, packaging design research, and customer experience optimization
+                    Delivers high-impact on-ground activations, events and retail execution that translates strategy into action.
                   </p>
                 </div>
                 <div className="flex items-center gap-4 order-2 sm:order-2">
@@ -214,11 +214,9 @@ export default function ExpertiseSection() {
               <CarouselContent className="-ml-4">
                 {[
                   { name: "India", code: "in" },
-                  { name: "Pakistan", code: "pk" },
                   { name: "Sri Lanka", code: "lk" },
                   { name: "Nepal", code: "np" },
                   { name: "Bhutan", code: "bt" },
-                  { name: "Bangladesh", code: "bd" },
                   { name: "Malaysia", code: "my" },
                   { name: "Japan", code: "jp" },
                   { name: "Indonesia", code: "id" },
@@ -232,11 +230,9 @@ export default function ExpertiseSection() {
                   { name: "Vietnam", code: "vn" },
                   // Duplicate for seamless loop
                   { name: "India", code: "in" },
-                  { name: "Pakistan", code: "pk" },
                   { name: "Sri Lanka", code: "lk" },
                   { name: "Nepal", code: "np" },
                   { name: "Bhutan", code: "bt" },
-                  { name: "Bangladesh", code: "bd" },
                   { name: "Malaysia", code: "my" },
                   { name: "Japan", code: "jp" },
                   { name: "Indonesia", code: "id" },
