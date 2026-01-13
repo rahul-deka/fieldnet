@@ -18,25 +18,30 @@ import BackToTopButton from "@/components/back-to-top";
 export default function RegisterPage() {
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [consent, setConsent] = useState('');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('');
   const [ageVal, setAgeVal] = useState('');
-  const [countryVal, setCountryVal] = useState('');
   const [stateVal, setStateVal] = useState('');
   const [cityVal, setCityVal] = useState('');
   const [postalCode, setPostalCode] = useState('');
-  const [timezoneVal, setTimezoneVal] = useState('');
   const [educationVal, setEducationVal] = useState('');
-  const [experienceVal, setExperienceVal] = useState('');
-  const [languagesVal, setLanguagesVal] = useState('');
+  const [occupationVal, setOccupationVal] = useState('');
+  const [languagesVal, setLanguagesVal] = useState<string[]>([]);
+  const [otherLanguage, setOtherLanguage] = useState('');
 
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>([]);
   const [selectedWorkTypes, setSelectedWorkTypes] = useState<string[]>([]);
   const [selectedSectors, setSelectedSectors] = useState<string[]>([]);
   const [payoutMethod, setPayoutMethod] = useState<string>("");
+  const [otherPayout, setOtherPayout] = useState("");
+  const [contactPrefs, setContactPrefs] = useState<string[]>([]);
+  const [priorResearch, setPriorResearch] = useState('');
+  const [hearAbout, setHearAbout] = useState('');
+  const [hearAboutOther, setHearAboutOther] = useState('');
+  const [storeContactConsent, setStoreContactConsent] = useState('');
 
   const toggleSelection = (value: string, list: string[], setter: (list: string[]) => void) => {
     if (list.includes(value)) {
@@ -52,25 +57,30 @@ export default function RegisterPage() {
 
     try {
       const payload = {
+        consent,
         fullName,
         email,
         phone,
         gender,
         age: ageVal,
-        country: countryVal,
         region: stateVal,
         city: cityVal,
         postalCode,
-        timezone: timezoneVal,
         education: educationVal,
-        experience: experienceVal,
-        languages: languagesVal,
+        occupation: occupationVal,
+        languages: languagesVal.includes('Other') && otherLanguage
+          ? [...languagesVal.filter(l => l !== 'Other'), otherLanguage].join(', ')
+          : languagesVal.join(', '),
         availability: selectedAvailability.join(', '),
         workTypes: selectedWorkTypes.join(', '),
         sectors: selectedSectors.join(', '),
-        paymentMethod: payoutMethod,
+        paymentMethod: payoutMethod === 'Other' && otherPayout ? `Other: ${otherPayout}` : payoutMethod,
         paypalEmail: (document.getElementById('paypalEmail') as HTMLInputElement)?.value || '',
         upiId: (document.getElementById('upiId') as HTMLInputElement)?.value || '',
+        contactPreferences: contactPrefs.join(', '),
+        priorResearch: priorResearch,
+        hearAbout: hearAbout === 'Other' && hearAboutOther ? `Other: ${hearAboutOther}` : hearAbout,
+        storeContactConsent,
       };
 
       const res = await fetch('/api/submit-registration', {
@@ -84,8 +94,9 @@ export default function RegisterPage() {
 
       toast({ title: 'Thank you!', description: 'Your registration has been submitted.' });
       // Reset form
-      setFullName(''); setEmail(''); setPhone(''); setGender(''); setAgeVal(''); setCountryVal(''); setStateVal(''); setCityVal(''); setPostalCode(''); setTimezoneVal(''); setEducationVal(''); setExperienceVal(''); setLanguagesVal('');
-      setSelectedAvailability([]); setSelectedWorkTypes([]); setSelectedSectors([]); setPayoutMethod('');
+      setConsent('');
+      setFullName(''); setEmail(''); setPhone(''); setGender(''); setAgeVal(''); setStateVal(''); setCityVal(''); setPostalCode(''); setEducationVal(''); setOccupationVal(''); setLanguagesVal([]); setOtherLanguage('');
+      setSelectedAvailability([]); setSelectedWorkTypes([]); setSelectedSectors([]); setPayoutMethod(''); setOtherPayout(""); setContactPrefs([]); setPriorResearch(''); setHearAbout(''); setHearAboutOther(''); setStoreContactConsent('');
     } catch (err: any) {
       console.error('Registration submit error', err);
       toast({ title: 'Submission failed', description: err?.message || 'Please try again later.' });
@@ -115,162 +126,176 @@ export default function RegisterPage() {
           <Card>
             <form onSubmit={handleRegister}>
               <CardContent className="space-y-6">
-                    {/* Personal Information */}
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-                        <User className="h-5 w-5 text-cyan-600" />
-                        Personal Information
-                      </h3>
-                      
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="fullName">Full Name *</Label>
-                          <Input
-                            id="fullName"
-                            type="text"
-                            placeholder="Enter your full name"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
-                        </div>
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-900">Consent</h3>
+                  <div className="space-y-2">
+                    <Label className="block mb-2">Do you agree to be contacted for research surveys, interviews, or product feedback studies? <span className="text-red-500">*</span></Label>
+                    <div className="flex gap-6">
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="consent"
+                          value="yes"
+                          checked={consent === 'yes'}
+                          onChange={() => setConsent('yes')}
+                          required
+                        />
+                        Yes
+                      </label>
+                      <label className="flex items-center gap-2">
+                        <input
+                          type="radio"
+                          name="consent"
+                          value="no"
+                          checked={consent === 'no'}
+                          onChange={() => setConsent('no')}
+                          required
+                        />
+                        No
+                      </label>
+                    </div>
+                  </div>
+                </div>
 
-                        <div className="space-y-2">
-                          <Label htmlFor="email">Email *</Label>
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                            <Input
-                              id="email"
-                              type="email"
-                              placeholder="you@example.com"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                              required
-                            />
-                          </div>
-                        </div>
+                {/* Personal Information */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                    <User className="h-5 w-5 text-cyan-600" />
+                    Personal Information
+                  </h3>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="fullName">Full Name *</Label>
+                      <Input
+                        id="fullName"
+                        type="text"
+                        placeholder="Enter your full name"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                          required
+                        />
                       </div>
+                    </div>
+                  </div>
 
-                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                        <div className="space-y-2">
-                          <Label htmlFor="phone">Phone (WhatsApp Preferred) *</Label>
-                          <div className="relative">
-                            <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
-                            <Input
-                              id="phone"
-                              type="tel"
-                              placeholder="+91 98765 43210"
-                              value={phone}
-                              onChange={(e) => setPhone(e.target.value)}
-                              className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                              required
-                            />
-                          </div>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="gender">Gender *</Label>
-                          <Select value={gender} onValueChange={setGender} required>
-                            <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
-                              <SelectValue placeholder="Select gender" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="male">Male</SelectItem>
-                              <SelectItem value="female">Female</SelectItem>
-                              <SelectItem value="non-binary">Non-binary</SelectItem>
-                              <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="age">Age *</Label>
-                          <Input
-                            id="age"
-                            type="text"
-                            inputMode="numeric"
-                            pattern="[0-9]*"
-                            maxLength={3}
-                            placeholder="25"
-                            value={ageVal}
-                            onChange={(e) => setAgeVal(e.target.value)}
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
-                        </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone (WhatsApp Preferred) *</Label>
+                      <div className="relative">
+                        <Phone className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                        <Input
+                          id="phone"
+                          type="tel"
+                          placeholder="+91 98765 43210"
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
+                          className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                          required
+                        />
                       </div>
                     </div>
 
-                    {/* Location Information */}
+                    <div className="space-y-2">
+                      <Label htmlFor="gender">Gender *</Label>
+                      <Select value={gender} onValueChange={setGender} required>
+                        <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
+                          <SelectValue placeholder="Select gender" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">Male</SelectItem>
+                          <SelectItem value="female">Female</SelectItem>
+                          <SelectItem value="non-binary">Non-binary</SelectItem>
+                          <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="ageGroup">Age Group *</Label>
+                      <Select value={ageVal} onValueChange={setAgeVal} required>
+                        <SelectTrigger id="ageGroup" className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
+                          <SelectValue placeholder="Select age group" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="18–24">18–24</SelectItem>
+                          <SelectItem value="25–34">25–34</SelectItem>
+                          <SelectItem value="35–44">35–44</SelectItem>
+                          <SelectItem value="45–54">45–54</SelectItem>
+                          <SelectItem value="55+">55+</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                         <MapPin className="h-5 w-5 text-cyan-600" />
                         Location
                       </h3>
 
-                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div className="space-y-2 lg:col-span-2">
-                          <Label htmlFor="country">Country *</Label>
-                          <Select value={countryVal} onValueChange={setCountryVal} required>
-                            <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
-                              <SelectValue placeholder="Select country" />
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="state">State/UT *</Label>
+                          <Select value={stateVal} onValueChange={setStateVal} required>
+                            <SelectTrigger id="state" className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
+                              <SelectValue placeholder="Select State/UT" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="india">India</SelectItem>
-                              <SelectItem value="pakistan">Pakistan</SelectItem>
-                              <SelectItem value="bangladesh">Bangladesh</SelectItem>
-                              <SelectItem value="sri-lanka">Sri Lanka</SelectItem>
-                              <SelectItem value="maldives">Maldives</SelectItem>
-                              <SelectItem value="nepal">Nepal</SelectItem>
-                              <SelectItem value="bhutan">Bhutan</SelectItem>
-
-                              <SelectItem value="china">China</SelectItem>
-                              <SelectItem value="taiwan">Taiwan</SelectItem>
-                              <SelectItem value="hong-kong">Hong Kong</SelectItem>
-                              <SelectItem value="macau">Macau</SelectItem>
-
-                              <SelectItem value="japan">Japan</SelectItem>
-                              <SelectItem value="south-korea">South Korea</SelectItem>
-
-                              <SelectItem value="indonesia">Indonesia</SelectItem>
-                              <SelectItem value="malaysia">Malaysia</SelectItem>
-                              <SelectItem value="singapore">Singapore</SelectItem>
-                              <SelectItem value="thailand">Thailand</SelectItem>
-                              <SelectItem value="philippines">Philippines</SelectItem>
-                              <SelectItem value="vietnam">Vietnam</SelectItem>
-                              <SelectItem value="cambodia">Cambodia</SelectItem>
-                              <SelectItem value="laos">Laos</SelectItem>
-
-                              <SelectItem value="myanmar">Myanmar</SelectItem>
-                              <SelectItem value="brunei">Brunei</SelectItem>
-
-                              <SelectItem value="australia">Australia</SelectItem>
-                              <SelectItem value="new-zealand">New Zealand</SelectItem>
-
-                              <SelectItem value="united-arab-emirates">United Arab Emirates</SelectItem>
-                              <SelectItem value="saudi-arabia">Saudi Arabia</SelectItem>
-
-                              <SelectItem value="usa">United States</SelectItem>
-                              <SelectItem value="uk">United Kingdom</SelectItem>
-                              <SelectItem value="canada">Canada</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
+                              <SelectItem value="Andhra Pradesh">Andhra Pradesh</SelectItem>
+                              <SelectItem value="Arunachal Pradesh">Arunachal Pradesh</SelectItem>
+                              <SelectItem value="Assam">Assam</SelectItem>
+                              <SelectItem value="Bihar">Bihar</SelectItem>
+                              <SelectItem value="Chhattisgarh">Chhattisgarh</SelectItem>
+                              <SelectItem value="Goa">Goa</SelectItem>
+                              <SelectItem value="Gujarat">Gujarat</SelectItem>
+                              <SelectItem value="Haryana">Haryana</SelectItem>
+                              <SelectItem value="Himachal Pradesh">Himachal Pradesh</SelectItem>
+                              <SelectItem value="Jharkhand">Jharkhand</SelectItem>
+                              <SelectItem value="Karnataka">Karnataka</SelectItem>
+                              <SelectItem value="Kerala">Kerala</SelectItem>
+                              <SelectItem value="Madhya Pradesh">Madhya Pradesh</SelectItem>
+                              <SelectItem value="Maharashtra">Maharashtra</SelectItem>
+                              <SelectItem value="Manipur">Manipur</SelectItem>
+                              <SelectItem value="Meghalaya">Meghalaya</SelectItem>
+                              <SelectItem value="Mizoram">Mizoram</SelectItem>
+                              <SelectItem value="Nagaland">Nagaland</SelectItem>
+                              <SelectItem value="Odisha">Odisha</SelectItem>
+                              <SelectItem value="Punjab">Punjab</SelectItem>
+                              <SelectItem value="Rajasthan">Rajasthan</SelectItem>
+                              <SelectItem value="Sikkim">Sikkim</SelectItem>
+                              <SelectItem value="Tamil Nadu">Tamil Nadu</SelectItem>
+                              <SelectItem value="Telangana">Telangana</SelectItem>
+                              <SelectItem value="Tripura">Tripura</SelectItem>
+                              <SelectItem value="Uttar Pradesh">Uttar Pradesh</SelectItem>
+                              <SelectItem value="Uttarakhand">Uttarakhand</SelectItem>
+                              <SelectItem value="West Bengal">West Bengal</SelectItem>
+                              <SelectItem value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</SelectItem>
+                              <SelectItem value="Chandigarh">Chandigarh</SelectItem>
+                              <SelectItem value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</SelectItem>
+                              <SelectItem value="Delhi">Delhi</SelectItem>
+                              <SelectItem value="Jammu and Kashmir">Jammu and Kashmir</SelectItem>
+                              <SelectItem value="Ladakh">Ladakh</SelectItem>
+                              <SelectItem value="Lakshadweep">Lakshadweep</SelectItem>
+                              <SelectItem value="Puducherry">Puducherry</SelectItem>
                             </SelectContent>
                           </Select>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="state">Region/State *</Label>
-                          <Input
-                            id="state"
-                            type="text"
-                            placeholder="State/Region"
-                            value={stateVal}
-                            onChange={(e) => setStateVal(e.target.value)}
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
                         </div>
 
                         <div className="space-y-2">
@@ -298,27 +323,8 @@ export default function RegisterPage() {
                             required
                           />
                         </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="timezone">Timezone *</Label>
-                          <Select value={timezoneVal} onValueChange={setTimezoneVal} required>
-                            <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
-                              <SelectValue placeholder="Select timezone" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="ist">IST (UTC+5:30)</SelectItem>
-                              <SelectItem value="est">EST (UTC-5)</SelectItem>
-                              <SelectItem value="pst">PST (UTC-8)</SelectItem>
-                              <SelectItem value="gmt">GMT (UTC+0)</SelectItem>
-                              <SelectItem value="cet">CET (UTC+1)</SelectItem>
-                              <SelectItem value="aest">AEST (UTC+10)</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
                       </div>
                     </div>
-
-                    {/* Professional Background */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                         <GraduationCap className="h-5 w-5 text-cyan-600" />
@@ -327,7 +333,7 @@ export default function RegisterPage() {
 
                       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="education">Education *</Label>
+                          <Label htmlFor="education">Highest Education Level *</Label>
                           <Select value={educationVal} onValueChange={setEducationVal} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select education level" />
@@ -343,40 +349,59 @@ export default function RegisterPage() {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="experience">Experience (Years) *</Label>
-                          <Input
-                            id="experience"
-                            type="text"
-                            inputMode="numeric"
-                            pattern="[0-9]*"
-                            maxLength={2}
-                            placeholder="0"
-                            value={experienceVal}
-                            onChange={(e) => setExperienceVal(e.target.value)}
-                            className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
-                            required
-                          />
+                          <Label htmlFor="occupation">Occupation *</Label>
+                          <Select value={occupationVal} onValueChange={setOccupationVal} required>
+                            <SelectTrigger id="occupation" className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
+                              <SelectValue placeholder="Select occupation" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Student">Student</SelectItem>
+                              <SelectItem value="Homemaker">Homemaker</SelectItem>
+                              <SelectItem value="Working Professional">Working Professional</SelectItem>
+                              <SelectItem value="Business Owner">Business Owner</SelectItem>
+                              <SelectItem value="Retired">Retired</SelectItem>
+                              <SelectItem value="Other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="languages">Languages (Comma-separated) *</Label>
-                          <div className="relative">
-                            <Languages className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+                      </div>
+                      <div className="space-y-2 mt-4">
+                        <Label>Languages You Are Comfortable With *</Label>
+                        <div className="flex flex-wrap gap-4">
+                          {['Hindi', 'English', 'Tamil', 'Telugu', 'Bengali', 'Marathi', 'Other'].map((lang) => (
+                            <label key={lang} className="flex items-center gap-2">
+                              <Checkbox
+                                id={`lang-${lang}`}
+                                checked={languagesVal.includes(lang)}
+                                onCheckedChange={() => {
+                                  if (languagesVal.includes(lang)) {
+                                    setLanguagesVal(languagesVal.filter(l => l !== lang));
+                                  } else {
+                                    setLanguagesVal([...languagesVal, lang]);
+                                  }
+                                }}
+                                required={languagesVal.length === 0}
+                              />
+                              {lang}
+                            </label>
+                          ))}
+                        </div>
+                        {languagesVal.includes('Other') && (
+                          <div className="mt-2">
                             <Input
-                              id="languages"
+                              id="otherLanguage"
                               type="text"
-                              placeholder="English, Hindi, Spanish"
-                              value={languagesVal}
-                              onChange={(e) => setLanguagesVal(e.target.value)}
-                              className="pl-10 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                              placeholder="Please specify other language(s)"
+                              value={otherLanguage}
+                              onChange={e => setOtherLanguage(e.target.value)}
+                              className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
                               required
                             />
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
 
-                    {/* Availability */}
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                         <Calendar className="h-5 w-5 text-cyan-600" />
@@ -409,13 +434,13 @@ export default function RegisterPage() {
                     <div className="space-y-4">
                       <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
                         <Briefcase className="h-5 w-5 text-cyan-600" />
-                        Preferred Work Types
+                        Participation Preferences
                       </h3>
 
                       <div className="space-y-3">
-                        <Label>Select work types you're interested in *</Label>
+                        <Label>What kind of research activities would you be comfortable participating in? *</Label>
                         <div className="grid grid-cols-2 gap-3">
-                          {['Online Surveys', 'CATI', 'CAPI/Intercepts', 'In-home Tests', 'Mystery Shop', 'Sampling/Promotions', 'Retail Audit', 'Events/BTL', 'Diary/UX Tests'].map((option) => (
+                          {["Online Surveys (via mobile or desktop)", "Phone Interviews (short calls for research)", "In-person Surveys (e.g. in malls, clinics, markets)", "Product Testing at Home (samples sent to you)", "Mystery Shopping (visit and review retail stores)", "Sampling/Promotions (try products, share views)", "Retail Audits (check product visibility in shops)", "Event Participation (at exhibitions, launches)", "UX / Diary Studies (track usage, daily input)"].map((option) => (
                             <div key={option} className="flex items-center space-x-2">
                               <Checkbox
                                 id={`worktype-${option}`}
@@ -432,6 +457,89 @@ export default function RegisterPage() {
                           ))}
                         </div>
                       </div>
+
+                      {/* Contact Preferences */}
+                      <div className="space-y-3 mt-6">
+                        <Label>How would you prefer to be contacted for research opportunities?</Label>
+                        <div className="flex flex-wrap gap-4">
+                          {['WhatsApp', 'Phone Call', 'Email', 'SMS'].map((method) => (
+                            <label key={method} className="flex items-center gap-2">
+                              <Checkbox
+                                id={`contactpref-${method}`}
+                                checked={contactPrefs.includes(method)}
+                                onCheckedChange={() => {
+                                  if (contactPrefs.includes(method)) {
+                                    setContactPrefs(contactPrefs.filter(m => m !== method));
+                                  } else {
+                                    setContactPrefs([...contactPrefs, method]);
+                                  }
+                                }}
+                              />
+                              {method}
+                            </label>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Prior Research Participation */}
+                      <div className="space-y-3 mt-6">
+                        <Label>Have you participated in any market research or paid survey before?</Label>
+                        <div className="flex gap-6">
+                          <label className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="priorResearch"
+                              value="yes"
+                              checked={priorResearch === 'yes'}
+                              onChange={() => setPriorResearch('yes')}
+                              required
+                            />
+                            Yes
+                          </label>
+                          <label className="flex items-center gap-2">
+                            <input
+                              type="radio"
+                              name="priorResearch"
+                              value="no"
+                              checked={priorResearch === 'no'}
+                              onChange={() => setPriorResearch('no')}
+                              required
+                            />
+                            No
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* How did you hear about FieldNet Panel? */}
+                      <div className="space-y-3">
+                        <Label>How did you hear about FieldNet Panel?</Label>
+                        <div className="flex gap-2 items-center">
+                          <div style={{ minWidth: 180 }}>
+                            <Select value={hearAbout} onValueChange={value => { setHearAbout(value); if (value !== 'Other') setHearAboutOther(''); }} required>
+                              <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
+                                <SelectValue placeholder="Select an option" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="WhatsApp group">WhatsApp group</SelectItem>
+                                <SelectItem value="Social media">Social media</SelectItem>
+                                <SelectItem value="Friend/Referral">Friend/Referral</SelectItem>
+                                <SelectItem value="FieldNet Representative">FieldNet Representative</SelectItem>
+                                <SelectItem value="Other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          {hearAbout === 'Other' && (
+                            <Input
+                              style={{ width: 180 }}
+                              type="text"
+                              placeholder="Please specify"
+                              value={hearAboutOther}
+                              onChange={e => setHearAboutOther(e.target.value)}
+                              required
+                            />
+                          )}
+                        </div>
+                      </div>
                     </div>
 
                     {/* Sectors */}
@@ -442,9 +550,9 @@ export default function RegisterPage() {
                       </h3>
 
                       <div className="space-y-3">
-                        <Label>Select sectors *</Label>
+                        <Label>Which topics or sectors are you most interested in? *</Label>
                         <div className="grid grid-cols-2 gap-3">
-                          {['FMCG', 'BFSI', 'Healthcare/Pharma', 'Telecom', 'Automobile', 'Real Estate', 'Energy/Solar/EV', 'Hospitality/Travel', 'Retail/E-commerce', 'Technology/Software', 'Education', 'Public Sector', 'Media/Entertainment'].map((option) => (
+                          {["Packaged Foods / FMCG", "Finance / Banking / Insurance", "Healthcare / Medicines", "Telecom / Mobile Services", "Automobiles / EVs", "Real Estate / Housing", "Retail / E-commerce", "Travel / Hospitality", "Education / Learning", "Tech / Apps / Software", "Government / Public Services", "Media / Entertainment", "Other"].map((option) => (
                             <div key={option} className="flex items-center space-x-2">
                               <Checkbox
                                 id={`sector-${option}`}
@@ -472,14 +580,15 @@ export default function RegisterPage() {
 
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="space-y-2">
-                          <Label htmlFor="payoutMethod">Payout Method *</Label>
-                          <Select value={payoutMethod} onValueChange={setPayoutMethod} required>
+                          <Label htmlFor="payoutMethod">Preferred Method to Receive Rewards/Payouts *</Label>
+                          <Select value={payoutMethod} onValueChange={value => { setPayoutMethod(value); if (value !== 'Other') setOtherPayout(''); }} required>
                             <SelectTrigger className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500">
                               <SelectValue placeholder="Select payout method" />
                             </SelectTrigger>
                             <SelectContent>
                               <SelectItem value="paypal">PayPal</SelectItem>
                               <SelectItem value="upi">UPI (India)</SelectItem>
+                              <SelectItem value="Other">Other</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -512,7 +621,54 @@ export default function RegisterPage() {
                               />
                             </div>
                           )}
+
+                          {payoutMethod === 'Other' && (
+                            <div className="space-y-2">
+                              <Label htmlFor="upiId">Please Specify *</Label>
+                              <Input
+                                type="text"
+                                placeholder="Netbanking, etc"
+                                value={otherPayout}
+                                className="focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500 focus-visible:ring-cyan-500"
+                                onChange={e => setOtherPayout(e.target.value)}
+                                required
+                              />
+                            </div>
+                          )}
                         </div>
+                      </div>
+                    </div>
+
+                    {/* Store Contact Consent */}
+                    <div className="mb-6">
+                      <label className="block font-semibold mb-2">
+                        Do you give permission to store your contact information securely for future research opportunities?
+                      </label>
+                      <div className="flex gap-4">
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            name="storeContactConsent"
+                            value="Yes"
+                            checked={storeContactConsent === "Yes"}
+                            onChange={() => setStoreContactConsent("Yes")}
+                            className="mr-2"
+                            required
+                          />
+                          Yes
+                        </label>
+                        <label className="flex items-center">
+                          <input
+                            type="radio"
+                            name="storeContactConsent"
+                            value="No"
+                            checked={storeContactConsent === "No"}
+                            onChange={() => setStoreContactConsent("No")}
+                            className="mr-2"
+                            required
+                          />
+                          No
+                        </label>
                       </div>
                     </div>
 

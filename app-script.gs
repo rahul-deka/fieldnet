@@ -185,55 +185,71 @@ function handlePanelRegistration(data) {
     sheet = spreadsheet.insertSheet(sheetName);
     sheet.appendRow([
       'Timestamp',
+      'Consent',
       'Full Name',
       'Email',
       'Phone',
       'Gender',
-      'Age',
-      'Country',
-      'Region/State',
+      'Age Group',
+      'State/UT',
       'City',
       'Postal Code',
-      'Timezone',
       'Education',
-      'Experience (Years)',
+      'Occupation',
       'Languages',
       'Availability',
       'Work Types',
       'Sectors',
-      'Payment Method',
+      'Prior Research Participation',
+      'Store Contact Consent',
+      'Contact Preferences',
+      'How did you hear about FieldNet Panel?',
       'PayPal Email',
-      'UPI ID'
+      'UPI ID',
+      'Payment Method'
     ]);
   }
 
   var row = [
     data.timestamp || new Date().toLocaleString(),
+    data.consent || '',
     data.fullName || data.FullName || data.name || '',
     data.email || data.Email || '',
     data.phone || data.Phone || '',
     data.gender || data.Gender || '',
-    data.age || data.Age || '',
-    data.country || data.Country || '',
-    data.region || data.Region || data.state || data.State || '',
+    data.age || data.Age || data.ageVal || data.ageGroup || '',
+    data.region || data.Region || data.state || data.State || data.stateVal || '',
     data.city || data.City || '',
     data.postalCode || data.PostalCode || data.postal || data.Postal || '',
-    data.timezone || data.Timezone || '',
     data.education || data.Education || '',
-    data.experience || data.Experience || data.experienceYears || '',
-    data.languages || data.Languages || '',
+    data.occupation || data.Occupation || data.occupationVal || '',
+    (Array.isArray(data.languages) ? data.languages.join(', ') : data.languages || data.Languages || ''),
     data.availability || data.Availability || '',
     data.workTypes || data.WorkTypes || '',
     data.sectors || data.Sectors || '',
-    data.paymentMethod || data.PaymentMethod || data.payoutMethod || '',
+    data.priorResearch || data.PriorResearch || '',
+    data.storeContactConsent || '',
+    data.contactPreferences || data.ContactPreferences || '',
+    data.hearAbout || '',
     data.paypalEmail || data.PayPalEmail || data.paypal || '',
-    data.upiId || data.UPIId || data.upi || ''
+    data.upiId || data.UPIId || data.upi || '',
+    data.paymentMethod || data.PaymentMethod || data.payoutMethod || '',
   ];
 
   sheet.appendRow(row);
 
   try {
-    sendPanelRegistrationNotification(data);
+      sendPanelRegistrationNotification(data);
+      var userEmail = data.email || data.Email || '';
+      var userName = data.fullName || data.FullName || data.name || 'Unknown';
+      if (userEmail) {
+        var userSubject = 'Thank you for registering with FieldNet Panel!';
+        var userBody = 'Hi ' + userName + ',\n\n';
+        userBody += 'Thank you for registering with FieldNet Panel. We have received your details and will reach out to you soon for relevant research opportunities.\n\n';
+        userBody += 'If you have any questions, feel free to reply to this email.\n\n';
+        userBody += 'Best regards,\nFieldNet Research Team';
+        MailApp.sendEmail({ to: userEmail, subject: userSubject, body: userBody });
+      }
   } catch (e) {
     Logger.log('sendPanelRegistrationNotification error: ' + e.toString());
   }
@@ -570,6 +586,19 @@ function getActiveAnnouncement() {
 function sendPanelRegistrationNotification(data) {
   var adminEmail = 'fieldnetllp@gmail.com';
   var subject = 'New Panel Registration: ' + (data.fullName || data.FullName || 'Unknown');
-  var body = 'New panel registration details:\\n\\n' + JSON.stringify(data, null, 2) + '\\n\\nView sheet: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl();
+  var body =
+    'New FieldNet Panel Registration:\n' +
+    '\n' +
+    'Consent: ' + (data.consent || '') + '\n' +
+    'Full Name: ' + (data.fullName || '') + '\n' +
+    'Email: ' + (data.email || '') + '\n' +
+    'Phone: ' + (data.phone || '') + '\n' +
+    'Age: ' + (data.age || '') + '\n' +
+    'Preferred Contact Method: ' + (data.contactPreferences|| data.ContactPreferences || '') + '\n' +
+    'How did you hear about FieldNet Panel?: ' + (data.hearAbout || '') + '\n' +
+    (data.hearAboutOther ? ('If Other, please specify: ' + data.hearAboutOther + '\n') : '') +
+    'Timestamp: ' + (data.timestamp || '') + '\n' +
+    '\n' +
+    'View sheet: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl();
   MailApp.sendEmail({ to: adminEmail, subject: subject, body: body });
 }
