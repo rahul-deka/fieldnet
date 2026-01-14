@@ -10,6 +10,7 @@ import { AnnouncementBannerSkeleton } from "@/components/announcement-banner-ske
 import "./globals.css"
 
 import CookieConsent from "@/components/cookie-consent"
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "FieldNet Global Research",
@@ -34,6 +35,7 @@ export default function RootLayout({
         </Suspense>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+        <Toaster />
         <CookieConsent />
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useToast } from "@/hooks/use-toast"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Mail } from "lucide-react"
@@ -9,6 +10,7 @@ export function NewsletterSubscribe({ showTitle = true, compact = false }: { sho
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -29,10 +31,19 @@ export function NewsletterSubscribe({ showTitle = true, compact = false }: { sho
       })
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Thank you for subscribing!" })
-        setEmail("")
+        toast({
+          title: "Subscribed!",
+          description: "Thank you for subscribing to our newsletter.",
+        });
+        setMessage(null);
+        setEmail("");
       } else {
-        setMessage({ type: "error", text: "Failed to subscribe. Please try again." })
+        const data = await response.json();
+        if (data?.error === "This email is already subscribed") {
+          setMessage({ type: "error", text: "This email is already subscribed to the newsletter." })
+        } else {
+          setMessage({ type: "error", text: "Failed to subscribe. Please try again." })
+        }
       }
     } catch (error) {
       console.error("Newsletter subscription error:", error)
@@ -63,16 +74,14 @@ export function NewsletterSubscribe({ showTitle = true, compact = false }: { sho
             type="submit"
             disabled={isSubmitting}
             aria-label={isSubmitting ? "Subscribing" : "Subscribe"}
-            className="h-[44px] min-h-[44px] max-h-[44px] inline-flex items-center justify-center rounded-md bg-cyan-600 px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-[44px] min-h-[44px] max-h-[44px] inline-flex items-center justify-center rounded-md bg-cyan-600 px-4 text-sm font-medium text-white shadow-sm transition-colors hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:cursor-not-allowed disabled:opacity-50 cursor-pointer"
           >
             <Mail className="h-4 w-4" />
           </button>
         </div>
-        {message && (
+        {message && message.type === "error" && (
           <p
-            className={`text-sm ${
-              message.type === "success" ? "text-green-600" : "text-red-600"
-            }`}
+            className={`text-sm mt-2 text-red-600`}
           >
             {message.text}
           </p>
