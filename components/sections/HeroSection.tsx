@@ -17,7 +17,7 @@ export default function HeroSection() {
           <div>
             <Badge variant="secondary" className="mb-6 bg-cyan-100 text-cyan-800 border-cyan-200">
               <Award className="w-3 h-3 mr-1" />
-              Established 2005 • 150+ Years Collective Experience
+              Established 2004 • 150+ Years Collective Experience
             </Badge>
             <h1 className="text-5xl font-bold tracking-tight text-foreground sm:text-6xl text-balance leading-tight">
               Global Market

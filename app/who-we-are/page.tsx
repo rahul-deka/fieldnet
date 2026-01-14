@@ -341,7 +341,7 @@ export default function WhoWeArePage() {
                   {
                     icon: <Trophy className="h-8 w-8 text-amber-500" />,
                     label: "Founded",
-                    value: "2005"
+                    value: "2004"
                   },
                   {
                     icon: <Users2 className="h-8 w-8 text-cyan-600" />,
@@ -740,7 +740,7 @@ export default function WhoWeArePage() {
               <div className="space-y-8">
                 {[
                   {
-                    year: '2005', title: 'Humble Beginnings', bullets: [
+                    year: '2004', title: 'Humble Beginnings', bullets: [
                       'Founder: Mr. Kamlesh Shukla, with a rich background at Nielsen and Ipsos, established FieldNet as a proprietary company.',
                       'Employee Strength: 2 dedicated employees.',
                       'Focus: Initially focused on small-scale market research projects.',
