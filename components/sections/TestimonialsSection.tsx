@@ -60,11 +60,13 @@ const testimonials = [
 ];
 
 
+
 export default function TestimonialsSection() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [latestNews, setLatestNews] = useState<Newsroom | null>(null);
   const [loadingNews, setLoadingNews] = useState(true);
+  const [newsError, setNewsError] = useState<string | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -86,12 +88,22 @@ export default function TestimonialsSection() {
   }, []);
 
   useEffect(() => {
-    fetchNewsroom().then((data) => {
-      if (data && data.length > 0) {
-        setLatestNews(data[0]);
-      }
-      setLoadingNews(false);
-    });
+    fetchNewsroom()
+      .then((data) => {
+        console.log('[Newsroom fetch] Data:', data);
+        if (data && data.length > 0) {
+          setLatestNews(data[0]);
+        } else {
+          setNewsError('No newsroom data found.');
+        }
+      })
+      .catch((err) => {
+        console.error('[Newsroom fetch] Error:', err);
+        setNewsError('Failed to load newsroom data.');
+      })
+      .finally(() => {
+        setLoadingNews(false);
+      });
   }, []);
 
   function formatMonthYear(dateStr?: string) {
@@ -202,6 +214,10 @@ export default function TestimonialsSection() {
               <div className="h-5 w-2/3 bg-gray-100 rounded mb-2" />
               <div className="h-5 w-1/2 bg-gray-100 rounded" />
             </div>
+          </div>
+        ) : newsError ? (
+          <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-red-300 text-red-700 font-semibold">
+            Newsroom error: {newsError}
           </div>
         ) : latestNews && (
           <div className="w-full mt-4 bg-white px-3 sm:px-8 py-4 sm:py-8 text-left border border-orange-300 hover:border-orange-500 transition-all duration-200 max-w-full">
