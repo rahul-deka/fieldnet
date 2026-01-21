@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "FieldNet Global Research",
   description:
     "Full-service market research agency providing exceptional quality services to clients across the globe. Established 2004 with 150+ years collective experience.",
+  metadataBase: new URL('https://www.fieldnetglobal.com'),
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({
