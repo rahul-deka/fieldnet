@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Resources | FieldNet Global Research",
+  description: "Download whitepapers, reports, and methodology notes from FieldNet's global research experts.",
+};
 import React from "react";
 import { Navigation } from "@/components/navigation";
 import { Footer } from "@/components/footer";

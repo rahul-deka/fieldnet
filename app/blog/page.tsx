@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Blog | FieldNet Global Research",
+  description: "Insights, updates, and thought leadership from FieldNet's global research team. Read our latest blog posts.",
+};
 import React from 'react'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
