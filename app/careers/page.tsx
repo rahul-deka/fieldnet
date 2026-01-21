@@ -1,8 +1,4 @@
-// ...removed 'use client' directive to allow metadata export...
-export const metadata = {
-  title: "Careers | FieldNet Global Research",
-  description: "Explore career opportunities at FieldNet. Join our team and help shape the future of market research.",
-};
+"use client";
 
 import React from "react";
 import { Navigation } from "@/components/navigation";
