@@ -1,4 +1,3 @@
-export const metadata = {
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { Navigation } from "@/components/navigation";
