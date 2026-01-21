@@ -13,14 +13,14 @@ import CookieConsent from "@/components/cookie-consent"
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "FieldNet Global Research",
+  title: "FieldNet | Global Market Research Agency | Data Collection & Insights",
   description:
-    "Full-service market research agency providing exceptional quality services to clients across the globe. Established 2004 with 150+ years collective experience.",
+    "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.",
   metadataBase: new URL('https://www.fieldnetglobal.com'),
   alternates: {
     canonical: '/',
   },
-}
+};
 
 export default function RootLayout({
   children,
@@ -31,6 +31,36 @@ export default function RootLayout({
     <html lang="en" className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
         <link rel="icon" href="/logo/logo%20brandmark.png" type="image/png" />
+        {/* Organization Structured Data for SEO */}
+        <script type="application/ld+json" suppressHydrationWarning>{`
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "FieldNet Global Research",
+            "url": "https://www.fieldnetglobal.com/",
+            "logo": "https://www.fieldnetglobal.com/logo/logo%20brandmark.png",
+            "description": "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004.",
+            "sameAs": [
+              "https://www.linkedin.com/company/fieldnetglobal/",
+              "https://www.facebook.com/field.netglobal.8/"
+            ],
+            "contactPoint": [{
+              "@type": "ContactPoint",
+              "telephone": "+91-9892787127",
+              "contactType": "customer service",
+              "areaServed": "IN",
+              "availableLanguage": ["English", "Hindi"]
+            }],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "F-220, First Floor, The Dreams Mall, Station Road, Bhandup (West)",
+              "addressLocality": "Mumbai",
+              "addressRegion": "Maharashtra",
+              "postalCode": "400078",
+              "addressCountry": "IN"
+            }
+          }
+        `}</script>
       </head>
       <body>
         <AsciiRunner />
