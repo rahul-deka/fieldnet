@@ -8,17 +8,7 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-  },
-
-  async redirects() {
-    return [
-      {
-        source: "/:path*/",
-        destination: "/:path*",
-        permanent: true,
-      }
-    ];
-  },
+  }
 };
 
 export default nextConfig;
