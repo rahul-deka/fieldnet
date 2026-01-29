@@ -4,7 +4,6 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
-import AsciiRunner from "@/components/ascii-runner"
 import { AnnouncementBanner } from "@/components/announcement-banner"
 import { AnnouncementBannerSkeleton } from "@/components/announcement-banner-skeleton"
 import "./globals.css"
@@ -13,7 +12,7 @@ import CookieConsent from "@/components/cookie-consent"
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "FieldNet | Global Market Research Agency | Data Collection & Insights",
+  title: "FieldNet",
   description:
     "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.",
   metadataBase: new URL('https://www.fieldnetglobal.com'),
@@ -30,8 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
       <head>
-        <link rel="icon" href="/logo/logo%20brandmark.png" type="image/png" />
-        {/* Organization Structured Data for SEO */}
+        <link rel="icon" href="/logo/logo%20brandmark.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/logo/logo%20brandmark.png" />
         <script type="application/ld+json" suppressHydrationWarning>{`
           {
             "@context": "https://schema.org",
@@ -63,7 +62,6 @@ export default function RootLayout({
         `}</script>
       </head>
       <body>
-        <AsciiRunner />
         <Suspense fallback={<AnnouncementBannerSkeleton />}>
           <AnnouncementBanner />
         </Suspense>
