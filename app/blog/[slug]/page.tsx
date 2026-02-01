@@ -1,5 +1,6 @@
 
 import React from 'react'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
@@ -14,6 +15,64 @@ export async function generateStaticParams() {
   return posts
     .filter((p) => p.slug)
     .map((p) => ({ slug: p.slug }))
+}
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = params
+  const post = await fetchPostBySlug(slug)
+  const siteUrl = 'https://www.fieldnetglobal.com/'
+  const url = `${siteUrl.replace(/\/$/, '')}/blog/${slug}`
+
+  if (!post) {
+    return { title: 'Blog' }
+  }
+
+  const title = post.title || 'Blog'
+  // derive description: prefer excerpt, fallback to plain text extracted from body
+  let description = post.excerpt
+  if (!description && post.body && Array.isArray(post.body)) {
+    const extractPlainText = (blocks: any[]): string => {
+      return blocks
+        .map((b) => {
+          if (!b) return ''
+          if (b._type === 'block' && Array.isArray(b.children)) {
+            return b.children.map((c: any) => c.text || '').join('')
+          }
+          // for other block types, try common text fields
+          if (typeof b.text === 'string') return b.text
+          if (typeof b.title === 'string') return b.title
+          return ''
+        })
+        .join('\n')
+    }
+
+    const plain = extractPlainText(post.body).replace(/\s+/g, ' ').trim()
+    if (plain) {
+      const max = 160
+      description = plain.length > max ? plain.slice(0, max).replace(/\s+\S*$/, '') + '...' : plain
+    }
+  }
+  if (!description) description = 'Read this post on Fieldnet'
+  const imageUrl = post.coverImage?.asset?.url
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'article',
+      publishedTime: post.publishedAt,
+      images: imageUrl ? [{ url: imageUrl, alt: post.coverImage?.alt || title }] : undefined,
+    },
+    twitter: {
+      card: imageUrl ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+  }
 }
 
 type Props = { params: { slug: string } }
