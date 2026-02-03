@@ -16,9 +16,7 @@ export const metadata: Metadata = {
   description:
     "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.",
   metadataBase: new URL('https://www.fieldnetglobal.com'),
-  alternates: {
-    canonical: '/',
-  },
+  // Let Next.js generate per-page canonicals. Avoid forcing root canonical for all pages.
 };
 
 export default function RootLayout({
