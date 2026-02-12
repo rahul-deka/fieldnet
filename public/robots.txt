@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Point Google to the sitemap (matches metadataBase & sitemap.xml in repo)
+Sitemap: https://www.fieldnetglobal.com/sitemap.xml
