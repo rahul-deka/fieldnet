@@ -1,4 +1,5 @@
 import React from 'react'
+import { imageUrlFor } from '@/lib/sanityImage'
 
 type PortableTextBlock = any
 
@@ -94,80 +95,83 @@ function renderBlock(block: PortableTextBlock, idx: number) {
 	if (block._type === 'list') return null
 
 	if (block._type === 'image') {
-		const asset = block.asset || block.asset?._ref || block.asset?._id
-		if (block.url) {
+		const assetRef = block.asset?._ref || block.asset?._id || block.asset || block?.value?.asset?._ref
+		const imageUrl = block.url || imageUrlFor(block.asset || block)
+
+		if (imageUrl) {
 			return (
 				// eslint-disable-next-line @next/next/no-img-element
-				<img key={block._key ?? idx} src={block.url} alt={block.alt || ''} className="my-6 rounded max-w-full" />
+				<img key={block._key ?? idx} src={imageUrl} alt={block.alt || block.caption || ''} className="my-6 rounded max-w-full" />
 			)
 		}
 
-			// Table support (Sanity community table or custom table shapes)
-			if (block._type === 'table' || block._type === 'tableBlock' || block._type === 'sanity.table') {
-				// try common shapes: block.rows -> [{cells: [{children: [...]}, ...]}, ...]
-				const rows = block.rows || block.table?.rows || block.rowsArray || []
-				if (Array.isArray(rows) && rows.length > 0) {
-					const hasHeader = rows[0]?.isHeader || rows[0]?.header || false
-					return (
-						<div key={block._key ?? idx} className="my-6 overflow-x-auto">
-							<table className="w-full table-auto border-collapse">
-								{hasHeader && (
-									<thead className="bg-gray-50">
-										<tr>
-											{(rows[0].cells || rows[0].columns || []).map((cell: any, ci: number) => (
-												<th key={ci} className="px-4 py-2 text-left text-sm font-medium border">
-													{(cell.children || cell.content || []).map((c: any) => renderSpan(c, cell.markDefs || block.markDefs || []))}
-												</th>
-											))}
-										</tr>
-									</thead>
-								)}
-								<tbody>
-									{rows.map((row: any, ri: number) => {
-										// skip header row if used as header
-										if (ri === 0 && hasHeader) return null
-										const cells = row.cells || row.columns || row.items || []
-										return (
-											<tr key={ri} className="odd:bg-white even:bg-gray-50">
-												{cells.map((cell: any, ci: number) => (
-													<td key={ci} className="px-4 py-2 align-top text-sm border">
-														{(cell.children || cell.content || []).map((c: any) => renderSpan(c, cell.markDefs || block.markDefs || []))}
-													</td>
-												))}
-											</tr>
-										)
-									})}
-								</tbody>
-							</table>
-						</div>
-					)
-				}
-				// fallback: try block.cells
-				if (Array.isArray(block.cells)) {
-					return (
-						<div key={block._key ?? idx} className="my-6 overflow-x-auto">
-							<table className="w-full table-auto border-collapse">
-								<tbody>
-									{block.cells.map((row: any, ri: number) => (
-										<tr key={ri} className="odd:bg-white even:bg-gray-50">
-											{(row || []).map((cell: any, ci: number) => (
-												<td key={ci} className="px-4 py-2 align-top text-sm border">
-													{(cell.children || []).map((c: any) => renderSpan(c, block.markDefs || []))}
-												</td>
-											))}
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					)
-				}
-			}
 		return (
 			<div key={block._key ?? idx} className="my-4 border rounded p-3 text-sm text-muted-foreground">
-				Image: {block.alt || (typeof asset === 'string' ? asset : 'unknown')}
+				Image: {block.alt || (typeof assetRef === 'string' ? assetRef : 'unknown')}
 			</div>
 		)
+	}
+
+	// Table support (Sanity community table or custom table shapes)
+	if (block._type === 'table' || block._type === 'tableBlock' || block._type === 'sanity.table') {
+		// try common shapes: block.rows -> [{cells: [{children: [...]}, ...]}, ...]
+		const rows = block.rows || block.table?.rows || block.rowsArray || []
+		if (Array.isArray(rows) && rows.length > 0) {
+			const hasHeader = rows[0]?.isHeader || rows[0]?.header || false
+			return (
+				<div key={block._key ?? idx} className="my-6 overflow-x-auto">
+					<table className="w-full table-auto border-collapse">
+						{hasHeader && (
+							<thead className="bg-gray-50">
+								<tr>
+									{(rows[0].cells || rows[0].columns || []).map((cell: any, ci: number) => (
+										<th key={ci} className="px-4 py-2 text-left text-sm font-medium border">
+											{(cell.children || cell.content || []).map((c: any) => renderSpan(c, cell.markDefs || block.markDefs || []))}
+										</th>
+									))}
+								</tr>
+							</thead>
+						)}
+						<tbody>
+							{rows.map((row: any, ri: number) => {
+								// skip header row if used as header
+								if (ri === 0 && hasHeader) return null
+								const cells = row.cells || row.columns || row.items || []
+								return (
+									<tr key={ri} className="odd:bg-white even:bg-gray-50">
+										{cells.map((cell: any, ci: number) => (
+											<td key={ci} className="px-4 py-2 align-top text-sm border">
+												{(cell.children || cell.content || []).map((c: any) => renderSpan(c, cell.markDefs || block.markDefs || []))}
+											</td>
+										))}
+									</tr>
+								)
+							})}
+						</tbody>
+					</table>
+				</div>
+			)
+		}
+		// fallback: try block.cells
+		if (Array.isArray(block.cells)) {
+			return (
+				<div key={block._key ?? idx} className="my-6 overflow-x-auto">
+					<table className="w-full table-auto border-collapse">
+						<tbody>
+							{block.cells.map((row: any, ri: number) => (
+								<tr key={ri} className="odd:bg-white even:bg-gray-50">
+									{(row || []).map((cell: any, ci: number) => (
+										<td key={ci} className="px-4 py-2 align-top text-sm border">
+											{(cell.children || []).map((c: any) => renderSpan(c, block.markDefs || []))}
+										</td>
+									))}
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			)
+		}
 	}
 
 	// fallback
