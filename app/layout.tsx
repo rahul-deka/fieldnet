@@ -12,7 +12,14 @@ import CookieConsent from "@/components/cookie-consent"
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: "FieldNet",
+  title: {
+    default: "FieldNet",   // browser tab title
+    template: "%s | FieldNet",
+  },
+  openGraph: {
+    title: "FieldNet Global - Best Market Research Company in India",  // shown by Google / social previews
+    siteName: "FieldNet Global",
+  },
   description:
     "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.",
   metadataBase: new URL('https://www.fieldnetglobal.com'),
