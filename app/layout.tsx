@@ -11,19 +11,39 @@ import "./globals.css"
 import CookieConsent from "@/components/cookie-consent"
 import { Toaster } from "@/components/ui/toaster"
 
+const SITE_URL = 'https://www.fieldnetglobal.com'
+const SITE_DESCRIPTION =
+  'FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.'
+
 export const metadata: Metadata = {
   title: {
-    default: "FieldNet",   // browser tab title
-    template: "%s | FieldNet",
+    default: 'FieldNet',
+    template: '%s | FieldNet',
   },
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL(SITE_URL),
   openGraph: {
-    title: "FieldNet Global - Best Market Research Company in India",  // shown by Google / social previews
-    siteName: "FieldNet Global",
+    title: 'FieldNet Global - Best Market Research Company in India',
+    siteName: 'FieldNet Global',
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    type: 'website',
+    images: [
+      {
+        url: '/logo/logo%20full.png',
+        width: 1200,
+        height: 630,
+        alt: 'FieldNet Global Research',
+      },
+    ],
   },
-  description:
-    "FieldNet is a leading global market research agency specializing in data collection, insights, and analytics. Trusted by top brands since 2004. Offices in India, UK, and worldwide.",
-  metadataBase: new URL('https://www.fieldnetglobal.com'),
-  // Let Next.js generate per-page canonicals. Avoid forcing root canonical for all pages.
+  twitter: {
+    card: 'summary_large_image',
+    title: 'FieldNet Global - Best Market Research Company in India',
+    description: SITE_DESCRIPTION,
+    images: ['/logo/logo%20full.png'],
+  },
+  // Next.js auto-generates per-page canonical URLs from metadataBase
 };
 
 export default function RootLayout({

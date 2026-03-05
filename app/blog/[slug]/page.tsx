@@ -58,6 +58,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title,
     description,
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title,
       description,
@@ -101,8 +104,40 @@ export default async function PostPage({ params }: Props) {
 
   if (!post) return notFound()
 
+  const siteUrl = 'https://www.fieldnetglobal.com'
+  const postUrl = `${siteUrl}/blog/${slug}`
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt || '',
+    url: postUrl,
+    datePublished: post.publishedAt || '',
+    dateModified: post.publishedAt || '',
+    image: post.coverImage?.asset?.url
+      ? [post.coverImage.asset.url]
+      : [`${siteUrl}/logo/logo%20full.png`],
+    publisher: {
+      '@type': 'Organization',
+      name: 'FieldNet Global Research',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/logo/logo%20brandmark.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': postUrl,
+    },
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Navigation />
       <main className="min-h-screen bg-white">
         <div className="max-w-3xl mx-auto px-6 py-20">
