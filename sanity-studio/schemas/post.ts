@@ -17,6 +17,7 @@ export default defineType({
       of: [
         { type: 'block' },
         { type: 'image' },
+        { type: 'table' },
       ],
     }),
   ],
